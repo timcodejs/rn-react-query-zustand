@@ -4,10 +4,10 @@ import Header from '../Components/Header';
 import CommonInput from '../Components/CommonInput';
 import SearchPopup from '../Components/SearchPopup';
 import SearchList from '../Components/SearchList';
-import {AllScreenList, SearchStackProps} from '../Navigation/NavigationProps';
 import {hp, wp} from '../Utility/utils/UI';
 import {Color} from '../Utility/utils/Color';
 import {SearchViewModel} from '../Business/services/SearchViewModel';
+import {AllScreenList, SearchStackProps} from '../Navigation/NavigationProps';
 
 const Search = ({navigation}: SearchStackProps<AllScreenList.Search>) => {
   const {data, status, isEnter, handleChange, handleSubmit} = SearchViewModel();

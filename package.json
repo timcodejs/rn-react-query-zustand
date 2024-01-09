@@ -28,6 +28,8 @@
     "react-native-fs": "^2.20.0",
     "react-native-gesture-handler": "^2.14.0",
     "react-native-image-picker": "^7.1.0",
+    "react-native-intersection-observer": "^0.2.0",
+    "react-native-logs": "^5.0.1",
     "react-native-modal-datetime-picker": "^17.1.0",
     "react-native-paper": "^5.11.6",
     "react-native-push-notification": "^8.1.1",

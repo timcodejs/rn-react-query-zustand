@@ -1,15 +1,75 @@
 import React from 'react';
-import {Text} from 'react-native';
+import {View, FlatList} from 'react-native';
+import styled from 'styled-components/native';
 import Header from '../Components/Header';
-import {AllScreenList, ScrollStackProps} from '@Navigation/NavigationProps';
+import {hp, wp} from '../Utility/utils/UI';
+import {Color} from '../Utility/utils/Color';
+import {useScrollInfiniteQuery} from '../Store/queries/scrollQuery';
+import {PretendardRegular, PretendardBold} from '../Utility/utils/CustomFont';
+import {AllScreenList, ScrollStackProps} from '../Navigation/NavigationProps';
 
 const Scroll = ({navigation}: ScrollStackProps<AllScreenList.Scroll>) => {
+  const {scrollData, fetchNextPage, isFetching, isFetchingNextPage} =
+    useScrollInfiniteQuery();
+
   return (
-    <>
+    <Wrap>
       <Header navigation={navigation} />
-      <Text>Scroll</Text>
-    </>
+      <View>
+        <PretendardBold size={hp(20)} style={{marginBottom: hp(10)}}>
+          무한 스크롤 (feat.FlatList)
+        </PretendardBold>
+        <FlatList
+          data={scrollData?.pages}
+          showsVerticalScrollIndicator={false}
+          keyExtractor={(item: any, index: number) => index.toString()}
+          renderItem={({item, index}) => {
+            return (
+              <View key={index}>
+                {item?.data?.items?.map((e: any, i: number) => {
+                  return (
+                    <View key={i} style={{marginBottom: hp(10)}}>
+                      <PretendardBold
+                        size={hp(16)}
+                        style={{marginBottom: hp(5)}}>
+                        {e.name}
+                      </PretendardBold>
+                      <View
+                        style={{
+                          padding: hp(5),
+                          borderRadius: hp(10),
+                          backgroundColor: Color.navy,
+                        }}>
+                        <PretendardRegular size={hp(16)} color={Color.white}>
+                          {e.description}
+                        </PretendardRegular>
+                      </View>
+                    </View>
+                  );
+                })}
+              </View>
+            );
+          }}
+          onEndReached={() => fetchNextPage()}
+          onEndReachedThreshold={0.1}
+          ListFooterComponent={
+            <PretendardRegular style={{paddingBottom: hp(20)}}>
+              {isFetchingNextPage && 'Loading more...'}
+            </PretendardRegular>
+          }
+        />
+      </View>
+      <PretendardRegular>
+        {isFetching && !isFetchingNextPage ? 'Background Updating...' : null}
+      </PretendardRegular>
+    </Wrap>
   );
 };
 
 export default Scroll;
+
+const Wrap = styled.View`
+  height: ${hp(740)}px;
+  padding: 0 ${wp(10)}px ${hp(150)}px ${wp(10)}px;
+  background-color: ${Color.white};
+`;

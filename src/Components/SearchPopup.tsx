@@ -59,11 +59,12 @@ const SearchPopup = ({data, status, isEnter}: any) => {
 
 export default SearchPopup;
 
-const Wrap = styled.View`
+const Wrap = styled.ScrollView`
   position: absolute;
   width: ${wp(340)}px;
+  height: ${hp(200)}px;
   padding-bottom: ${hp(5)}px;
   border-radius: ${wp(5)}px;
-  border: 1px solid ${Color.gray};
+  border: 1.5px solid ${Color.gray};
   background-color: ${Color.white};
 `;
