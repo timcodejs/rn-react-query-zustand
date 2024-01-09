@@ -1,19 +1,19 @@
 import {createStackNavigator} from '@react-navigation/stack';
-import {AllScreenList, SocialParamList} from './NavigationProps';
-import Social from '../Screens/Social';
+import {AllScreenList, SearchParamList} from './NavigationProps';
+import Search from '../Screens/Search';
 
-const SocialNavigation = () => {
-  const Stack = createStackNavigator<SocialParamList>();
+const SearchNavigation = () => {
+  const Stack = createStackNavigator<SearchParamList>();
 
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name={AllScreenList.Social}
-        component={Social}
+        name={AllScreenList.Search}
+        component={Search}
         options={{headerShown: false}}
       />
     </Stack.Navigator>
   );
 };
 
-export default SocialNavigation;
+export default SearchNavigation;

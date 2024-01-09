@@ -6,8 +6,8 @@ import {RootStackParamList, BottomTabNameList} from './NavigationProps';
 import {Color} from '../Utility/utils/Color';
 import TodoNavigation from './TodoNavigation';
 import ScrollNavigation from './ScrollNavigation';
-import SocialNavigation from './SearchNavigation';
-import SearchNavigation from './SocialNavigation';
+import SocialNavigation from './SocialNavigation';
+import SearchNavigation from './SearchNavigation';
 import {
   IconTodoIcon,
   IconScrollIcon,

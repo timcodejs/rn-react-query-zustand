@@ -3,12 +3,12 @@
     "baseUrl": "./src",
     "paths": {
       "@*": ["./*"],
-      "@assets/*": ["assets/*"],
-      "@components/*": ["components/*"],
-      "@navigation/*": ["navigation/*"],
-      "@screens/*": ["screens/*"],
-      "@store/*": ["store/*"],
-      "@utils/*": ["utils/*"]
+      "@Assets/*": ["Assets/*"],
+      "@Components/*": ["Components/*"],
+      "@Navigation/*": ["Navigation/*"],
+      "@Screens/*": ["Screens/*"],
+      "@Store/*": ["Store/*"],
+      "@Utility/*": ["Utility/*"]
     },
     "allowJs": true,
     "allowSyntheticDefaultImports": true,

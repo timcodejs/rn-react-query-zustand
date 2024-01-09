@@ -19,6 +19,10 @@ declare module 'react-native-push-notification' {
 }
 
 declare module 'react-native-dotenv' {
-  export const API_URL: string;
-  export const HOMEPAGE_URL: string;
+  export const REACT_APP_KAKAO_REST_API_KEY: string;
+  export const REACT_APP_KAKAO_REDIRECT_URI: string;
+  export const REACT_APP_NAVER_CLIENT_ID: string;
+  export const REACT_APP_NAVER_CLIENT_SECRET: string;
+  export const REACT_APP_NAVER_CALLBACK_URL: string;
+  export const REACT_APP_GOOGLE_CLIENT_ID: string;
 }
