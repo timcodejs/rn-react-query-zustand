@@ -4,7 +4,7 @@ import {PretendardRegular} from '../Utility/utils/CustomFont';
 import {Color} from '../Utility/utils/Color';
 import {wp, hp} from '../Utility/utils/UI';
 
-const SearchPopup = ({data, status, isEnter}: any) => {
+const SearchPopup = ({data, status, isEnter, onPress}: any) => {
   const gwrDataByStatus = () => {
     switch (status) {
       case 'loading':
@@ -33,7 +33,7 @@ const SearchPopup = ({data, status, isEnter}: any) => {
                         borderBottomColor: Color.gray,
                       }}>
                       <TouchableOpacity
-                        onPress={() => {}}
+                        onPress={() => onPress(item.title)}
                         style={{
                           marginLeft: wp(5),
                           marginRight: wp(5),

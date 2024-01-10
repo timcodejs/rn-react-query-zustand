@@ -14,13 +14,18 @@ interface CommonInputProps {
 
 const CommonInput = ({
   text,
+  values,
   placeholderText,
   onChange,
   onPress,
 }: CommonInputProps) => {
   return (
     <TodoInputView>
-      <InputText placeholder={placeholderText} onChangeText={onChange} />
+      <InputText
+        placeholder={placeholderText}
+        value={values}
+        onChangeText={(text: string) => onChange(text)}
+      />
       <InputButton onPress={onPress}>
         <PretendardRegular size={hp(15)} color={Color.white} style={{}}>
           {text}

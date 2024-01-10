@@ -16,7 +16,9 @@ const Scroll = ({navigation}: ScrollStackProps<AllScreenList.Scroll>) => {
     <Wrap>
       <Header navigation={navigation} />
       <View>
-        <PretendardBold size={hp(20)} style={{marginBottom: hp(10)}}>
+        <PretendardBold
+          size={hp(20)}
+          style={{marginTop: hp(20), marginBottom: hp(20)}}>
           무한 스크롤 (feat.FlatList)
         </PretendardBold>
         <FlatList
@@ -70,6 +72,6 @@ export default Scroll;
 
 const Wrap = styled.View`
   height: ${hp(740)}px;
-  padding: 0 ${wp(10)}px ${hp(150)}px ${wp(10)}px;
+  padding: 0 ${wp(10)}px ${hp(180)}px ${wp(10)}px;
   background-color: ${Color.white};
 `;

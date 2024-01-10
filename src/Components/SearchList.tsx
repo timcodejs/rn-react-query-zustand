@@ -1,13 +1,31 @@
-import {View} from 'react-native';
+import {TouchableOpacity, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import styled from 'styled-components/native';
 import {hp, wp} from '../Utility/utils/UI';
 import {Color} from '../Utility/utils/Color';
 import {PretendardRegular} from '../Utility/utils/CustomFont';
+import {IconResetIcon} from '@Utility/utils/SVG';
 
-const SearchList = ({data}: any) => {
+const SearchList = ({data, handleReset}: any) => {
   return (
     <Wrap>
+      <ResetButton>
+        <TouchableOpacity
+          onPress={handleReset}
+          style={{flexDirection: 'row', alignItems: 'center'}}>
+          <IconResetIcon
+            height={15}
+            width={15}
+            style={{color: Color.eerieBlack2}}
+          />
+          <PretendardRegular
+            size={hp(15)}
+            color={Color.eerieBlack2}
+            style={{marginLeft: hp(5)}}>
+            초기화
+          </PretendardRegular>
+        </TouchableOpacity>
+      </ResetButton>
       {data?.length > 0 ? (
         data?.map((item: any, idx: number) => {
           return (
@@ -51,4 +69,11 @@ const Item = styled.View`
   margin-bottom: ${hp(20)}px;
   padding-bottom: ${hp(20)}px;
   border: 1px solid ${Color.gray};
+`;
+
+const ResetButton = styled.View`
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: ${hp(15)}px;
 `;
