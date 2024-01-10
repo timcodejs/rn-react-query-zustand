@@ -1,10 +1,10 @@
-import {TouchableOpacity, View} from 'react-native';
+import {FlatList, TouchableOpacity, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import styled from 'styled-components/native';
 import {hp, wp} from '../Utility/utils/UI';
 import {Color} from '../Utility/utils/Color';
+import {IconResetIcon} from '../Utility/utils/SVG';
 import {PretendardRegular} from '../Utility/utils/CustomFont';
-import {IconResetIcon} from '@Utility/utils/SVG';
 
 const SearchList = ({data, handleReset}: any) => {
   return (
@@ -16,26 +16,30 @@ const SearchList = ({data, handleReset}: any) => {
           <IconResetIcon
             height={15}
             width={15}
-            style={{color: Color.eerieBlack2}}
+            style={{color: Color.eerieBlack}}
           />
           <PretendardRegular
             size={hp(15)}
-            color={Color.eerieBlack2}
+            color={Color.eerieBlack}
             style={{marginLeft: hp(5)}}>
             초기화
           </PretendardRegular>
         </TouchableOpacity>
       </ResetButton>
-      {data?.length > 0 ? (
-        data?.map((item: any, idx: number) => {
-          return (
-            <Item
-              key={idx}
-              style={{
-                borderTopWidth: 0,
-                borderLeftWidth: 0,
-                borderRightWidth: 0,
-              }}>
+      <List>
+        {!data && (
+          <PretendardRegular
+            color={Color.darkCharcoal}
+            style={{marginTop: hp(15)}}>
+            결과가 없습니다.
+          </PretendardRegular>
+        )}
+        <FlatList
+          data={data}
+          showsVerticalScrollIndicator={false}
+          keyExtractor={(item, index): any => index.toString()}
+          renderItem={({item}) => (
+            <Item>
               <View>
                 <FastImage
                   style={{width: wp(340), height: hp(500)}}
@@ -49,11 +53,9 @@ const SearchList = ({data, handleReset}: any) => {
                 <PretendardRegular>설명 : {item.description}</PretendardRegular>
               </View>
             </Item>
-          );
-        })
-      ) : (
-        <PretendardRegular>결과가 없습니다.</PretendardRegular>
-      )}
+          )}
+        />
+      </List>
     </Wrap>
   );
 };
@@ -69,6 +71,9 @@ const Item = styled.View`
   margin-bottom: ${hp(20)}px;
   padding-bottom: ${hp(20)}px;
   border: 1px solid ${Color.gray};
+  border-top-width: 0;
+  border-left-width: 0;
+  border-right-width: 0;
 `;
 
 const ResetButton = styled.View`
@@ -76,4 +81,12 @@ const ResetButton = styled.View`
   justify-content: flex-end;
   align-items: center;
   margin-bottom: ${hp(15)}px;
+`;
+
+const List = styled.View`
+  padding-bottom: ${hp(300)}px;
+  border: 1px solid ${Color.gray};
+  border-bottom-width: 0;
+  border-left-width: 0;
+  border-right-width: 0;
 `;

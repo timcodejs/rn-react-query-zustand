@@ -1,9 +1,11 @@
 import React from 'react';
+import {RefreshControl} from 'react-native';
 import styled from 'styled-components/native';
 import Header from '../Components/Header';
 import KakaoLogin from '../Components/KakaoLogin';
 import NaverLogin from '@Components/NaverLogin';
 import GoogleLogin from '../Components/GoogleLogin';
+import useRefresh from '../Business/hooks/useRefresh';
 import {hp, wp} from '../Utility/utils/UI';
 import {Color} from '../Utility/utils/Color';
 import {PretendardBold} from '../Utility/utils/CustomFont';
@@ -11,14 +13,23 @@ import {PretendardRegular} from '../Utility/utils/CustomFont';
 import {AllScreenList, SocialStackProps} from '../Navigation/NavigationProps';
 
 const Social = ({navigation}: SocialStackProps<AllScreenList.Social>) => {
+  const [refreshing, onRefresh] = useRefresh();
   return (
-    <SocialView>
+    <SocialView
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }>
       <Header navigation={navigation} />
       <PretendardBold
         size={hp(20)}
         style={{marginTop: hp(20), marginBottom: hp(20)}}>
         소셜 로그인
       </PretendardBold>
+      <SocialHeadding>
+        <PretendardBold size={wp(30)} color={Color.black}>
+          &lt; Sooocial Login Test &gt;
+        </PretendardBold>
+      </SocialHeadding>
       <SocialWrap>
         <GoogleLogin />
         <KakaoLogin />
@@ -50,6 +61,13 @@ const SocialView = styled.ScrollView`
   padding-left: ${hp(10)}px;
   padding-right: ${hp(10)}px;
   background-color: ${Color.white};
+`;
+
+const SocialHeadding = styled.View`
+  align-items: center;
+  justify-content: center;
+  margin-top: ${hp(10)}px;
+  margin-bottom: ${hp(30)}px;
 `;
 
 const SocialWrap = styled.View`

@@ -1,1 +1,3 @@
-export const TodoViewModel = () => {};
+export const TodoViewModel = () => {
+  return {};
+};

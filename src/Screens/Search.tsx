@@ -51,7 +51,7 @@ const Search = ({navigation}: SearchStackProps<AllScreenList.Search>) => {
 
 export default Search;
 
-const SearchView = styled.ScrollView`
+const SearchView = styled.View`
   height: ${hp(740)}px;
   padding-left: ${hp(10)}px;
   padding-right: ${hp(10)}px;
