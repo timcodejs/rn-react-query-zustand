@@ -2,6 +2,10 @@ module.exports = {
   presets: ['module:metro-react-native-babel-preset'],
   plugins: [
     'react-native-reanimated/plugin',
+    ['@babel/plugin-transform-flow-strip-types'],
+    ['@babel/plugin-proposal-class-properties'],
+    ['@babel/plugin-proposal-private-methods'],
+    ['@babel/plugin-transform-private-methods', {loose: true}],
     [
       'module-resolver',
       {

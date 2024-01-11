@@ -10,13 +10,18 @@ import {Color} from '../Utility/utils/Color';
 import {PretendardBold} from '../Utility/utils/CustomFont';
 import {TodoViewModel} from '../Business/services/TodoViewModel';
 import {AllScreenList, TodoStackProps} from '../Navigation/NavigationProps';
+import {useGetDataQuery} from '../Store/queries/todoQuery';
 
 import data from '../Mocks/data.json';
 
 const Todo = ({navigation}: TodoStackProps<AllScreenList.Todo>) => {
   const rowRef = useRef<Swipeable | null>(null);
+
+  // query
+  const {datas} = useGetDataQuery();
   const todo = TodoViewModel();
-  console.log('todo', todo);
+
+  console.log('todo', datas);
 
   return (
     <TodoView>
@@ -37,7 +42,7 @@ const Todo = ({navigation}: TodoStackProps<AllScreenList.Todo>) => {
         <FlatList
           data={data?.todos}
           showsVerticalScrollIndicator={false}
-          keyExtractor={(item): any => item.id}
+          keyExtractor={(item, index): any => index.toString()}
           renderItem={({item, index}) => (
             <SwipeableItem
               item={item}
