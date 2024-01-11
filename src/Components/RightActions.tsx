@@ -6,9 +6,15 @@ interface RightActionsProps {
   dragX: any;
   index: number;
   swipeableRef: any;
+  model: any;
 }
 
-const RightActions = ({dragX, index, swipeableRef}: RightActionsProps) => {
+const RightActions = ({
+  dragX,
+  index,
+  swipeableRef,
+  model,
+}: RightActionsProps) => {
   const trans = dragX.interpolate({
     inputRange: [0, 100],
     outputRange: [0, 1],
@@ -19,6 +25,7 @@ const RightActions = ({dragX, index, swipeableRef}: RightActionsProps) => {
     <TouchableOpacity
       onPress={() => {
         console.log(index, 'delete');
+        model?.handleDelete(index);
         swipeableRef.current?.close();
       }}
       activeOpacity={0.6}>

@@ -8,6 +8,7 @@ interface CommonInputProps {
   text: string;
   placeholderText: string;
   values?: string;
+  btnStatus: boolean;
   onChange: (e: string) => void;
   onPress: (e: any) => void;
 }
@@ -16,6 +17,7 @@ const CommonInput = ({
   text,
   values,
   placeholderText,
+  btnStatus,
   onChange,
   onPress,
 }: CommonInputProps) => {
@@ -26,7 +28,7 @@ const CommonInput = ({
         value={values}
         onChangeText={(text: string) => onChange(text)}
       />
-      <InputButton onPress={onPress}>
+      <InputButton onPress={onPress} btnStatus={btnStatus}>
         <PretendardRegular size={hp(15)} color={Color.white} style={{}}>
           {text}
         </PretendardRegular>
@@ -52,11 +54,11 @@ const InputText = styled.TextInput`
   padding-left: ${wp(10)}px;
 `;
 
-const InputButton = styled.TouchableOpacity`
+const InputButton = styled.TouchableOpacity<{btnStatus: boolean}>`
   width: ${wp(80)}px;
   height: ${hp(50)}px;
   align-items: center;
   justify-content: center;
   border-radius: ${wp(5)}px;
-  background-color: ${Color.navy};
+  background-color: ${props => (props.btnStatus ? Color.gray : Color.navy)};
 `;

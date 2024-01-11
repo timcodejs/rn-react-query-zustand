@@ -33,8 +33,9 @@ const Search = ({navigation}: SearchStackProps<AllScreenList.Search>) => {
       </PretendardBold>
       <CommonInput
         text="검색"
-        values={keyword}
         placeholderText="네이버 책 검색"
+        values={keyword}
+        btnStatus={false}
         onChange={handleChange}
         onPress={handleSubmit}
       />

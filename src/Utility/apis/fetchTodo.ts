@@ -1,44 +1,29 @@
+import request from './request';
+
 const fetchTodoList = async () => {
-  console.log('fetch 실행');
-  return await fetch('http://localhost:8081/todos')
-    .then((res: any) => res.json())
-    .then(data => data);
+  return await request('get', 'http://localhost:4000/todos', {}, {});
 };
 
 const fetchTodoPost = async (json: any) => {
-  return await fetch('http://localhost:8081/todos', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(json),
-  })
-    .then((res: any) => res.json())
-    .then(data => data);
+  return await request('post', 'http://localhost:4000/todos', {}, json);
 };
 
 const fetchTodoDelete = async (json: any) => {
-  return await fetch(`http://localhost:8081/todos/${json?.id}`, {
-    method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({id: json?.id}),
-  })
-    .then((res: any) => res.json())
-    .then(data => data);
+  return await request(
+    'delete',
+    `http://localhost:4000/todos/${json.id}`,
+    {},
+    {},
+  );
 };
 
 const fetchTodoUpdate = async (json: any) => {
-  return await fetch(`http://localhost:8081/todos/${json?.id}`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(json),
-  })
-    .then((res: any) => res.json())
-    .then(data => data);
+  return await request(
+    'put',
+    `http://localhost:4000/todos/${json.id}`,
+    {},
+    json,
+  );
 };
 
 export {fetchTodoList, fetchTodoPost, fetchTodoDelete, fetchTodoUpdate};

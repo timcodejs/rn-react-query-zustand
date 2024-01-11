@@ -9,13 +9,13 @@ import RightActions from './RightActions';
 
 interface SwipeableItemProps {
   item: any;
-  index: number;
+  model: any;
   onSwipeableOpenHandler: (ref: Swipeable | null) => void;
 }
 
 const SwipeableItem = ({
   item,
-  index,
+  model,
   onSwipeableOpenHandler,
 }: SwipeableItemProps) => {
   const swipeableRef = useRef<Swipeable | null>(null);
@@ -23,9 +23,16 @@ const SwipeableItem = ({
   return (
     <Swipeable
       ref={swipeableRef}
-      renderLeftActions={dragX => LeftActions({dragX, index, swipeableRef})}
-      renderRightActions={dragX => RightActions({dragX, index, swipeableRef})}
-      onSwipeableWillOpen={() => onSwipeableOpenHandler(swipeableRef.current)}>
+      renderLeftActions={dragX =>
+        LeftActions({dragX, item: item, swipeableRef, model})
+      }
+      renderRightActions={dragX =>
+        RightActions({dragX, index: item.id, swipeableRef, model})
+      }
+      onSwipeableWillOpen={() => {
+        model?.setIisEdit(false);
+        onSwipeableOpenHandler(swipeableRef.current);
+      }}>
       <TodoListItem
         activeOpacity={1}
         underlayColor={Color.lightGray}

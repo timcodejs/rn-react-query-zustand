@@ -4,11 +4,15 @@ import {styles} from '../Utility/utils/Styles';
 
 interface LeftActionsProps {
   dragX: any;
-  index: number;
+  item: {
+    id: number;
+    title: string;
+  };
   swipeableRef: any;
+  model: any;
 }
 
-const LeftActions = ({dragX, index, swipeableRef}: LeftActionsProps) => {
+const LeftActions = ({dragX, item, swipeableRef, model}: LeftActionsProps) => {
   const trans = dragX.interpolate({
     inputRange: [0, 100],
     outputRange: [0, 1],
@@ -18,7 +22,8 @@ const LeftActions = ({dragX, index, swipeableRef}: LeftActionsProps) => {
   return (
     <TouchableOpacity
       onPress={() => {
-        console.log(index, 'edit');
+        console.log(item.id, 'edit');
+        model?.handleEdit(item);
         swipeableRef.current?.close();
       }}
       activeOpacity={0.6}>

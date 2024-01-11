@@ -12,16 +12,12 @@ import {TodoViewModel} from '../Business/services/TodoViewModel';
 import {AllScreenList, TodoStackProps} from '../Navigation/NavigationProps';
 import {useGetDataQuery} from '../Store/queries/todoQuery';
 
-import data from '../Mocks/data.json';
-
 const Todo = ({navigation}: TodoStackProps<AllScreenList.Todo>) => {
   const rowRef = useRef<Swipeable | null>(null);
 
   // query
-  const {datas} = useGetDataQuery();
-  const todo = TodoViewModel();
-
-  console.log('todo', datas);
+  const {datas, refetch} = useGetDataQuery();
+  const Model = TodoViewModel({refetch});
 
   return (
     <TodoView>
@@ -31,22 +27,37 @@ const Todo = ({navigation}: TodoStackProps<AllScreenList.Todo>) => {
         style={{marginTop: hp(20), marginBottom: hp(20)}}>
         할 일 등록 (feat.RNGH, Animated)
       </PretendardBold>
-      <CommonInput
-        text="할 일 등록"
-        placeholderText="할 일을 입력해 주세요."
-        values={''}
-        onChange={() => {}}
-        onPress={() => {}}
-      />
+      {Model?.isEdit === false ? (
+        <CommonInput
+          text="할 일 등록"
+          placeholderText="할 일을 입력해 주세요."
+          btnStatus={Model?.isEdit}
+          values={Model?.inputValue}
+          onChange={(e: string) => Model?.handleChange(e)}
+          onPress={() => Model?.handlePost()}
+        />
+      ) : (
+        <CommonInput
+          text="수정"
+          placeholderText="할 일을 입력해 주세요."
+          btnStatus={Model?.isEdit}
+          values={Model?.inputValue}
+          onChange={(e: string) => Model?.handleChange(e)}
+          onPress={() => {
+            Model?.onUpdateData.mutate();
+            Model?.setIisEdit(false);
+          }}
+        />
+      )}
       <TodoListWrap>
         <FlatList
-          data={data?.todos}
+          data={datas?.data}
           showsVerticalScrollIndicator={false}
           keyExtractor={(item, index): any => index.toString()}
-          renderItem={({item, index}) => (
+          renderItem={({item}) => (
             <SwipeableItem
               item={item}
-              index={index}
+              model={Model}
               onSwipeableOpenHandler={ref => {
                 if (rowRef.current && ref !== rowRef.current) {
                   rowRef.current.close();
@@ -73,6 +84,7 @@ const TodoView = styled.View`
 `;
 
 const TodoListWrap = styled.View`
+  height: ${hp(740)}px;
   padding-bottom: ${hp(240)}px;
 `;
 
