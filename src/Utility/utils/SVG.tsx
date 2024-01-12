@@ -2,6 +2,7 @@ import TodoSvg from '../../Assets/images/todo.svg';
 import ScrollSvg from '../../Assets/images/scroll.svg';
 import SocialSvg from '../../Assets/images/social.svg';
 import SearchSvg from '../../Assets/images/search.svg';
+import SwipeSvg from '../../Assets/images/swipe.svg';
 import ResetSvg from '../../Assets/images/reset.svg';
 
 type IconProps = {
@@ -48,6 +49,17 @@ export const IconScoialIcon = (IconProps: IconProps) => {
 export const IconSearchIcon = (IconProps: IconProps) => {
   return (
     <SearchSvg
+      width={IconProps.width}
+      height={IconProps.height}
+      color={IconProps.color}
+      style={IconProps.style}
+    />
+  );
+};
+
+export const IconSwipeIcon = (IconProps: IconProps) => {
+  return (
+    <SwipeSvg
       width={IconProps.width}
       height={IconProps.height}
       color={IconProps.color}

@@ -5,9 +5,13 @@ import {hp, wp} from '../Utility/utils/UI';
 import {Color} from '../Utility/utils/Color';
 import {PretendardBold} from '../Utility/utils/CustomFont';
 
-const NaverLoginBtn = () => {
+interface Props {
+  loginHandler: (e: any) => void;
+}
+
+const NaverLoginBtn = ({loginHandler}: Props) => {
   return (
-    <NaverWrap>
+    <NaverWrap onPress={loginHandler}>
       <FastImage
         style={{width: wp(50), height: hp(50)}}
         source={require('../Assets/images/naver.png')}

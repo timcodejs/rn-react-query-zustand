@@ -1,11 +1,10 @@
 import React from 'react';
-import {RefreshControl, View, ActivityIndicator} from 'react-native';
+import {View, ActivityIndicator} from 'react-native';
 import styled from 'styled-components/native';
 import Header from '../Components/Header';
 import KakaoLoginBtn from '../Components/KakaoLoginBtn';
 import NaverLoginBtn from '@Components/NaverLoginBtn';
 import GoogleLoginBtn from '../Components/GoogleLoginBtn';
-import useRefresh from '../Business/hooks/useRefresh';
 import {hp, wp} from '../Utility/utils/UI';
 import {Color} from '../Utility/utils/Color';
 import {PretendardBold} from '../Utility/utils/CustomFont';
@@ -14,33 +13,40 @@ import {SocialViewModel} from '../Business/services/SocialViewModel';
 import {AllScreenList, SocialStackProps} from '../Navigation/NavigationProps';
 
 const Social = ({navigation}: SocialStackProps<AllScreenList.Social>) => {
-  const [refreshing, onRefresh] = useRefresh();
   const model = SocialViewModel();
 
   return (
-    <SocialView
-      refreshControl={
-        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-      }>
+    <SocialView>
       <Header navigation={navigation} />
-      <SocialHeadding>
-        <PretendardBold
-          size={hp(20)}
-          style={{marginTop: hp(20), marginBottom: hp(20)}}
-          children="소셜 로그인 (feat.firebase)"
-        />
-      </SocialHeadding>
+      <PretendardBold
+        size={hp(20)}
+        style={{marginTop: hp(20), marginBottom: hp(70)}}
+        children="소셜 로그인 (feat.firebase)"
+      />
       {model?.isLogin === true && model?.accessToken !== '' ? (
         <>
           {model?.isLoding ? (
-            <ActivityIndicator size="large" />
+            <View
+              style={{
+                height: hp(400),
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <ActivityIndicator size="large" />
+            </View>
           ) : (
             <View>
               <PretendardBold
                 size={wp(25)}
                 color={Color.black}
                 style={{marginBottom: hp(15)}}
-                children={`로그인을 환영합니다. ${model?.userNickname}님.`}
+                children={`환영합니다. ${model?.userNickname}님.`}
+              />
+              <PretendardRegular
+                size={wp(20)}
+                color={Color.black}
+                style={{marginBottom: hp(15)}}
+                children={`${model?.isPlatForm} 계정으로 로그인하셨습니다.`}
               />
               <LogoutBtn onPress={model?.logout}>
                 <PretendardBold
@@ -56,7 +62,7 @@ const Social = ({navigation}: SocialStackProps<AllScreenList.Social>) => {
         <SocialWrap>
           <GoogleLoginBtn loginHandler={model?.onGoogleLoginHandler} />
           <KakaoLoginBtn loginHandler={model?.onKakaoLoginHandler} />
-          <NaverLoginBtn />
+          <NaverLoginBtn loginHandler={model?.onNaverLoginHandler} />
           <Other>
             <Line />
             <PretendardRegular
@@ -66,7 +72,7 @@ const Social = ({navigation}: SocialStackProps<AllScreenList.Social>) => {
             />
             <Line />
           </Other>
-          <OtherWrap>
+          <OtherWrap onPress={model?.onNaverLoginHandler}>
             <PretendardBold
               size={wp(17)}
               color={Color.jetBlack}
@@ -82,20 +88,17 @@ const Social = ({navigation}: SocialStackProps<AllScreenList.Social>) => {
 
 export default Social;
 
-const SocialView = styled.ScrollView`
+const SocialView = styled.View`
   height: ${hp(740)}px;
   padding-left: ${hp(10)}px;
   padding-right: ${hp(10)}px;
   background-color: ${Color.white};
 `;
 
-const SocialHeadding = styled.View`
-  margin-bottom: ${hp(20)}px;
-`;
-
 const SocialWrap = styled.View`
   padding: ${hp(5)}px 0;
   align-items: center;
+  border-radius: ${hp(5)}px;
   border: 1px solid ${Color.gray};
 `;
 const Other = styled.View`

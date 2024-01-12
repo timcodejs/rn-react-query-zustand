@@ -8,11 +8,13 @@ import TodoNavigation from './TodoNavigation';
 import ScrollNavigation from './ScrollNavigation';
 import SocialNavigation from './SocialNavigation';
 import SearchNavigation from './SearchNavigation';
+import SwipeNavigation from './SwipeNavigation';
 import {
   IconTodoIcon,
   IconScrollIcon,
-  IconScoialIcon,
   IconSearchIcon,
+  IconSwipeIcon,
+  IconScoialIcon,
 } from '../Utility/utils/SVG';
 import StackIcon from '../Components/StackIcon';
 
@@ -76,19 +78,28 @@ const BottomNavigation = () => {
           />
           <BottomStack.Screen
             name={BottomTabNameList.second}
-            component={SocialNavigation}
+            component={SearchNavigation}
             options={{
               tabBarIcon: ({focused}) => (
-                <StackIcon focused={focused} Icon={IconScoialIcon} />
+                <StackIcon focused={focused} Icon={IconSearchIcon} />
               ),
             }}
           />
           <BottomStack.Screen
             name={BottomTabNameList.third}
-            component={SearchNavigation}
+            component={SwipeNavigation}
             options={{
               tabBarIcon: ({focused}) => (
-                <StackIcon focused={focused} Icon={IconSearchIcon} />
+                <StackIcon focused={focused} Icon={IconSwipeIcon} />
+              ),
+            }}
+          />
+          <BottomStack.Screen
+            name={BottomTabNameList.forth}
+            component={SocialNavigation}
+            options={{
+              tabBarIcon: ({focused}) => (
+                <StackIcon focused={focused} Icon={IconScoialIcon} />
               ),
             }}
           />

@@ -29,7 +29,7 @@ const Search = ({navigation}: SearchStackProps<AllScreenList.Search>) => {
       <PretendardBold
         size={hp(20)}
         style={{marginTop: hp(20), marginBottom: hp(20)}}
-        children="검색"
+        children="책 검색"
       />
       <CommonInput
         text="검색"

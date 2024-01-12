@@ -1,17 +1,18 @@
 import request from './request';
+import {LOCALHOST_ADDRESS} from 'react-native-dotenv';
 
 const fetchTodoList = async () => {
-  return await request('get', 'http://localhost:4000/todos', {}, {});
+  return await request('get', `${LOCALHOST_ADDRESS}/todos`, {}, {});
 };
 
 const fetchTodoPost = async (json: any) => {
-  return await request('post', 'http://localhost:4000/todos', {}, json);
+  return await request('post', `${LOCALHOST_ADDRESS}/todos`, {}, json);
 };
 
 const fetchTodoDelete = async (json: any) => {
   return await request(
     'delete',
-    `http://localhost:4000/todos/${json.id}`,
+    `${LOCALHOST_ADDRESS}/todos/${json.id}`,
     {},
     {},
   );
@@ -20,7 +21,7 @@ const fetchTodoDelete = async (json: any) => {
 const fetchTodoUpdate = async (json: any) => {
   return await request(
     'put',
-    `http://localhost:4000/todos/${json.id}`,
+    `${LOCALHOST_ADDRESS}/todos/${json.id}`,
     {},
     json,
   );

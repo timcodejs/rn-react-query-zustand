@@ -1,4 +1,5 @@
 import {useEffect, useState} from 'react';
+import {Alert} from 'react-native';
 import auth from '@react-native-firebase/auth';
 import {WEB_CLIENT_ID} from 'react-native-dotenv';
 import * as KakaoLogin from '@react-native-seoul/kakao-login';
@@ -11,7 +12,14 @@ export const SocialViewModel = () => {
   const [userNickname, setUserNickname] = useState<string>('');
 
   // store
-  const {accessToken, setAccessToken} = useAuthStore();
+  const {
+    userInfo,
+    isPlatForm,
+    accessToken,
+    setUserInfo,
+    setIsPlatForm,
+    setAccessToken,
+  } = useAuthStore();
 
   useEffect(() => {
     GoogleSignin.configure({
@@ -40,6 +48,8 @@ export const SocialViewModel = () => {
       const res: any = await auth().signInWithCredential(googleCredential);
       console.log('res : ', res);
       if (res) {
+        setUserInfo(res?.user);
+        setIsPlatForm('Google');
         setUserNickname(res?.user.displayName);
         setIsLoding(false);
       }
@@ -74,6 +84,7 @@ export const SocialViewModel = () => {
         console.log('GetProfile Success', JSON.stringify(result));
         const nickname = result.nickname;
         setUserNickname(nickname);
+        setIsPlatForm('Kakao');
         setIsLoding(false);
       })
       .catch(error => {
@@ -81,8 +92,14 @@ export const SocialViewModel = () => {
       });
   };
 
+  // 네이버 로그인
+  const onNaverLoginHandler = () => {
+    Alert.alert('준비중입니다.');
+  };
+
   const logout = () => {
     setIsLogin(false);
+    setIsPlatForm('');
     setAccessToken('');
     setIsLoding(true);
   };
@@ -90,10 +107,13 @@ export const SocialViewModel = () => {
   return {
     isLogin,
     isLoding,
+    userInfo,
+    isPlatForm,
     accessToken,
     userNickname,
     onKakaoLoginHandler,
     onGoogleLoginHandler,
+    onNaverLoginHandler,
     logout,
   };
 };

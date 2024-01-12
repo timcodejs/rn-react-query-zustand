@@ -22,4 +22,5 @@ declare module 'react-native-dotenv' {
   export const REACT_APP_NAVER_CLIENT_ID: string;
   export const REACT_APP_NAVER_CLIENT_SECRET: string;
   export const WEB_CLIENT_ID: string;
+  export const LOCALHOST_ADDRESS: string;
 }

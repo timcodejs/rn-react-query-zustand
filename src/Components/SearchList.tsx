@@ -9,23 +9,35 @@ import {PretendardRegular} from '../Utility/utils/CustomFont';
 const SearchList = ({data, handleReset}: any) => {
   return (
     <Wrap>
-      <ResetButton>
-        <TouchableOpacity
-          onPress={handleReset}
-          style={{flexDirection: 'row', alignItems: 'center'}}>
-          <IconResetIcon
-            height={15}
-            width={15}
-            style={{color: Color.eerieBlack}}
-          />
-          <PretendardRegular
-            size={hp(15)}
-            color={Color.eerieBlack}
-            style={{marginLeft: hp(5)}}
-            children="초기화"
-          />
-        </TouchableOpacity>
-      </ResetButton>
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+        }}>
+        <PretendardRegular
+          size={hp(15)}
+          color={Color.eerieBlack}
+          style={{marginLeft: hp(5), marginBottom: hp(15)}}
+          children={`총 ${data?.length ? data?.length : 0}개`}
+        />
+        <ResetButton>
+          <TouchableOpacity
+            onPress={handleReset}
+            style={{flexDirection: 'row', alignItems: 'center'}}>
+            <IconResetIcon
+              height={15}
+              width={15}
+              style={{color: Color.eerieBlack}}
+            />
+            <PretendardRegular
+              size={hp(15)}
+              color={Color.eerieBlack}
+              style={{marginLeft: hp(5)}}
+              children="초기화"
+            />
+          </TouchableOpacity>
+        </ResetButton>
+      </View>
       <List>
         {!data && (
           <PretendardRegular
@@ -77,9 +89,6 @@ const Item = styled.View`
 `;
 
 const ResetButton = styled.View`
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: center;
   margin-bottom: ${hp(15)}px;
 `;
 

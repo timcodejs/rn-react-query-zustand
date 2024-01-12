@@ -17,16 +17,18 @@ export type NavigationProps = {
 export enum AllScreenList {
   Todo = 'Todo',
   Scroll = 'Scroll',
+  Search = 'Search',
+  Swipe = 'Swipe',
   Social = 'Social',
   User = 'User',
-  Search = 'Search',
 }
 
 export enum BottomTabNameList {
   main = '할 일',
   first = '스크롤',
-  second = '소셜 로그인',
-  third = '검색',
+  second = '책 검색',
+  third = '스와이프',
+  forth = '소셜 로그인',
 }
 
 //for useNavigation
@@ -42,13 +44,17 @@ export type ScrollParamList = {
   [AllScreenList.Scroll]: {};
 };
 
+export type SearchParamList = {
+  [AllScreenList.Search]: {};
+};
+
+export type SwipeParamList = {
+  [AllScreenList.Swipe]: {};
+};
+
 export type SocialParamList = {
   [AllScreenList.Social]: {};
   [AllScreenList.User]: {route?: any};
-};
-
-export type SearchParamList = {
-  [AllScreenList.Search]: {};
 };
 
 export type TodoStackProps<T extends keyof TodoParamList> = NavigationProps &
@@ -57,8 +63,11 @@ export type TodoStackProps<T extends keyof TodoParamList> = NavigationProps &
 export type ScrollStackProps<T extends keyof ScrollParamList> =
   NavigationProps & ScrollParamList[T];
 
-export type SocialStackProps<T extends keyof SocialParamList> =
-  NavigationProps & SocialParamList[T];
-
 export type SearchStackProps<T extends keyof SearchParamList> =
   NavigationProps & SearchParamList[T];
+
+export type SwipeStackProps<T extends keyof SwipeParamList> = NavigationProps &
+  SwipeParamList[T];
+
+export type SocialStackProps<T extends keyof SocialParamList> =
+  NavigationProps & SocialParamList[T];
