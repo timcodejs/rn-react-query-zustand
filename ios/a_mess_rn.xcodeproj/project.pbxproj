@@ -40,6 +40,7 @@
 		D0476124903949D0B2FED565 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E38C54EEBA754F39880315F9 /* Foundation.ttf */; };
 		D19AA02E714F4C0E8ED1A732 /* Arita-buri-SemiBold_TTF.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 28F24A9F2B6C4560B63D6253 /* Arita-buri-SemiBold_TTF.ttf */; };
 		EB7F0FD6945F417E90D81AC4 /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AC33D967A21E4B3BB7848854 /* Fontisto.ttf */; };
+		EFBE075B2B513CF600984C77 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EFBE075A2B513CF600984C77 /* GoogleService-Info.plist */; };
 		F8028CE4C70F4878ADB696E7 /* Pretendard-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9B53B46000404713BDA7281E /* Pretendard-ExtraBold.ttf */; };
 /* End PBXBuildFile section */
 
@@ -98,6 +99,7 @@
 		DF6983C36E404B5895EB3B84 /* Pretendard-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-Thin.ttf"; path = "../src/Assets/fonts/Pretendard-Thin.ttf"; sourceTree = "<group>"; };
 		E38C54EEBA754F39880315F9 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = ../src/Assets/fonts/Foundation.ttf; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		EFBE075A2B513CF600984C77 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +145,7 @@
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
+				EFBE075A2B513CF600984C77 /* GoogleService-Info.plist */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
@@ -349,6 +352,7 @@
 				807B9DE110924985BB5288A7 /* Ionicons.ttf in Resources */,
 				2777C661083B4B7FB54AC2B9 /* MaterialCommunityIcons.ttf in Resources */,
 				02EB2FCD9DA24FB7BA875E1D /* MaterialIcons.ttf in Resources */,
+				EFBE075B2B513CF600984C77 /* GoogleService-Info.plist in Resources */,
 				5877B7B9774249B991A59980 /* NanumSquareB.ttf in Resources */,
 				71731804505547C893504822 /* Octicons.ttf in Resources */,
 				9B496ADD50074C569432F70C /* Pretendard-Bold.ttf in Resources */,
