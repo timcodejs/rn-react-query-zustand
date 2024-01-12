@@ -18,9 +18,9 @@ const Scroll = ({navigation}: ScrollStackProps<AllScreenList.Scroll>) => {
       <View>
         <PretendardBold
           size={hp(20)}
-          style={{marginTop: hp(20), marginBottom: hp(20)}}>
-          무한 스크롤 (feat.FlatList)
-        </PretendardBold>
+          style={{marginTop: hp(20), marginBottom: hp(20)}}
+          children="무한 스크롤 (feat.FlatList)"
+        />
         <FlatList
           data={scrollData?.pages}
           showsVerticalScrollIndicator={false}
@@ -33,18 +33,20 @@ const Scroll = ({navigation}: ScrollStackProps<AllScreenList.Scroll>) => {
                     <View key={i} style={{marginBottom: hp(10)}}>
                       <PretendardBold
                         size={hp(16)}
-                        style={{marginBottom: hp(5)}}>
-                        {e.name}
-                      </PretendardBold>
+                        style={{marginBottom: hp(5)}}
+                        children={e.name}
+                      />
                       <View
                         style={{
                           padding: hp(5),
                           borderRadius: hp(10),
                           backgroundColor: Color.navy,
                         }}>
-                        <PretendardRegular size={hp(16)} color={Color.white}>
-                          {e.description}
-                        </PretendardRegular>
+                        <PretendardRegular
+                          size={hp(16)}
+                          color={Color.white}
+                          children={e.description}
+                        />
                       </View>
                     </View>
                   );
@@ -55,15 +57,18 @@ const Scroll = ({navigation}: ScrollStackProps<AllScreenList.Scroll>) => {
           onEndReached={() => fetchNextPage()}
           onEndReachedThreshold={0.1}
           ListFooterComponent={
-            <PretendardRegular style={{paddingBottom: hp(20)}}>
-              {isFetchingNextPage && 'Loading more...'}
-            </PretendardRegular>
+            <PretendardRegular
+              style={{paddingBottom: hp(20)}}
+              children={isFetchingNextPage && 'Loading more...'}
+            />
           }
         />
       </View>
-      <PretendardRegular>
-        {isFetching && !isFetchingNextPage ? 'Background Updating...' : null}
-      </PretendardRegular>
+      <PretendardRegular
+        children={
+          isFetching && !isFetchingNextPage ? 'Background Updating...' : null
+        }
+      />
     </Wrap>
   );
 };

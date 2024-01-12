@@ -28,9 +28,9 @@ const Search = ({navigation}: SearchStackProps<AllScreenList.Search>) => {
       <Header navigation={navigation} />
       <PretendardBold
         size={hp(20)}
-        style={{marginTop: hp(20), marginBottom: hp(20)}}>
-        검색
-      </PretendardBold>
+        style={{marginTop: hp(20), marginBottom: hp(20)}}
+        children="검색"
+      />
       <CommonInput
         text="검색"
         placeholderText="네이버 책 검색"

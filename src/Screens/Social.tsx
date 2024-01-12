@@ -1,55 +1,81 @@
 import React from 'react';
-import {RefreshControl} from 'react-native';
+import {RefreshControl, View, ActivityIndicator} from 'react-native';
 import styled from 'styled-components/native';
 import Header from '../Components/Header';
-import KakaoLogin from '../Components/KakaoLogin';
-import NaverLogin from '@Components/NaverLogin';
-import GoogleLogin from '../Components/GoogleLogin';
+import KakaoLoginBtn from '../Components/KakaoLoginBtn';
+import NaverLoginBtn from '@Components/NaverLoginBtn';
+import GoogleLoginBtn from '../Components/GoogleLoginBtn';
 import useRefresh from '../Business/hooks/useRefresh';
 import {hp, wp} from '../Utility/utils/UI';
 import {Color} from '../Utility/utils/Color';
 import {PretendardBold} from '../Utility/utils/CustomFont';
 import {PretendardRegular} from '../Utility/utils/CustomFont';
+import {SocialViewModel} from '../Business/services/SocialViewModel';
 import {AllScreenList, SocialStackProps} from '../Navigation/NavigationProps';
 
 const Social = ({navigation}: SocialStackProps<AllScreenList.Social>) => {
   const [refreshing, onRefresh] = useRefresh();
+  const model = SocialViewModel();
+
   return (
     <SocialView
       refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }>
       <Header navigation={navigation} />
-      <PretendardBold
-        size={hp(20)}
-        style={{marginTop: hp(20), marginBottom: hp(20)}}>
-        소셜 로그인
-      </PretendardBold>
       <SocialHeadding>
-        <PretendardBold size={wp(30)} color={Color.black}>
-          &lt; Sooocial Login Test &gt;
-        </PretendardBold>
+        <PretendardBold
+          size={hp(20)}
+          style={{marginTop: hp(20), marginBottom: hp(20)}}
+          children="소셜 로그인 (feat.firebase)"
+        />
       </SocialHeadding>
-      <SocialWrap>
-        <GoogleLogin />
-        <KakaoLogin />
-        <NaverLogin />
-        <Other>
-          <Line />
-          <PretendardRegular size={wp(15)} color={Color.gray}>
-            또는
-          </PretendardRegular>
-          <Line />
-        </Other>
-        <OtherWrap>
-          <PretendardBold
-            size={wp(17)}
-            color={Color.jetBlack}
-            style={{marginLeft: wp(10)}}>
-            ID/PW 회원가입
-          </PretendardBold>
-        </OtherWrap>
-      </SocialWrap>
+      {model?.isLogin === true && model?.accessToken !== '' ? (
+        <>
+          {model?.isLoding ? (
+            <ActivityIndicator size="large" />
+          ) : (
+            <View>
+              <PretendardBold
+                size={wp(25)}
+                color={Color.black}
+                style={{marginBottom: hp(15)}}
+                children={`로그인을 환영합니다. ${model?.userNickname}님.`}
+              />
+              <LogoutBtn onPress={model?.logout}>
+                <PretendardBold
+                  size={wp(17)}
+                  color={Color.white}
+                  children="로그아웃"
+                />
+              </LogoutBtn>
+            </View>
+          )}
+        </>
+      ) : (
+        <SocialWrap>
+          <GoogleLoginBtn loginHandler={model?.onGoogleLoginHandler} />
+          <KakaoLoginBtn loginHandler={model?.onKakaoLoginHandler} />
+          <NaverLoginBtn />
+          <Other>
+            <Line />
+            <PretendardRegular
+              size={wp(15)}
+              color={Color.gray}
+              children="또는"
+            />
+            <Line />
+          </Other>
+          <OtherWrap>
+            <PretendardBold
+              size={wp(17)}
+              color={Color.jetBlack}
+              style={{marginLeft: wp(10)}}
+              children="ID/PW 회원가입"
+            />
+          </OtherWrap>
+        </SocialWrap>
+      )}
     </SocialView>
   );
 };
@@ -64,10 +90,7 @@ const SocialView = styled.ScrollView`
 `;
 
 const SocialHeadding = styled.View`
-  align-items: center;
-  justify-content: center;
-  margin-top: ${hp(10)}px;
-  margin-bottom: ${hp(30)}px;
+  margin-bottom: ${hp(20)}px;
 `;
 
 const SocialWrap = styled.View`
@@ -99,4 +122,13 @@ const OtherWrap = styled.TouchableOpacity`
   box-sizing: border-box;
   border-radius: ${hp(5)}px;
   border: 1px solid #bababa;
+`;
+
+const LogoutBtn = styled.TouchableOpacity`
+  width: ${wp(80)}px;
+  height: ${hp(50)}px;
+  align-items: center;
+  justify-content: center;
+  border-radius: ${wp(5)}px;
+  background-color: red;
 `;

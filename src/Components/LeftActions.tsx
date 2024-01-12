@@ -29,9 +29,9 @@ const LeftActions = ({dragX, item, swipeableRef, model}: LeftActionsProps) => {
       activeOpacity={0.6}>
       <View style={[styles.ItemBox, styles.edit]}>
         <Animated.Text
-          style={[styles.color, {transform: [{translateX: trans}]}]}>
-          Edit
-        </Animated.Text>
+          style={[styles.color, {transform: [{translateX: trans}]}]}
+          children="Edit"
+        />
       </View>
     </TouchableOpacity>
   );

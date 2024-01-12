@@ -31,9 +31,9 @@ const RightActions = ({
       activeOpacity={0.6}>
       <View style={[styles.ItemBox, styles.delete]}>
         <Animated.Text
-          style={[styles.color, {transform: [{translateX: trans}]}]}>
-          Delete
-        </Animated.Text>
+          style={[styles.color, {transform: [{translateX: trans}]}]}
+          children="Delete"
+        />
       </View>
     </TouchableOpacity>
   );

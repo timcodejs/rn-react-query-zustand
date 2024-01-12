@@ -21,18 +21,18 @@ const SearchList = ({data, handleReset}: any) => {
           <PretendardRegular
             size={hp(15)}
             color={Color.eerieBlack}
-            style={{marginLeft: hp(5)}}>
-            초기화
-          </PretendardRegular>
+            style={{marginLeft: hp(5)}}
+            children="초기화"
+          />
         </TouchableOpacity>
       </ResetButton>
       <List>
         {!data && (
           <PretendardRegular
             color={Color.darkCharcoal}
-            style={{marginTop: hp(15)}}>
-            결과가 없습니다.
-          </PretendardRegular>
+            style={{marginTop: hp(15)}}
+            children="결과가 없습니다."
+          />
         )}
         <FlatList
           data={data}
@@ -47,10 +47,10 @@ const SearchList = ({data, handleReset}: any) => {
                 />
               </View>
               <View>
-                <PretendardRegular>북명 : {item.title}</PretendardRegular>
-                <PretendardRegular>저자 : {item.author}</PretendardRegular>
-                <PretendardRegular>출판사 : {item.publisher}</PretendardRegular>
-                <PretendardRegular>설명 : {item.description}</PretendardRegular>
+                <PretendardRegular children={`북명 : ${item.title}`} />
+                <PretendardRegular children={`저자 : ${item.author}`} />
+                <PretendardRegular children={`출판사 : ${item.publisher}`} />
+                <PretendardRegular children={`설명 : ${item.description}`} />
               </View>
             </Item>
           )}

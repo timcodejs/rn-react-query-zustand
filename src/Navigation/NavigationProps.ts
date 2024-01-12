@@ -18,6 +18,7 @@ export enum AllScreenList {
   Todo = 'Todo',
   Scroll = 'Scroll',
   Social = 'Social',
+  User = 'User',
   Search = 'Search',
 }
 
@@ -43,6 +44,7 @@ export type ScrollParamList = {
 
 export type SocialParamList = {
   [AllScreenList.Social]: {};
+  [AllScreenList.User]: {route?: any};
 };
 
 export type SearchParamList = {

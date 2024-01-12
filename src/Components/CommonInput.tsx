@@ -29,9 +29,12 @@ const CommonInput = ({
         onChangeText={(text: string) => onChange(text)}
       />
       <InputButton onPress={onPress} btnStatus={btnStatus}>
-        <PretendardRegular size={hp(15)} color={Color.white} style={{}}>
-          {text}
-        </PretendardRegular>
+        <PretendardRegular
+          size={hp(15)}
+          color={Color.white}
+          style={{}}
+          children={text}
+        />
       </InputButton>
     </TodoInputView>
   );

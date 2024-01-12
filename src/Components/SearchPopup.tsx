@@ -9,15 +9,21 @@ const SearchPopup = ({data, status, isEnter, onPress}: any) => {
     switch (status) {
       case 'loading':
         return (
-          <PretendardRegular size={hp(12)} color={Color.black} style={{}}>
-            Loading
-          </PretendardRegular>
+          <PretendardRegular
+            size={hp(12)}
+            color={Color.black}
+            style={{}}
+            children="Loading"
+          />
         );
       case 'error':
         return (
-          <PretendardRegular size={hp(12)} color={Color.black} style={{}}>
-            Error
-          </PretendardRegular>
+          <PretendardRegular
+            size={hp(12)}
+            color={Color.black}
+            style={{}}
+            children="Error"
+          />
         );
       default:
         return (
@@ -41,9 +47,9 @@ const SearchPopup = ({data, status, isEnter, onPress}: any) => {
                         <PretendardRegular
                           size={hp(15)}
                           color={Color.black}
-                          style={{paddingTop: hp(10), paddingBottom: hp(10)}}>
-                          {item.title}
-                        </PretendardRegular>
+                          style={{paddingTop: hp(10), paddingBottom: hp(10)}}
+                          children={item.title}
+                        />
                       </TouchableOpacity>
                     </View>
                   );

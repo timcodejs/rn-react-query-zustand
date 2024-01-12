@@ -5,21 +5,23 @@ import {hp, wp} from '../Utility/utils/UI';
 import {Color} from '../Utility/utils/Color';
 import {PretendardBold} from '../Utility/utils/CustomFont';
 
-const NaverLogin = () => {
+const NaverLoginBtn = () => {
   return (
     <NaverWrap>
       <FastImage
         style={{width: wp(50), height: hp(50)}}
         source={require('../Assets/images/naver.png')}
       />
-      <PretendardBold size={wp(17)} color={Color.white}>
-        네이버로 시작하기
-      </PretendardBold>
+      <PretendardBold
+        size={wp(17)}
+        color={Color.white}
+        children="네이버로 시작하기"
+      />
     </NaverWrap>
   );
 };
 
-export default NaverLogin;
+export default NaverLoginBtn;
 
 const NaverWrap = styled.TouchableOpacity`
   width: ${wp(320)}px;

@@ -5,9 +5,13 @@ import {hp, wp} from '../Utility/utils/UI';
 import {Color} from '../Utility/utils/Color';
 import {PretendardBold} from '../Utility/utils/CustomFont';
 
-const GoogleLogin = () => {
+interface Props {
+  loginHandler: (e: any) => void;
+}
+
+const GoogleLoginBtn = ({loginHandler}: Props) => {
   return (
-    <GoogleWrap>
+    <GoogleWrap onPress={loginHandler}>
       <FastImage
         style={{width: wp(29), height: hp(25)}}
         source={require('../Assets/images/google.png')}
@@ -15,14 +19,14 @@ const GoogleLogin = () => {
       <PretendardBold
         size={wp(17)}
         color={Color.jetBlack}
-        style={{marginLeft: wp(10)}}>
-        구글로 시작하기
-      </PretendardBold>
+        style={{marginLeft: wp(10)}}
+        children="구글로 시작하기"
+      />
     </GoogleWrap>
   );
 };
 
-export default GoogleLogin;
+export default GoogleLoginBtn;
 
 const GoogleWrap = styled.TouchableOpacity`
   width: ${wp(320)}px;

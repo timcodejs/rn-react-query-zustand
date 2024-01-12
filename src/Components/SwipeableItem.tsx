@@ -37,9 +37,11 @@ const SwipeableItem = ({
         activeOpacity={1}
         underlayColor={Color.lightGray}
         onPress={() => onSwipeableOpenHandler(swipeableRef.current)}>
-        <PretendardBold size={hp(17)} color={Color.darkCharcoal}>
-          {item.title}
-        </PretendardBold>
+        <PretendardBold
+          size={hp(17)}
+          color={Color.darkCharcoal}
+          children={item.title}
+        />
       </TodoListItem>
     </Swipeable>
   );
