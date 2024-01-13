@@ -22,6 +22,7 @@ export enum AllScreenList {
   Swipe = 'Swipe',
   SwipeToClose = 'SwipeToClose',
   SwipeCarousel = 'SwipeCarousel',
+  YoutubePlayer = 'YoutubePlayer',
 }
 
 export enum BottomTabNameList {
@@ -53,6 +54,7 @@ export type SwipeParamList = {
   [AllScreenList.Swipe]: {};
   [AllScreenList.SwipeToClose]: {route?: any};
   [AllScreenList.SwipeCarousel]: {route?: any};
+  [AllScreenList.YoutubePlayer]: {route?: any};
 };
 
 export type SocialParamList = {

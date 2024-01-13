@@ -21,7 +21,7 @@ const Todo = ({navigation}: TodoStackProps<AllScreenList.Todo>) => {
 
   return (
     <TodoView>
-      <Header navigation={navigation} />
+      <Header navigation={navigation} bgColor={Color.white} />
       <PretendardBold
         size={hp(20)}
         style={{marginTop: hp(20), marginBottom: hp(20)}}

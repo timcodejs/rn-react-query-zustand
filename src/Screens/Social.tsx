@@ -18,7 +18,7 @@ const Social = ({navigation}: SocialStackProps<AllScreenList.Social>) => {
 
   return (
     <SocialView>
-      <Header navigation={navigation} />
+      <Header navigation={navigation} bgColor={Color.white} />
       <PretendardBold
         size={hp(20)}
         style={{marginTop: hp(20), marginBottom: hp(40)}}

@@ -3,6 +3,7 @@ import {AllScreenList, SwipeParamList} from './NavigationProps';
 import Swipe from '../Screens/Swipe';
 import SwipeToClose from '../Screens/Gesture/SwipeToClose';
 import SwipeCarousel from '../Screens/Gesture/SwipeCarousel';
+import YoutubePlayer from '../Screens/Gesture/YoutubePlayer';
 
 const SwipeNavigation = () => {
   const Stack = createStackNavigator<SwipeParamList>();
@@ -22,6 +23,11 @@ const SwipeNavigation = () => {
       <Stack.Screen
         name={AllScreenList.SwipeCarousel}
         component={SwipeCarousel}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name={AllScreenList.YoutubePlayer}
+        component={YoutubePlayer}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {View} from 'react-native';
 import AdvancedParallax from '../Carousel/AdvancedParallax';
 
 const data = [
@@ -18,5 +18,3 @@ const SwipeCarouselGesture = () => {
 };
 
 export default SwipeCarouselGesture;
-
-const styles = StyleSheet.create({});

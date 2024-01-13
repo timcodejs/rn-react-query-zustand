@@ -14,7 +14,7 @@ const Scroll = ({navigation}: ScrollStackProps<AllScreenList.Scroll>) => {
 
   return (
     <Wrap>
-      <Header navigation={navigation} />
+      <Header navigation={navigation} bgColor={Color.white} />
       <View>
         <PretendardBold
           size={hp(20)}

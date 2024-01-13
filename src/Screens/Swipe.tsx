@@ -17,10 +17,14 @@ const Swipe = ({navigation}: SwipeStackProps<AllScreenList.Swipe>) => {
       navigates: AllScreenList.SwipeCarousel,
       text: 'Swipe Carousel',
     },
+    {
+      navigates: AllScreenList.YoutubePlayer,
+      text: 'Youtube',
+    },
   ];
   return (
     <View style={styles.view}>
-      <Header navigation={navigation} />
+      <Header navigation={navigation} bgColor={Color.white} />
       <PretendardBold
         size={hp(20)}
         style={{marginTop: hp(20), marginBottom: hp(20)}}
@@ -40,7 +44,11 @@ const Swipe = ({navigation}: SwipeStackProps<AllScreenList.Swipe>) => {
                 style={{marginTop: hp(20), marginBottom: hp(20)}}
                 children={item.text}
               />
-              <IconArrowIcon width={wp(20)} height={hp(20)} />
+              <IconArrowIcon
+                color={Color.black}
+                width={wp(20)}
+                height={hp(20)}
+              />
             </TouchableOpacity>
           );
         }}
