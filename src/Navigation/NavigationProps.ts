@@ -18,9 +18,10 @@ export enum AllScreenList {
   Todo = 'Todo',
   Scroll = 'Scroll',
   Search = 'Search',
-  Swipe = 'Swipe',
   Social = 'Social',
-  User = 'User',
+  Swipe = 'Swipe',
+  SwipeToClose = 'SwipeToClose',
+  SwipeCarousel = 'SwipeCarousel',
 }
 
 export enum BottomTabNameList {
@@ -50,11 +51,12 @@ export type SearchParamList = {
 
 export type SwipeParamList = {
   [AllScreenList.Swipe]: {};
+  [AllScreenList.SwipeToClose]: {route?: any};
+  [AllScreenList.SwipeCarousel]: {route?: any};
 };
 
 export type SocialParamList = {
   [AllScreenList.Social]: {};
-  [AllScreenList.User]: {route?: any};
 };
 
 export type TodoStackProps<T extends keyof TodoParamList> = NavigationProps &

@@ -1,9 +1,9 @@
 import React from 'react';
 import FastImage from 'react-native-fast-image';
 import styled from 'styled-components/native';
-import {hp, wp} from '../Utility/utils/UI';
-import {Color} from '../Utility/utils/Color';
-import {PretendardBold} from '../Utility/utils/CustomFont';
+import {hp, wp} from '../../Utility/utils/UI';
+import {Color} from '../../Utility/utils/Color';
+import {PretendardBold} from '../../Utility/utils/CustomFont';
 
 interface Props {
   loginHandler: (e: any) => void;
@@ -14,7 +14,7 @@ const NaverLoginBtn = ({loginHandler}: Props) => {
     <NaverWrap onPress={loginHandler}>
       <FastImage
         style={{width: wp(50), height: hp(50)}}
-        source={require('../Assets/images/naver.png')}
+        source={require('../../Assets/images/naver.png')}
       />
       <PretendardBold
         size={wp(17)}

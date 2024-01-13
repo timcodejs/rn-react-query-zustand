@@ -1,9 +1,9 @@
 import React, {useRef} from 'react';
 import styled from 'styled-components/native';
 import {Swipeable} from 'react-native-gesture-handler';
-import {hp} from '../Utility/utils/UI';
-import {Color} from '../Utility/utils/Color';
-import {PretendardBold} from '../Utility/utils/CustomFont';
+import {hp} from '../../Utility/utils/UI';
+import {Color} from '../../Utility/utils/Color';
+import {PretendardBold} from '../../Utility/utils/CustomFont';
 import LeftActions from './LeftActions';
 import RightActions from './RightActions';
 

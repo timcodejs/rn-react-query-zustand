@@ -4,7 +4,7 @@ import styled from 'styled-components/native';
 import {Swipeable} from 'react-native-gesture-handler';
 import Header from '../Components/Header';
 import CommonInput from '../Components/CommonInput';
-import SwipeableItem from '../Components/SwipeableItem';
+import SwipeableItem from '../Components/TodoSwipe/SwipeableItem';
 import {hp} from '../Utility/utils/UI';
 import {Color} from '../Utility/utils/Color';
 import {PretendardBold} from '../Utility/utils/CustomFont';

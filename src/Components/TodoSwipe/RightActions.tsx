@@ -1,6 +1,6 @@
 import React from 'react';
 import {Animated, TouchableOpacity, View} from 'react-native';
-import {styles} from '../Utility/utils/Styles';
+import {styles} from '../../Utility/utils/Styles';
 
 interface RightActionsProps {
   dragX: any;

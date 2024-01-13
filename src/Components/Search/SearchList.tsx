@@ -1,10 +1,10 @@
 import {FlatList, TouchableOpacity, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import styled from 'styled-components/native';
-import {hp, wp} from '../Utility/utils/UI';
-import {Color} from '../Utility/utils/Color';
-import {IconResetIcon} from '../Utility/utils/SVG';
-import {PretendardRegular} from '../Utility/utils/CustomFont';
+import {hp, wp} from '../../Utility/utils/UI';
+import {Color} from '../../Utility/utils/Color';
+import {IconResetIcon} from '../../Utility/utils/SVG';
+import {PretendardRegular} from '../../Utility/utils/CustomFont';
 
 const SearchList = ({data, handleReset}: any) => {
   return (

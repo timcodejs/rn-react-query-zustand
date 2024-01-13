@@ -1,9 +1,9 @@
 import React from 'react';
 import FastImage from 'react-native-fast-image';
 import styled from 'styled-components/native';
-import {hp, wp} from '../Utility/utils/UI';
-import {Color} from '../Utility/utils/Color';
-import {PretendardBold} from '../Utility/utils/CustomFont';
+import {hp, wp} from '../../Utility/utils/UI';
+import {Color} from '../../Utility/utils/Color';
+import {PretendardBold} from '../../Utility/utils/CustomFont';
 
 interface Props {
   loginHandler: (e: any) => void;
@@ -14,7 +14,7 @@ const GoogleLoginBtn = ({loginHandler}: Props) => {
     <GoogleWrap onPress={loginHandler}>
       <FastImage
         style={{width: wp(29), height: hp(25)}}
-        source={require('../Assets/images/google.png')}
+        source={require('../../Assets/images/google.png')}
       />
       <PretendardBold
         size={wp(17)}

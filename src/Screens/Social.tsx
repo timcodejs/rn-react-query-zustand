@@ -2,9 +2,10 @@ import React from 'react';
 import {View, ActivityIndicator} from 'react-native';
 import styled from 'styled-components/native';
 import Header from '../Components/Header';
-import KakaoLoginBtn from '../Components/KakaoLoginBtn';
-import NaverLoginBtn from '@Components/NaverLoginBtn';
-import GoogleLoginBtn from '../Components/GoogleLoginBtn';
+import UserForm from '../Components/Social/UserForm';
+import NaverLoginBtn from '../Components/Social/NaverLoginBtn';
+import KakaoLoginBtn from '../Components/Social/KakaoLoginBtn';
+import GoogleLoginBtn from '../Components/Social/GoogleLoginBtn';
 import {hp, wp} from '../Utility/utils/UI';
 import {Color} from '../Utility/utils/Color';
 import {PretendardBold} from '../Utility/utils/CustomFont';
@@ -20,11 +21,11 @@ const Social = ({navigation}: SocialStackProps<AllScreenList.Social>) => {
       <Header navigation={navigation} />
       <PretendardBold
         size={hp(20)}
-        style={{marginTop: hp(20), marginBottom: hp(70)}}
+        style={{marginTop: hp(20), marginBottom: hp(40)}}
         children="소셜 로그인 (feat.firebase)"
       />
       {model?.isLogin === true && model?.accessToken !== '' ? (
-        <>
+        <View>
           {model?.isLoding ? (
             <View
               style={{
@@ -35,29 +36,9 @@ const Social = ({navigation}: SocialStackProps<AllScreenList.Social>) => {
               <ActivityIndicator size="large" />
             </View>
           ) : (
-            <View>
-              <PretendardBold
-                size={wp(25)}
-                color={Color.black}
-                style={{marginBottom: hp(15)}}
-                children={`환영합니다. ${model?.userNickname}님.`}
-              />
-              <PretendardRegular
-                size={wp(20)}
-                color={Color.black}
-                style={{marginBottom: hp(15)}}
-                children={`${model?.isPlatForm} 계정으로 로그인하셨습니다.`}
-              />
-              <LogoutBtn onPress={model?.logout}>
-                <PretendardBold
-                  size={wp(17)}
-                  color={Color.white}
-                  children="로그아웃"
-                />
-              </LogoutBtn>
-            </View>
+            <UserForm model={model} />
           )}
-        </>
+        </View>
       ) : (
         <SocialWrap>
           <GoogleLoginBtn loginHandler={model?.onGoogleLoginHandler} />
@@ -96,6 +77,7 @@ const SocialView = styled.View`
 `;
 
 const SocialWrap = styled.View`
+  margin-top: ${hp(30)}px;
   padding: ${hp(5)}px 0;
   align-items: center;
   border-radius: ${hp(5)}px;
@@ -125,13 +107,4 @@ const OtherWrap = styled.TouchableOpacity`
   box-sizing: border-box;
   border-radius: ${hp(5)}px;
   border: 1px solid #bababa;
-`;
-
-const LogoutBtn = styled.TouchableOpacity`
-  width: ${wp(80)}px;
-  height: ${hp(50)}px;
-  align-items: center;
-  justify-content: center;
-  border-radius: ${wp(5)}px;
-  background-color: red;
 `;

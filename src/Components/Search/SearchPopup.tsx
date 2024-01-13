@@ -1,8 +1,8 @@
 import {View, TouchableOpacity} from 'react-native';
 import styled from 'styled-components/native';
-import {PretendardRegular} from '../Utility/utils/CustomFont';
-import {Color} from '../Utility/utils/Color';
-import {wp, hp} from '../Utility/utils/UI';
+import {PretendardRegular} from '../../Utility/utils/CustomFont';
+import {Color} from '../../Utility/utils/Color';
+import {wp, hp} from '../../Utility/utils/UI';
 
 const SearchPopup = ({data, status, isEnter, onPress}: any) => {
   const gwrDataByStatus = () => {
