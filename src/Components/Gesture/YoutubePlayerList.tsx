@@ -11,10 +11,12 @@ import 'moment/locale/ko';
 
 const YoutubePlayerList = () => {
   const [playData, setPlayData] = useState();
+  const [playing, setPlaying] = useState(true);
   const yPosition = useSharedValue(screenHeight);
   const {datas} = useGetYoutubeListQuery();
 
   const handlePlay = (data: any) => {
+    setPlaying(true);
     setPlayData(data);
     yPosition.value = withSpring(0, {
       damping: 15,
@@ -45,8 +47,14 @@ const YoutubePlayerList = () => {
             </View>
           );
         }}
+        ListFooterComponent={<View style={{height: hp(200)}} />}
       />
-      <YoutubeSwipeToCloseGesture data={playData} yPosition={yPosition} />
+      <YoutubeSwipeToCloseGesture
+        data={playData}
+        yPosition={yPosition}
+        playing={playing}
+        setPlaying={setPlaying}
+      />
     </View>
   );
 };
@@ -55,8 +63,7 @@ export default YoutubePlayerList;
 
 const styles = StyleSheet.create({
   view: {
-    height: hp(740),
-    paddingBottom: hp(200),
+    height: screenHeight,
     backgroundColor: Color.black,
   },
   item: {

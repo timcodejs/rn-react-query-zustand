@@ -5,6 +5,7 @@ import SearchSvg from '../../Assets/images/search.svg';
 import SwipeSvg from '../../Assets/images/swipe.svg';
 import ResetSvg from '../../Assets/images/reset.svg';
 import ArrowSvg from '../../Assets/images/arrow.svg';
+import CrossSvg from '../../Assets/images/cross.svg';
 
 type IconProps = {
   width: number;
@@ -83,6 +84,17 @@ export const IconResetIcon = (IconProps: IconProps) => {
 export const IconArrowIcon = (IconProps: IconProps) => {
   return (
     <ArrowSvg
+      width={IconProps.width}
+      height={IconProps.height}
+      color={IconProps.color}
+      style={IconProps.style}
+    />
+  );
+};
+
+export const IconCrossIcon = (IconProps: IconProps) => {
+  return (
+    <CrossSvg
       width={IconProps.width}
       height={IconProps.height}
       color={IconProps.color}
