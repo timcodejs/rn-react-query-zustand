@@ -1,6 +1,7 @@
-import React, {useRef} from 'react';
+import React, {useEffect, useRef} from 'react';
 import {FlatList} from 'react-native';
 import styled from 'styled-components/native';
+import {useIsFocused} from '@react-navigation/native';
 import {Swipeable} from 'react-native-gesture-handler';
 import Header from '../Components/Header';
 import CommonInput from '../Components/CommonInput';
@@ -13,11 +14,19 @@ import {AllScreenList, TodoStackProps} from '../Navigation/NavigationProps';
 import {useGetDataQuery} from '../Store/queries/todoQuery';
 
 const Todo = ({navigation}: TodoStackProps<AllScreenList.Todo>) => {
+  const isFocused = useIsFocused();
   const rowRef = useRef<Swipeable | null>(null);
 
   // query
   const {datas, refetch} = useGetDataQuery();
   const Model = TodoViewModel({refetch});
+
+  useEffect(() => {
+    if (isFocused && rowRef.current) {
+      rowRef.current.close();
+      rowRef.current = null;
+    }
+  }, [isFocused]);
 
   return (
     <TodoView>
@@ -68,6 +77,7 @@ const Todo = ({navigation}: TodoStackProps<AllScreenList.Todo>) => {
             />
           )}
           ItemSeparatorComponent={() => <Line />}
+          ListFooterComponent={() => <Line />}
         />
       </TodoListWrap>
     </TodoView>

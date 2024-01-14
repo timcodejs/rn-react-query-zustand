@@ -1,24 +1,25 @@
-import {FlatList, TouchableOpacity, View} from 'react-native';
-import FastImage from 'react-native-fast-image';
+import React from 'react';
+import {FlatList, TouchableOpacity} from 'react-native';
 import styled from 'styled-components/native';
-import {hp, wp} from '../../Utility/utils/UI';
+import {hp} from '../../Utility/utils/UI';
 import {Color} from '../../Utility/utils/Color';
 import {IconResetIcon} from '../../Utility/utils/SVG';
 import {PretendardRegular} from '../../Utility/utils/CustomFont';
+import {useSearchStore} from '../../Store/stores/searchStore';
+import BookList from './BookList';
 
-const SearchList = ({data, handleReset}: any) => {
+const SearchList = ({handleReset}: any) => {
+  // store
+  const {result} = useSearchStore();
+
   return (
     <Wrap>
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-        }}>
+      <Align>
         <PretendardRegular
           size={hp(15)}
           color={Color.eerieBlack}
-          style={{marginLeft: hp(5), marginBottom: hp(15)}}
-          children={`총 ${data?.length ? data?.length : 0}개`}
+          style={{marginBottom: hp(15)}}
+          children={`총 ${result?.length ? result?.length : 0}개`}
         />
         <ResetButton>
           <TouchableOpacity
@@ -37,9 +38,9 @@ const SearchList = ({data, handleReset}: any) => {
             />
           </TouchableOpacity>
         </ResetButton>
-      </View>
+      </Align>
       <List>
-        {!data && (
+        {!result && (
           <PretendardRegular
             color={Color.darkCharcoal}
             style={{marginTop: hp(15)}}
@@ -47,45 +48,24 @@ const SearchList = ({data, handleReset}: any) => {
           />
         )}
         <FlatList
-          data={data}
-          showsVerticalScrollIndicator={false}
+          data={result}
           keyExtractor={(item, index): any => index.toString()}
-          renderItem={({item}) => (
-            <Item>
-              <View>
-                <FastImage
-                  style={{width: wp(340), height: hp(500)}}
-                  source={{uri: item.image}}
-                />
-              </View>
-              <View>
-                <PretendardRegular children={`북명 : ${item.title}`} />
-                <PretendardRegular children={`저자 : ${item.author}`} />
-                <PretendardRegular children={`출판사 : ${item.publisher}`} />
-                <PretendardRegular children={`설명 : ${item.description}`} />
-              </View>
-            </Item>
-          )}
+          renderItem={({item}) => <BookList book={item} />}
         />
       </List>
     </Wrap>
   );
 };
 
-export default SearchList;
+export default React.memo(SearchList);
 
 const Wrap = styled.View`
   margin-top: ${hp(10)}px;
 `;
 
-const Item = styled.View`
-  width: ${wp(340)}px;
-  margin-bottom: ${hp(20)}px;
-  padding-bottom: ${hp(20)}px;
-  border: 1px solid ${Color.gray};
-  border-top-width: 0;
-  border-left-width: 0;
-  border-right-width: 0;
+const Align = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
 `;
 
 const ResetButton = styled.View`

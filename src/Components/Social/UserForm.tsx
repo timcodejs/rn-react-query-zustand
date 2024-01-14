@@ -7,33 +7,34 @@ import {
   PretendardBold,
   PretendardRegular,
 } from '../../Utility/utils/CustomFont';
+import {useAuthStore} from '../../Store/stores/authStore';
 
 interface Props {
   model: any;
 }
 
 const UserForm = ({model}: Props) => {
+  // store
+  const {userNickname, userInfo, isPlatForm} = useAuthStore();
+
   return (
     <View>
-      {model?.isPlatForm === 'Google' && (
+      {isPlatForm === 'Google' && (
         <View>
-          <FastImage
-            style={styles.image}
-            source={{uri: model?.userInfo?.photoURL}}
-          />
+          <FastImage style={styles.image} source={{uri: userInfo?.photoURL}} />
         </View>
       )}
       <PretendardBold
         size={wp(25)}
         color={Color.black}
         style={{marginBottom: hp(15)}}
-        children={`환영합니다. ${model?.userNickname}님.`}
+        children={`환영합니다. ${userNickname}님.`}
       />
       <PretendardRegular
         size={wp(20)}
         color={Color.black}
         style={{marginBottom: hp(15)}}
-        children={`${model?.isPlatForm} 계정으로 로그인하셨습니다.`}
+        children={`${isPlatForm} 계정으로 로그인하셨습니다.`}
       />
       <View style={styles.btnAlign}>
         <TouchableOpacity style={styles.btn} onPress={model?.logout}>

@@ -1,10 +1,14 @@
 import {useState} from 'react';
+import {useSearchStore} from '../../Store/stores/searchStore';
 import {useGetSearchQuery} from '../../Store/queries/searchQuery';
 
 export const SearchViewModel = () => {
-  const [result, setResult] = useState<any>();
   const [keyword, setKeyword] = useState<string>('');
-  const [isEnter, setIsEnter] = useState<boolean>(false);
+
+  // store
+  const {setResult, setIsEnter} = useSearchStore();
+
+  // query
   const {data, status} = useGetSearchQuery(keyword);
 
   const handleChange = (text: string) => {
@@ -28,9 +32,7 @@ export const SearchViewModel = () => {
 
   return {
     data,
-    result,
     status,
-    isEnter,
     keyword,
     handleChange,
     handleChoise,

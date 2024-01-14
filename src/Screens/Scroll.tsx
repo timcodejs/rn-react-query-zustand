@@ -3,7 +3,11 @@ import {View, FlatList} from 'react-native';
 import styled from 'styled-components/native';
 import Header from '../Components/Header';
 import {hp, wp} from '../Utility/utils/UI';
-import {Color} from '../Utility/utils/Color';
+import {
+  Color,
+  getBgColor,
+  getTextColorByBackgroundColor,
+} from '../Utility/utils/Color';
 import {useScrollInfiniteQuery} from '../Store/queries/scrollQuery';
 import {PretendardRegular, PretendardBold} from '../Utility/utils/CustomFont';
 import {AllScreenList, ScrollStackProps} from '../Navigation/NavigationProps';
@@ -25,10 +29,13 @@ const Scroll = ({navigation}: ScrollStackProps<AllScreenList.Scroll>) => {
           data={scrollData?.pages}
           showsVerticalScrollIndicator={false}
           keyExtractor={(item: any, index: number) => index.toString()}
-          renderItem={({item, index}) => {
+          renderItem={({item}) => {
             return (
-              <View key={index}>
+              <View>
                 {item?.data?.items?.map((e: any, i: number) => {
+                  const colorCode: any = getBgColor(item?.data?.items.length);
+                  const textColor = getTextColorByBackgroundColor(colorCode);
+
                   return (
                     <View key={i} style={{marginBottom: hp(10)}}>
                       <PretendardBold
@@ -40,11 +47,11 @@ const Scroll = ({navigation}: ScrollStackProps<AllScreenList.Scroll>) => {
                         style={{
                           padding: hp(5),
                           borderRadius: hp(10),
-                          backgroundColor: Color.navy,
+                          backgroundColor: colorCode,
                         }}>
                         <PretendardRegular
                           size={hp(16)}
-                          color={Color.white}
+                          color={textColor}
                           children={e.description}
                         />
                       </View>

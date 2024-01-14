@@ -7,21 +7,22 @@ import {IconArrowIcon} from '../Utility/utils/SVG';
 import {PretendardBold, PretendardRegular} from '../Utility/utils/CustomFont';
 import {AllScreenList, SwipeStackProps} from '../Navigation/NavigationProps';
 
+const menuList = [
+  {
+    navigates: AllScreenList.SwipeToClose,
+    text: 'Swipe To Close',
+  },
+  {
+    navigates: AllScreenList.SwipeCarousel,
+    text: 'Swipe Carousel',
+  },
+  {
+    navigates: AllScreenList.YoutubePlayer,
+    text: 'Youtube',
+  },
+];
+
 const Swipe = ({navigation}: SwipeStackProps<AllScreenList.Swipe>) => {
-  const data = [
-    {
-      navigates: AllScreenList.SwipeToClose,
-      text: 'Swipe To Close',
-    },
-    {
-      navigates: AllScreenList.SwipeCarousel,
-      text: 'Swipe Carousel',
-    },
-    {
-      navigates: AllScreenList.YoutubePlayer,
-      text: 'Youtube',
-    },
-  ];
   return (
     <View style={styles.view}>
       <Header navigation={navigation} bgColor={Color.white} />
@@ -31,7 +32,7 @@ const Swipe = ({navigation}: SwipeStackProps<AllScreenList.Swipe>) => {
         children="스와이프 (feat.RNGH, reanimated)"
       />
       <FlatList
-        data={data}
+        data={menuList}
         showsVerticalScrollIndicator={false}
         keyExtractor={(item: any, index: number) => index.toString()}
         renderItem={({item}) => {

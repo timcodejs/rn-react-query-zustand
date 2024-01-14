@@ -12,9 +12,12 @@ import {PretendardBold} from '../Utility/utils/CustomFont';
 import {PretendardRegular} from '../Utility/utils/CustomFont';
 import {SocialViewModel} from '../Business/services/SocialViewModel';
 import {AllScreenList, SocialStackProps} from '../Navigation/NavigationProps';
+import {useAuthStore} from '../Store/stores/authStore';
 
 const Social = ({navigation}: SocialStackProps<AllScreenList.Social>) => {
   const model = SocialViewModel();
+  // store
+  const {isLogin, isLoding, accessToken} = useAuthStore();
 
   return (
     <SocialView>
@@ -24,9 +27,9 @@ const Social = ({navigation}: SocialStackProps<AllScreenList.Social>) => {
         style={{marginTop: hp(20), marginBottom: hp(40)}}
         children="소셜 로그인 (feat.firebase)"
       />
-      {model?.isLogin === true && model?.accessToken !== '' ? (
+      {isLogin === true && accessToken !== '' ? (
         <View>
-          {model?.isLoding ? (
+          {isLoding ? (
             <View
               style={{
                 height: hp(400),

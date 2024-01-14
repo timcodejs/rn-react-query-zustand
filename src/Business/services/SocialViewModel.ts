@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useEffect} from 'react';
 import {Alert} from 'react-native';
 import auth from '@react-native-firebase/auth';
 import {WEB_CLIENT_ID} from 'react-native-dotenv';
@@ -7,16 +7,12 @@ import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {useAuthStore} from '../../Store/stores/authStore';
 
 export const SocialViewModel = () => {
-  const [isLogin, setIsLogin] = useState<boolean>(false);
-  const [isLoding, setIsLoding] = useState<boolean>(true);
-  const [userNickname, setUserNickname] = useState<string>('');
-
   // store
   const {
-    userInfo,
-    isPlatForm,
-    accessToken,
+    setIsLogin,
+    setIsLoding,
     setUserInfo,
+    setUserNickname,
     setIsPlatForm,
     setAccessToken,
   } = useAuthStore();
@@ -105,12 +101,6 @@ export const SocialViewModel = () => {
   };
 
   return {
-    isLogin,
-    isLoding,
-    userInfo,
-    isPlatForm,
-    accessToken,
-    userNickname,
     onKakaoLoginHandler,
     onGoogleLoginHandler,
     onNaverLoginHandler,

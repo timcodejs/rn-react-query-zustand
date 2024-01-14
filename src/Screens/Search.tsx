@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import {useIsFocused} from '@react-navigation/native';
 import styled from 'styled-components/native';
 import Header from '../Components/Header';
 import CommonInput from '../Components/CommonInput';
@@ -11,17 +12,14 @@ import {SearchViewModel} from '../Business/services/SearchViewModel';
 import {AllScreenList, SearchStackProps} from '../Navigation/NavigationProps';
 
 const Search = ({navigation}: SearchStackProps<AllScreenList.Search>) => {
-  const {
-    data,
-    result,
-    status,
-    isEnter,
-    keyword,
-    handleChange,
-    handleChoise,
-    handleReset,
-    handleSubmit,
-  } = SearchViewModel();
+  const isFocused = useIsFocused();
+  const model = SearchViewModel();
+
+  useEffect(() => {
+    if (isFocused) {
+      model?.handleReset();
+    }
+  }, [isFocused]);
 
   return (
     <SearchView>
@@ -34,18 +32,17 @@ const Search = ({navigation}: SearchStackProps<AllScreenList.Search>) => {
       <CommonInput
         text="검색"
         placeholderText="네이버 책 검색"
-        values={keyword}
+        values={model?.keyword}
         btnStatus={false}
-        onChange={handleChange}
-        onPress={handleSubmit}
+        onChange={model?.handleChange}
+        onPress={model?.handleSubmit}
       />
       <SearchPopup
-        data={data?.data}
-        status={status}
-        isEnter={isEnter}
-        onPress={handleChoise}
+        data={model?.data?.data}
+        status={model?.status}
+        onPress={model?.handleChoise}
       />
-      <SearchList data={result} handleReset={handleReset} />
+      <SearchList handleReset={model?.handleReset} />
     </SearchView>
   );
 };

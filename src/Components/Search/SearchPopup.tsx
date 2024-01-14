@@ -1,10 +1,14 @@
 import {View, TouchableOpacity} from 'react-native';
 import styled from 'styled-components/native';
+import {useSearchStore} from '../../Store/stores/searchStore';
 import {PretendardRegular} from '../../Utility/utils/CustomFont';
 import {Color} from '../../Utility/utils/Color';
 import {wp, hp} from '../../Utility/utils/UI';
 
-const SearchPopup = ({data, status, isEnter, onPress}: any) => {
+const SearchPopup = ({data, status, onPress}: any) => {
+  // store
+  const {isEnter} = useSearchStore();
+
   const gwrDataByStatus = () => {
     switch (status) {
       case 'loading':
