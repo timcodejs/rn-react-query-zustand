@@ -12,6 +12,8 @@ json-server --watch db.json --port 4000
 
 ## Youtube API 사용하여 Youtube 만들기
 
+- YouTube Data API v3 사용. (GCP 콘솔)
+
 ```
 // 설치
 yarn add react-native-webview react-native-reanimated react-native-gesture-handler
