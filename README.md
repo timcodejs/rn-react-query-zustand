@@ -9,6 +9,8 @@ yarn global add json-server@0.17.4
 // 프로젝트 루트 경로에서 가상 서버 실행
 json-server --watch db.json --port 4000
 ```
+![2024-01-1418 20 08-ezgif com-video-to-gif-converter](https://github.com/timcodejs/rn-react-query-zustand/assets/46413981/46ccc2ba-f446-4208-8fb1-0c019fb6e45a)
+
 
 ## Youtube API 사용하여 Youtube 만들기
 
