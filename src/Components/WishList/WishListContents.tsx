@@ -9,21 +9,19 @@ import {
   PretendardRegular,
 } from '../../Utility/utils/CustomFont';
 import {screenWidth} from '../../Utility/utils/UI';
-import {wishListData} from '../../Utility/utils/constant';
-import {useWishListStore} from '../../Store/stores/wishListStore';
+import {WishListDataProps} from '../../Utility/utils/Types';
 
 interface Props {
   yPosition: any;
+  data: WishListDataProps[];
+  setDetailItem: (e: any) => void;
 }
 
-const WishListContents = ({yPosition}: Props) => {
-  // store
-  const {setData} = useWishListStore();
-
+const WishListContents = ({yPosition, data, setDetailItem}: Props) => {
   return (
     <View style={styles.wrap}>
       <FlatList
-        data={wishListData}
+        data={data}
         numColumns={2}
         columnWrapperStyle={{justifyContent: 'space-between'}}
         keyExtractor={(item: any) => item.id}
@@ -32,8 +30,8 @@ const WishListContents = ({yPosition}: Props) => {
           return (
             <TouchableOpacity
               style={styles.items}
-              onPress={async () => {
-                await setData(item);
+              onPress={() => {
+                setDetailItem(item);
                 yPosition.value = withSpring(0, {
                   damping: 15,
                   overshootClamping: true,
@@ -43,9 +41,18 @@ const WishListContents = ({yPosition}: Props) => {
               <PretendardBold
                 size={hp(14)}
                 children={item.name}
-                style={{marginBottom: hp(6), textAlign: 'center'}}
+                style={{textAlign: 'center'}}
               />
-              <PretendardRegular size={hp(12)} children={price} />
+              <PretendardRegular
+                size={hp(12)}
+                children={price}
+                style={{marginTop: hp(6), marginBottom: hp(6)}}
+              />
+              <PretendardRegular
+                size={hp(12)}
+                color={Color.gray}
+                children={`남은 수량 : ${item?.quantityLeft} 개`}
+              />
             </TouchableOpacity>
           );
         }}

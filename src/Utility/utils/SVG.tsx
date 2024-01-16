@@ -7,6 +7,8 @@ import ResetSvg from '../../Assets/images/reset.svg';
 import ArrowSvg from '../../Assets/images/arrow.svg';
 import CrossSvg from '../../Assets/images/cross.svg';
 import CartSvg from '../../Assets/images/cart.svg';
+import MinusSvg from '../../Assets/images/minus.svg';
+import PlusSvg from '../../Assets/images/plus.svg';
 
 type IconProps = {
   width: number;
@@ -107,6 +109,28 @@ export const IconCrossIcon = (IconProps: IconProps) => {
 export const IconCartIcon = (IconProps: IconProps) => {
   return (
     <CartSvg
+      width={IconProps.width}
+      height={IconProps.height}
+      color={IconProps.color}
+      style={IconProps.style}
+    />
+  );
+};
+
+export const IconPlusIcon = (IconProps: IconProps) => {
+  return (
+    <PlusSvg
+      width={IconProps.width}
+      height={IconProps.height}
+      color={IconProps.color}
+      style={IconProps.style}
+    />
+  );
+};
+
+export const IconMinusIcon = (IconProps: IconProps) => {
+  return (
+    <MinusSvg
       width={IconProps.width}
       height={IconProps.height}
       color={IconProps.color}

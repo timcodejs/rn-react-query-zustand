@@ -1,46 +1,19 @@
-import Animated, {
-  useSharedValue,
-  useAnimatedStyle,
-  withSpring,
-} from 'react-native-reanimated';
-import {Gesture, GestureDetector} from 'react-native-gesture-handler';
+import Animated, {useSharedValue, withSpring} from 'react-native-reanimated';
+import {GestureDetector} from 'react-native-gesture-handler';
 import {StyleSheet, View, TouchableOpacity} from 'react-native';
 import {wp, hp} from '../../Utility/utils/UI';
 import {Color} from '../../Utility/utils/Color';
 import {screenHeight} from '../../Utility/utils/UI';
 import {PretendardBold} from '../../Utility/utils/CustomFont';
+import {useSwipeToClose} from '../../Business/hooks/useVerticalSwipeToClose';
 
 const SwipeToCloseGesture = () => {
   const yPosition = useSharedValue(screenHeight);
   const contentHeight = useSharedValue(screenHeight);
-
-  const swipeToCloseGestureHandler = Gesture.Pan()
-    .onStart((ctx: any) => {
-      ctx.absoluteY = yPosition.value;
-    })
-    .onUpdate((ctx: any) => {
-      if (ctx.translationY < 0) {
-        // Drag up
-        yPosition.value = ctx.translationY / 5;
-      } else {
-        // Drag down
-        yPosition.value = ctx.translationY;
-      }
-    })
-    .onEnd((ctx: any) => {
-      const shouldClose = yPosition.value + 0.5 * ctx.velocityY > 300;
-      const animateTo = shouldClose ? contentHeight.value : 0;
-
-      yPosition.value = withSpring(animateTo, {
-        damping: 5,
-        overshootClamping: true,
-      });
-    });
-
-  const animatedStyle = useAnimatedStyle(() => ({
-    backgroundColor: yPosition.value > 0 ? 'rgba(0,0,0,0)' : 'rgba(0,0,0,0.4)',
-    transform: [{translateY: yPosition.value}],
-  }));
+  const {swipeToCloseGestureHandler, animatedStyle} = useSwipeToClose({
+    yPosition,
+    contentHeight,
+  });
 
   return (
     <>
