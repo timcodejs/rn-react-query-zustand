@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, FlatList, StyleSheet, TouchableOpacity} from 'react-native';
+import {withSpring} from 'react-native-reanimated';
 import FastImage from 'react-native-fast-image';
-import {wishListData} from '../../Utility/utils/constant';
 import {hp, wp} from '../../Utility/utils/UI';
 import {Color} from '../../Utility/utils/Color';
 import {
@@ -9,10 +9,17 @@ import {
   PretendardRegular,
 } from '../../Utility/utils/CustomFont';
 import {screenWidth} from '../../Utility/utils/UI';
+import {wishListData} from '../../Utility/utils/constant';
+import {useWishListStore} from '../../Store/stores/wishListStore';
 
-type Props = {};
+interface Props {
+  yPosition: any;
+}
 
-const WishListContents = (props: Props) => {
+const WishListContents = ({yPosition}: Props) => {
+  // store
+  const {setData} = useWishListStore();
+
   return (
     <View style={styles.wrap}>
       <FlatList
@@ -23,7 +30,15 @@ const WishListContents = (props: Props) => {
         renderItem={({item}: any) => {
           const price = '₩ ' + item.price.toLocaleString();
           return (
-            <TouchableOpacity style={styles.items} onPress={() => {}}>
+            <TouchableOpacity
+              style={styles.items}
+              onPress={async () => {
+                await setData(item);
+                yPosition.value = withSpring(0, {
+                  damping: 15,
+                  overshootClamping: true,
+                });
+              }}>
               <FastImage source={item.itemImage} style={styles.image} />
               <PretendardBold
                 size={hp(14)}
