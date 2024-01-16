@@ -6,6 +6,7 @@ import SwipeSvg from '../../Assets/images/swipe.svg';
 import ResetSvg from '../../Assets/images/reset.svg';
 import ArrowSvg from '../../Assets/images/arrow.svg';
 import CrossSvg from '../../Assets/images/cross.svg';
+import CartSvg from '../../Assets/images/cart.svg';
 
 type IconProps = {
   width: number;
@@ -95,6 +96,17 @@ export const IconArrowIcon = (IconProps: IconProps) => {
 export const IconCrossIcon = (IconProps: IconProps) => {
   return (
     <CrossSvg
+      width={IconProps.width}
+      height={IconProps.height}
+      color={IconProps.color}
+      style={IconProps.style}
+    />
+  );
+};
+
+export const IconCartIcon = (IconProps: IconProps) => {
+  return (
+    <CartSvg
       width={IconProps.width}
       height={IconProps.height}
       color={IconProps.color}

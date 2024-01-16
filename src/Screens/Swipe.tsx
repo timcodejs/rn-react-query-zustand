@@ -4,23 +4,9 @@ import Header from '../Components/Header';
 import {hp, wp} from '../Utility/utils/UI';
 import {Color} from '../Utility/utils/Color';
 import {IconArrowIcon} from '../Utility/utils/SVG';
+import {menuList} from '../Utility/utils/constant';
 import {PretendardBold, PretendardRegular} from '../Utility/utils/CustomFont';
 import {AllScreenList, SwipeStackProps} from '../Navigation/NavigationProps';
-
-const menuList = [
-  {
-    navigates: AllScreenList.SwipeToClose,
-    text: 'Swipe To Close',
-  },
-  {
-    navigates: AllScreenList.SwipeCarousel,
-    text: 'Swipe Carousel',
-  },
-  {
-    navigates: AllScreenList.YoutubePlayer,
-    text: 'Youtube',
-  },
-];
 
 const Swipe = ({navigation}: SwipeStackProps<AllScreenList.Swipe>) => {
   return (

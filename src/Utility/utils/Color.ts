@@ -9,6 +9,7 @@ export const Color = {
   white: '#FFFFFF',
   gray: '#9a9a9a',
   lightGray: '#ebebeb',
+  paleGrey: '#C0C0C0',
   navy: '#191970',
 };
 
@@ -35,5 +36,5 @@ export const getTextColorByBackgroundColor = (hexColor: string) => {
   const b = (rgb >> 0) & 0xff; // blue 추출
   const luma = 0.2126 * r + 0.7152 * g + 0.0722 * b; // per ITU-R BT.709
   // 색상 선택
-  return luma < 127.5 ? 'white' : 'black'; // 글자색이
+  return luma < 127.5 ? '#ffffff' : '#000000'; // 글자색이
 };

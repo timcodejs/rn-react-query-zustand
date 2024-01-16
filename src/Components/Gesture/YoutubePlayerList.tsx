@@ -35,7 +35,7 @@ const YoutubePlayerList = () => {
               <TouchableOpacity onPress={() => handlePlay(item)}>
                 <FastImage
                   style={{width: screenWidth, height: hp(200)}}
-                  source={{uri: item?.snippet.thumbnails.maxres.url}}
+                  source={{uri: item?.snippet.thumbnails?.maxres?.url}}
                 />
                 <PretendardBold
                   size={hp(20)}
