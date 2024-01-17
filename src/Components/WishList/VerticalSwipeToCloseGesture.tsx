@@ -3,6 +3,7 @@ import {GestureDetector} from 'react-native-gesture-handler';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import Animated, {useSharedValue, withSpring} from 'react-native-reanimated';
 import {Color} from '../../Utility/utils/Color';
+import {WishListDataProps} from '../../Utility/utils/Types';
 import {IconPlusIcon, IconMinusIcon} from '../../Utility/utils/SVG';
 import {wp, hp, screenWidth, screenHeight} from '../../Utility/utils/UI';
 import {
@@ -10,7 +11,6 @@ import {
   PretendardRegular,
 } from '../../Utility/utils/CustomFont';
 import {useVerticalSwipeToClose} from '../../Business/hooks/useVerticalSwipeToClose';
-import {WishListDataProps} from '../../Utility/utils/Types';
 
 interface Props {
   yPosition: any;
@@ -57,10 +57,7 @@ const VerticalSwipeToCloseGesture = ({
               children={`남은 수량 : ${detailItem?.quantityLeft} 개`}
             />
             <View style={styles.count}>
-              <TouchableOpacity
-                onPress={() =>
-                  decreaseItemCount(detailItem?.id, itemCount, 'choiseCount')
-                }>
+              <TouchableOpacity onPress={() => decreaseItemCount(itemCount)}>
                 <IconMinusIcon
                   width={wp(30)}
                   height={hp(30)}
@@ -76,12 +73,7 @@ const VerticalSwipeToCloseGesture = ({
               />
               <TouchableOpacity
                 onPress={() =>
-                  increaseItemCount(
-                    detailItem?.id,
-                    itemCount,
-                    detailItem?.quantityLeft,
-                    'choiseCount',
-                  )
+                  increaseItemCount(itemCount, detailItem?.quantityLeft)
                 }>
                 <IconPlusIcon
                   width={wp(30)}
@@ -94,16 +86,16 @@ const VerticalSwipeToCloseGesture = ({
             <TouchableOpacity
               style={[
                 styles.addItemBtn,
-                {backgroundColor: itemCount <= 0 ? Color.gray : 'red'},
+                {backgroundColor: itemCount > 0 ? 'red' : Color.gray},
               ]}
               onPress={() => {
                 if (itemCount > 0) {
-                  totalItemCount('choiseCount');
-                  setItemCount(0);
+                  totalItemCount(detailItem?.id, itemCount, 'choiseCount');
                   yPosition.value = withSpring(screenHeight, {
                     damping: 5,
                     overshootClamping: true,
                   });
+                  setItemCount(0);
                 }
               }}>
               <PretendardBold

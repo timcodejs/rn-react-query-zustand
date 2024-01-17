@@ -1,9 +1,9 @@
-import {useEffect} from 'react';
 import {Gesture} from 'react-native-gesture-handler';
 import {
   useAnimatedStyle,
   withSpring,
   SharedValue,
+  runOnJS,
 } from 'react-native-reanimated';
 
 interface Props {
@@ -17,12 +17,6 @@ export const useVerticalSwipeToClose = ({
   contentHeight,
   setReset,
 }: Props) => {
-  useEffect(() => {
-    if (yPosition.value === contentHeight.value) {
-      setReset(0);
-    }
-  }, [yPosition.value, contentHeight.value]);
-
   const swipeToCloseGestureHandler = Gesture.Pan()
     .onStart((ctx: any) => {
       ctx.absoluteY = yPosition.value;
@@ -40,16 +34,21 @@ export const useVerticalSwipeToClose = ({
       const shouldClose = yPosition.value + 0.5 * ctx.velocityY > 300;
       const animateTo = shouldClose ? contentHeight.value : 0;
 
+      // UI Thread에서 함수 호출할 때 runOnJS 사용
+      runOnJS(setReset)(0);
       yPosition.value = withSpring(animateTo, {
         damping: 5,
         overshootClamping: true,
       });
     });
 
-  const animatedStyle = useAnimatedStyle(() => ({
-    backgroundColor: yPosition.value > 0 ? 'rgba(0,0,0,0)' : 'rgba(0,0,0,0.4)',
-    transform: [{translateY: yPosition.value}],
-  }));
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      backgroundColor:
+        yPosition.value > 0 ? 'rgba(0,0,0,0)' : 'rgba(0,0,0,0.4)',
+      transform: [{translateY: yPosition.value}],
+    };
+  });
 
   return {swipeToCloseGestureHandler, animatedStyle};
 };
