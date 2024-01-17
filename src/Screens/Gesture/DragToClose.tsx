@@ -6,8 +6,11 @@ import {Color} from '../../Utility/utils/Color';
 import {IconArrowIcon} from '../../Utility/utils/SVG';
 import {PretendardBold} from '../../Utility/utils/CustomFont';
 import {AllScreenList, SwipeStackProps} from '../../Navigation/NavigationProps';
+import DragToCloseAnimation from '../../Components/Animations/DragToCloseAnimation';
 
-const Bounce = ({navigation}: SwipeStackProps<AllScreenList.WishList>) => {
+const DragToClose = ({
+  navigation,
+}: SwipeStackProps<AllScreenList.DragToClose>) => {
   return (
     <View style={styles.view}>
       <Header navigation={navigation} bgColor={Color.white} />
@@ -26,14 +29,15 @@ const Bounce = ({navigation}: SwipeStackProps<AllScreenList.WishList>) => {
           size={hp(20)}
           color={Color.black}
           style={{marginTop: hp(20), marginBottom: hp(20)}}
-          children="Bounce"
+          children="Drag To Close"
         />
       </View>
+      <DragToCloseAnimation />
     </View>
   );
 };
 
-export default Bounce;
+export default DragToClose;
 
 const styles = StyleSheet.create({
   view: {

@@ -34,7 +34,7 @@ const Todo = ({navigation}: TodoStackProps<AllScreenList.Todo>) => {
       <PretendardBold
         size={hp(20)}
         style={{marginTop: hp(20), marginBottom: hp(20)}}
-        children="할 일 등록 (feat.RNGH, Animated)"
+        children="할 일 목록 (feat.RNGH, Animated)"
       />
       {Model?.isEdit === false ? (
         <CommonInput

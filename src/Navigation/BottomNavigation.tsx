@@ -17,6 +17,7 @@ import {
   IconScoialIcon,
 } from '../Utility/utils/SVG';
 import StackIcon from '../Components/StackIcon';
+import db from '../../db.json';
 
 const BottomNavigation = () => {
   const routeNameRef = useRef<any>();
@@ -55,7 +56,7 @@ const BottomNavigation = () => {
             tabBarInactiveTintColor: Color.gray,
             tabBarHideOnKeyboard: true,
             tabBarStyle: {
-              backgroundColor: Color.navy,
+              backgroundColor: Color.black,
             },
           }}>
           <BottomStack.Screen
@@ -65,6 +66,7 @@ const BottomNavigation = () => {
               tabBarIcon: ({focused}) => (
                 <StackIcon focused={focused} Icon={IconTodoIcon} />
               ),
+              tabBarBadge: db.todos.length,
             }}
           />
           <BottomStack.Screen

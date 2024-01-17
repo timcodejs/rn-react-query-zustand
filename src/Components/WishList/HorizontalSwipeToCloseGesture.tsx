@@ -162,8 +162,6 @@ const styles = StyleSheet.create({
     height: screenHeight,
     paddingTop: hp(70),
     paddingHorizontal: hp(10),
-    borderWidth: 1,
-    borderColor: Color.lightGray,
     backgroundColor: Color.white,
   },
   item: {

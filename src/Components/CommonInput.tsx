@@ -25,6 +25,7 @@ const CommonInput = ({
     <TodoInputView>
       <InputText
         placeholder={placeholderText}
+        placeholderTextColor={Color.gray}
         value={values}
         onChangeText={(text: string) => onChange(text)}
       />
@@ -63,5 +64,5 @@ const InputButton = styled.TouchableOpacity<{btnStatus: boolean}>`
   align-items: center;
   justify-content: center;
   border-radius: ${wp(5)}px;
-  background-color: ${props => (props.btnStatus ? Color.gray : Color.navy)};
+  background-color: ${props => (props.btnStatus ? Color.gray : Color.black)};
 `;

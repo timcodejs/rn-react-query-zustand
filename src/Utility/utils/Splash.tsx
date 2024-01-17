@@ -22,7 +22,7 @@ const SplashStyled = styled.View`
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: ${Color.navy};
+  background-color: ${Color.black};
   display: flex;
   justify-content: center;
   align-items: center;
