@@ -2,6 +2,10 @@ import {AllScreenList} from '../../Navigation/NavigationProps';
 
 export const menuList = [
   {
+    navigates: AllScreenList.Bounce,
+    text: 'Bounce',
+  },
+  {
     navigates: AllScreenList.SwipeToClose,
     text: 'Swipe To Close',
   },

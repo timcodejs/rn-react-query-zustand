@@ -117,8 +117,8 @@ const HorizontalSwipeToCloseGesture = ({
             />
           ) : (
             <PretendardRegular
-              size={hp(12)}
-              style={{marginTop: hp(6), marginBottom: hp(6)}}
+              size={hp(13)}
+              style={{marginTop: hp(20), marginBottom: hp(6)}}
               children={'장바구니에 담긴 상품이 없습니다.'}
             />
           )}
@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
     paddingTop: hp(70),
     paddingHorizontal: hp(10),
     borderWidth: 1,
-    borderColor: Color.gray,
+    borderColor: Color.lightGray,
     backgroundColor: Color.white,
   },
   item: {

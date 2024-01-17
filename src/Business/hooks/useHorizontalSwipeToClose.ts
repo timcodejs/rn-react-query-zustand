@@ -36,7 +36,7 @@ export const useHorizontalSwipeToClose = ({xPosition, contentWidth}: Props) => {
     });
 
   const animatedStyle = useAnimatedStyle(() => ({
-    backgroundColor: xPosition.value > 0 ? 'rgba(0,0,0,0)' : 'rgba(0,0,0,0.4)',
+    backgroundColor: xPosition.value > 0 ? 'rgba(0,0,0,0)' : 'rgba(0,0,0,0.3)',
     transform: [{translateX: xPosition.value}],
   }));
 

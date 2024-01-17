@@ -24,6 +24,7 @@ export enum AllScreenList {
   SwipeCarousel = 'SwipeCarousel',
   YoutubePlayer = 'YoutubePlayer',
   WishList = 'WishList',
+  Bounce = 'Bounce',
 }
 
 export enum BottomTabNameList {
@@ -57,6 +58,7 @@ export type SwipeParamList = {
   [AllScreenList.SwipeCarousel]: {route?: any};
   [AllScreenList.YoutubePlayer]: {route?: any};
   [AllScreenList.WishList]: {route?: any};
+  [AllScreenList.Bounce]: {route?: any};
 };
 
 export type SocialParamList = {

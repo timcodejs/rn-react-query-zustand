@@ -45,7 +45,7 @@ export const useVerticalSwipeToClose = ({
   const animatedStyle = useAnimatedStyle(() => {
     return {
       backgroundColor:
-        yPosition.value > 0 ? 'rgba(0,0,0,0)' : 'rgba(0,0,0,0.4)',
+        yPosition.value > 0 ? 'rgba(0,0,0,0)' : 'rgba(0,0,0,0.3)',
       transform: [{translateY: yPosition.value}],
     };
   });

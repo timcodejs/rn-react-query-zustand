@@ -1,8 +1,8 @@
 import React from 'react';
 import {View, FlatList, StyleSheet, TouchableOpacity} from 'react-native';
-import {withSpring} from 'react-native-reanimated';
+import {SharedValue, withSpring} from 'react-native-reanimated';
 import FastImage from 'react-native-fast-image';
-import {hp, wp} from '../../Utility/utils/UI';
+import {hp, screenHeight, wp} from '../../Utility/utils/UI';
 import {Color} from '../../Utility/utils/Color';
 import {
   PretendardBold,
@@ -12,12 +12,24 @@ import {screenWidth} from '../../Utility/utils/UI';
 import {WishListDataProps} from '../../Utility/utils/Types';
 
 interface Props {
+  ballSize: SharedValue<any>;
+  xBallPosition: SharedValue<number>;
+  yBallPosition: SharedValue<number>;
+  ballOpacity: SharedValue<number>;
   yPosition: any;
   data: WishListDataProps[];
   setDetailItem: (e: any) => void;
 }
 
-const WishListContents = ({yPosition, data, setDetailItem}: Props) => {
+const WishListContents = ({
+  ballSize,
+  xBallPosition,
+  yBallPosition,
+  ballOpacity,
+  yPosition,
+  data,
+  setDetailItem,
+}: Props) => {
   return (
     <View style={styles.wrap}>
       <FlatList
@@ -36,6 +48,10 @@ const WishListContents = ({yPosition, data, setDetailItem}: Props) => {
                   damping: 15,
                   overshootClamping: true,
                 });
+                ballOpacity.value = 1;
+                yBallPosition.value = screenHeight;
+                xBallPosition.value = 0;
+                ballSize.value = {width: 100, height: 100};
               }}>
               <FastImage source={item.itemImage} style={styles.image} />
               <PretendardBold

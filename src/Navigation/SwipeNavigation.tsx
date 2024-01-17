@@ -4,7 +4,8 @@ import Swipe from '../Screens/Swipe';
 import SwipeToClose from '../Screens/Gesture/SwipeToClose';
 import SwipeCarousel from '../Screens/Gesture/SwipeCarousel';
 import YoutubePlayer from '../Screens/Gesture/YoutubePlayer';
-import WishList from '@Screens/Gesture/WishList';
+import WishList from '../Screens/Gesture/WishList';
+import Bounce from '../Screens/Gesture/Bounce';
 
 const SwipeNavigation = () => {
   const Stack = createStackNavigator<SwipeParamList>();
@@ -34,6 +35,11 @@ const SwipeNavigation = () => {
       <Stack.Screen
         name={AllScreenList.WishList}
         component={WishList}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name={AllScreenList.Bounce}
+        component={Bounce}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

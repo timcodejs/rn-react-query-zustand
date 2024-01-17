@@ -1,7 +1,11 @@
 import FastImage from 'react-native-fast-image';
 import {GestureDetector} from 'react-native-gesture-handler';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
-import Animated, {useSharedValue, withSpring} from 'react-native-reanimated';
+import Animated, {
+  SharedValue,
+  useSharedValue,
+  withSpring,
+} from 'react-native-reanimated';
 import {Color} from '../../Utility/utils/Color';
 import {WishListDataProps} from '../../Utility/utils/Types';
 import {IconPlusIcon, IconMinusIcon} from '../../Utility/utils/SVG';
@@ -13,6 +17,10 @@ import {
 import {useVerticalSwipeToClose} from '../../Business/hooks/useVerticalSwipeToClose';
 
 interface Props {
+  ballSize: SharedValue<any>;
+  xBallPosition: SharedValue<number>;
+  yBallPosition: SharedValue<number>;
+  ballOpacity: SharedValue<number>;
   yPosition: any;
   itemCount: number;
   detailItem: WishListDataProps;
@@ -23,6 +31,10 @@ interface Props {
 }
 
 const VerticalSwipeToCloseGesture = ({
+  ballSize,
+  xBallPosition,
+  yBallPosition,
+  ballOpacity,
   yPosition,
   itemCount,
   setItemCount,
@@ -90,12 +102,19 @@ const VerticalSwipeToCloseGesture = ({
               ]}
               onPress={() => {
                 if (itemCount > 0) {
-                  totalItemCount(detailItem?.id, itemCount, 'choiseCount');
+                  setItemCount(0);
+                  setTimeout(() => {
+                    totalItemCount(detailItem?.id, itemCount, 'choiseCount');
+                  }, 700);
+
                   yPosition.value = withSpring(screenHeight, {
                     damping: 5,
                     overshootClamping: true,
                   });
-                  setItemCount(0);
+                  ballOpacity.value = 0;
+                  yBallPosition.value = 75;
+                  xBallPosition.value = screenWidth / 1.82;
+                  ballSize.value = {width: 15, height: 15};
                 }
               }}>
               <PretendardBold
@@ -125,7 +144,7 @@ const styles = StyleSheet.create({
     marginTop: 120,
     borderWidth: 1,
     borderRadius: 20,
-    borderColor: Color.gray,
+    borderColor: Color.lightGray,
     backgroundColor: Color.white,
   },
   handle: {
