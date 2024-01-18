@@ -13,12 +13,7 @@ const Header = ({navigation, bgColor}: HeaderProps) => {
 
   return (
     <>
-      <View
-        style={{
-          height: top,
-          backgroundColor: bgColor,
-        }}
-      />
+      <View style={{height: top, backgroundColor: bgColor}} />
       <StatusBar
         barStyle={bgColor === '#000000' ? 'light-content' : 'dark-content'}
       />

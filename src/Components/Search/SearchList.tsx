@@ -51,6 +51,7 @@ const SearchList = ({handleReset}: any) => {
           data={result}
           keyExtractor={(item, index): any => index.toString()}
           renderItem={({item}) => <BookList book={item} />}
+          ListFooterComponent={() => <Line />}
         />
       </List>
     </Wrap>
@@ -73,9 +74,12 @@ const ResetButton = styled.View`
 `;
 
 const List = styled.View`
-  padding-bottom: ${hp(300)}px;
   border: 1px solid ${Color.gray};
   border-bottom-width: 0;
   border-left-width: 0;
   border-right-width: 0;
+`;
+
+const Line = styled.View`
+  padding-bottom: ${hp(300)}px;
 `;

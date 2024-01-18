@@ -1,6 +1,7 @@
 apply plugin: "com.android.application"
 apply plugin: "com.facebook.react"
 apply plugin: "com.google.gms.google-services" // 추가
+apply plugin: 'com.google.firebase.crashlytics' // 추가
 
 import com.android.build.OutputFile
 

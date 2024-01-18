@@ -1,5 +1,5 @@
 import React, {useEffect, useRef} from 'react';
-import {FlatList} from 'react-native';
+import {FlatList, View} from 'react-native';
 import styled from 'styled-components/native';
 import {useIsFocused} from '@react-navigation/native';
 import {Swipeable} from 'react-native-gesture-handler';
@@ -15,6 +15,7 @@ import {useGetDataQuery} from '../Store/queries/todoQuery';
 
 const Todo = ({navigation}: TodoStackProps<AllScreenList.Todo>) => {
   const isFocused = useIsFocused();
+  const flatListRef = useRef<FlatList | null>(null);
   const rowRef = useRef<Swipeable | null>(null);
 
   // query
@@ -58,9 +59,11 @@ const Todo = ({navigation}: TodoStackProps<AllScreenList.Todo>) => {
           }}
         />
       )}
-      <TodoListWrap>
+      <View style={{flex: 1}}>
         <FlatList
+          ref={flatListRef}
           data={datas?.data}
+          contentContainerStyle={{paddingBottom: 100}}
           showsVerticalScrollIndicator={false}
           keyExtractor={(item, index): any => index.toString()}
           renderItem={({item}) => (
@@ -79,7 +82,7 @@ const Todo = ({navigation}: TodoStackProps<AllScreenList.Todo>) => {
           ItemSeparatorComponent={() => <Line />}
           ListFooterComponent={() => <Line />}
         />
-      </TodoListWrap>
+      </View>
     </TodoView>
   );
 };
@@ -91,11 +94,6 @@ const TodoView = styled.View`
   padding-left: ${hp(10)}px;
   padding-right: ${hp(10)}px;
   background-color: ${Color.white};
-`;
-
-const TodoListWrap = styled.View`
-  height: ${hp(740)}px;
-  padding-bottom: ${hp(240)}px;
 `;
 
 const Line = styled.View`

@@ -19,14 +19,15 @@ const Scroll = ({navigation}: ScrollStackProps<AllScreenList.Scroll>) => {
   return (
     <Wrap>
       <Header navigation={navigation} bgColor={Color.white} />
-      <View>
-        <PretendardBold
-          size={hp(20)}
-          style={{marginTop: hp(20), marginBottom: hp(20)}}
-          children="무한 스크롤 (feat.FlatList)"
-        />
+      <PretendardBold
+        size={hp(20)}
+        style={{marginTop: hp(20), marginBottom: hp(20)}}
+        children="무한 스크롤 (feat.FlatList)"
+      />
+      <View style={{flex: 1}}>
         <FlatList
           data={scrollData?.pages}
+          contentContainerStyle={{paddingBottom: 50}}
           showsVerticalScrollIndicator={false}
           keyExtractor={(item: any, index: number) => index.toString()}
           renderItem={({item}) => {
@@ -84,6 +85,6 @@ export default Scroll;
 
 const Wrap = styled.View`
   height: ${hp(740)}px;
-  padding: 0 ${wp(10)}px ${hp(180)}px ${wp(10)}px;
+  padding: 0 ${wp(10)}px ${hp(0)}px ${wp(10)}px;
   background-color: ${Color.white};
 `;

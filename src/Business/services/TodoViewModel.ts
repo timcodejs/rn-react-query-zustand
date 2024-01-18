@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import {
   useDeleteDataQuery,
   usePostDataQuery,
@@ -37,13 +37,13 @@ export const TodoViewModel = ({refetch}: TodoViewModelData) => {
     }
   }, [onDeleteData?.isSuccess, onSaveData?.isSuccess, onUpdateData?.isSuccess]);
 
-  const handleChange = (e: any) => {
+  const handleChange = useCallback((e: any) => {
     setInputValue(e);
     setData({
       id: isEdit ? data.id : Math.floor(Math.random() * (100 - 4) + 4),
       title: e,
     });
-  };
+  }, []);
 
   const handlePost = () => {
     if (data.title === '') {

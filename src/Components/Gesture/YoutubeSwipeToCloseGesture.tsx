@@ -1,6 +1,6 @@
 import moment from 'moment';
 import {useCallback, useEffect, useRef, useState} from 'react';
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, TouchableOpacity, View, Platform} from 'react-native';
 import Animated, {
   withSpring,
   SharedValue,
@@ -32,11 +32,13 @@ const YoutubeSwipeToCloseGesture = ({
   playing,
   setPlaying,
 }: Props) => {
+  const platformHeight =
+    Platform.OS === 'ios' ? screenHeight - 280 : screenHeight - 210;
   const playerRef = useRef<YoutubeIframeRef | null>(null);
   const [elapsed, setElapsed] = useState('');
   const [playerState, setPlayerState] = useState('');
   const [dateFormat, setDateFormat] = useState(false);
-  const contentHeight = useSharedValue(screenHeight - 280);
+  const contentHeight = useSharedValue(platformHeight);
   const publishedAt = moment.duration(
     moment().diff(moment(data?.snippet.publishedAt)),
   );
@@ -79,7 +81,7 @@ const YoutubeSwipeToCloseGesture = ({
   }));
 
   const smallTitleStyle = useAnimatedStyle(() => ({
-    width: screenWidth - 160,
+    width: screenWidth - 149,
     height: 70,
     alignItems: 'center',
     display: yPosition.value === contentHeight.value ? 'flex' : 'none',
