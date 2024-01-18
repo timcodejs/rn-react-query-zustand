@@ -1,6 +1,5 @@
 import {useRef} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {RootStackParamList, BottomTabNameList} from './NavigationProps';
 import {Color} from '../Utility/utils/Color';
@@ -32,82 +31,80 @@ const BottomNavigation = () => {
   };
 
   return (
-    <GestureHandlerRootView style={{flex: 1}}>
-      <NavigationContainer
-        linking={Linking}
-        ref={navigationRef}
-        onReady={() => {
-          routeNameRef.current = navigationRef?.current.getCurrentRoute().name;
-        }}
-        onStateChange={async () => {
-          const previousRouteName = routeNameRef.current;
-          const currentRouteName = navigationRef.current.getCurrentRoute().name;
+    <NavigationContainer
+      linking={Linking}
+      ref={navigationRef}
+      onReady={() => {
+        routeNameRef.current = navigationRef?.current.getCurrentRoute().name;
+      }}
+      onStateChange={async () => {
+        const previousRouteName = routeNameRef.current;
+        const currentRouteName = navigationRef.current.getCurrentRoute().name;
 
-          if (previousRouteName !== currentRouteName) {
-            // analytics().setCurrentScreen(currentRouteName); // -> 애널리틱스 연결
-          }
-          routeNameRef.current = currentRouteName;
+        if (previousRouteName !== currentRouteName) {
+          // analytics().setCurrentScreen(currentRouteName); // -> 애널리틱스 연결
+        }
+        routeNameRef.current = currentRouteName;
+      }}>
+      <BottomStack.Navigator
+        backBehavior="history"
+        screenOptions={{
+          headerShown: false,
+          tabBarActiveTintColor: Color.white,
+          tabBarInactiveTintColor: Color.gray,
+          tabBarHideOnKeyboard: true,
+          tabBarStyle: {
+            backgroundColor: Color.black,
+          },
         }}>
-        <BottomStack.Navigator
-          backBehavior="history"
-          screenOptions={{
-            headerShown: false,
-            tabBarActiveTintColor: Color.white,
-            tabBarInactiveTintColor: Color.gray,
-            tabBarHideOnKeyboard: true,
-            tabBarStyle: {
-              backgroundColor: Color.black,
-            },
-          }}>
-          <BottomStack.Screen
-            name={BottomTabNameList.main}
-            component={TodoNavigation}
-            options={{
-              tabBarIcon: ({focused}) => (
-                <StackIcon focused={focused} Icon={IconTodoIcon} />
-              ),
-              tabBarBadge: db.todos.length,
-            }}
-          />
-          <BottomStack.Screen
-            name={BottomTabNameList.first}
-            component={ScrollNavigation}
-            options={{
-              tabBarIcon: ({focused}) => (
-                <StackIcon focused={focused} Icon={IconScrollIcon} />
-              ),
-            }}
-          />
-          <BottomStack.Screen
-            name={BottomTabNameList.second}
-            component={SearchNavigation}
-            options={{
-              tabBarIcon: ({focused}) => (
-                <StackIcon focused={focused} Icon={IconSearchIcon} />
-              ),
-            }}
-          />
-          <BottomStack.Screen
-            name={BottomTabNameList.third}
-            component={SwipeNavigation}
-            options={{
-              tabBarIcon: ({focused}) => (
-                <StackIcon focused={focused} Icon={IconSwipeIcon} />
-              ),
-            }}
-          />
-          <BottomStack.Screen
-            name={BottomTabNameList.forth}
-            component={SocialNavigation}
-            options={{
-              tabBarIcon: ({focused}) => (
-                <StackIcon focused={focused} Icon={IconScoialIcon} />
-              ),
-            }}
-          />
-        </BottomStack.Navigator>
-      </NavigationContainer>
-    </GestureHandlerRootView>
+        <BottomStack.Screen
+          name={BottomTabNameList.main}
+          component={TodoNavigation}
+          options={{
+            tabBarIcon: ({focused}) => (
+              <StackIcon focused={focused} Icon={IconTodoIcon} />
+            ),
+            tabBarBadge: db.todos.length,
+          }}
+        />
+        <BottomStack.Screen
+          name={BottomTabNameList.first}
+          component={ScrollNavigation}
+          options={{
+            tabBarIcon: ({focused}) => (
+              <StackIcon focused={focused} Icon={IconScrollIcon} />
+            ),
+          }}
+        />
+        <BottomStack.Screen
+          name={BottomTabNameList.second}
+          component={SearchNavigation}
+          options={{
+            tabBarIcon: ({focused}) => (
+              <StackIcon focused={focused} Icon={IconSearchIcon} />
+            ),
+          }}
+        />
+        <BottomStack.Screen
+          name={BottomTabNameList.third}
+          component={SwipeNavigation}
+          options={{
+            tabBarIcon: ({focused}) => (
+              <StackIcon focused={focused} Icon={IconSwipeIcon} />
+            ),
+          }}
+        />
+        <BottomStack.Screen
+          name={BottomTabNameList.forth}
+          component={SocialNavigation}
+          options={{
+            tabBarIcon: ({focused}) => (
+              <StackIcon focused={focused} Icon={IconScoialIcon} />
+            ),
+          }}
+        />
+      </BottomStack.Navigator>
+    </NavigationContainer>
   );
 };
 

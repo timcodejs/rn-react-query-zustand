@@ -22,7 +22,6 @@ const LeftActions = ({dragX, item, swipeableRef, model}: LeftActionsProps) => {
   return (
     <TouchableOpacity
       onPress={() => {
-        console.log(item.id, 'edit');
         model?.handleEdit(item);
         swipeableRef.current?.close();
       }}

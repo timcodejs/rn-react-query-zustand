@@ -27,7 +27,7 @@ const Scroll = ({navigation}: ScrollStackProps<AllScreenList.Scroll>) => {
       <View style={{flex: 1}}>
         <FlatList
           data={scrollData?.pages}
-          contentContainerStyle={{paddingBottom: 50}}
+          contentContainerStyle={{paddingBottom: 70}}
           showsVerticalScrollIndicator={false}
           keyExtractor={(item: any, index: number) => index.toString()}
           renderItem={({item}) => {
@@ -64,6 +64,15 @@ const Scroll = ({navigation}: ScrollStackProps<AllScreenList.Scroll>) => {
           }}
           onEndReached={() => fetchNextPage()}
           onEndReachedThreshold={0.1}
+          ListHeaderComponent={
+            <PretendardRegular
+              children={
+                isFetching && !isFetchingNextPage
+                  ? 'Background Updating...'
+                  : null
+              }
+            />
+          }
           ListFooterComponent={
             <PretendardRegular
               style={{paddingBottom: hp(20)}}
@@ -72,11 +81,6 @@ const Scroll = ({navigation}: ScrollStackProps<AllScreenList.Scroll>) => {
           }
         />
       </View>
-      <PretendardRegular
-        children={
-          isFetching && !isFetchingNextPage ? 'Background Updating...' : null
-        }
-      />
     </Wrap>
   );
 };

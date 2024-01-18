@@ -25,6 +25,7 @@ export enum AllScreenList {
   YoutubePlayer = 'YoutubePlayer',
   WishList = 'WishList',
   DragToClose = 'DragToClose',
+  DimensionsValue = 'DimensionsValue',
 }
 
 export enum BottomTabNameList {
@@ -59,6 +60,7 @@ export type SwipeParamList = {
   [AllScreenList.YoutubePlayer]: {route?: any};
   [AllScreenList.WishList]: {route?: any};
   [AllScreenList.DragToClose]: {route?: any};
+  [AllScreenList.DimensionsValue]: {route?: any};
 };
 
 export type SocialParamList = {

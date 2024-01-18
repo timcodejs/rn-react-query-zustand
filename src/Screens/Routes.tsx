@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 import Splash from '../Utility/utils/Splash';
 import BottomNavigation from '../Navigation/BottomNavigation';
@@ -17,7 +18,9 @@ const Routes = () => {
     <Splash />
   ) : (
     <QueryClientProvider client={queryClient}>
-      <BottomNavigation />
+      <GestureHandlerRootView style={{flex: 1}}>
+        <BottomNavigation />
+      </GestureHandlerRootView>
     </QueryClientProvider>
   );
 };

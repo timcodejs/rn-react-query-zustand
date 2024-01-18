@@ -1,6 +1,6 @@
 import FastImage from 'react-native-fast-image';
 import {GestureDetector} from 'react-native-gesture-handler';
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {Platform, StyleSheet, TouchableOpacity, View} from 'react-native';
 import Animated, {
   SharedValue,
   useSharedValue,
@@ -112,9 +112,10 @@ const VerticalSwipeToCloseGesture = ({
                     overshootClamping: true,
                   });
                   ballOpacity.value = 0;
-                  yBallPosition.value = 75;
-                  xBallPosition.value = screenWidth / 1.82;
-                  ballSize.value = {width: 15, height: 15};
+                  yBallPosition.value = Platform.OS === 'ios' ? 75 : 15;
+                  xBallPosition.value =
+                    screenWidth / (Platform.OS === 'ios' ? 1.82 : 1.81);
+                  ballSize.value = {width: 15, height: 17};
                 }
               }}>
               <PretendardBold
@@ -141,16 +142,16 @@ const styles = StyleSheet.create({
   inner: {
     width: wp(360),
     height: screenHeight,
-    marginTop: 120,
+    marginTop: hp(120),
     borderWidth: 1,
     borderRadius: 20,
     borderColor: Color.lightGray,
     backgroundColor: Color.white,
   },
   handle: {
-    width: 50,
-    height: 6,
-    marginTop: 13,
+    width: wp(50),
+    height: hp(5),
+    marginTop: hp(13),
     borderRadius: 10,
     alignSelf: 'center',
     backgroundColor: Color.navy,
@@ -176,7 +177,7 @@ const styles = StyleSheet.create({
   },
   addItemBtn: {
     position: 'absolute',
-    top: screenHeight - 310,
+    top: screenHeight - (250 + (Platform.OS === 'ios' ? 78 : 46)),
     width: screenWidth,
     height: hp(60),
     alignItems: 'center',

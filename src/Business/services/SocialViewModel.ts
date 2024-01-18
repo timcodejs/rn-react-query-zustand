@@ -30,7 +30,7 @@ export const SocialViewModel = () => {
       await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true});
       // Get the users ID token
       const {idToken} = await GoogleSignin.signIn();
-      console.log('idToekn : ', idToken);
+      // console.log('idToekn : ', idToken);
       if (idToken) {
         setIsLogin(true);
         setAccessToken(idToken);
@@ -38,11 +38,11 @@ export const SocialViewModel = () => {
 
       // Create a Google credential with the token
       const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-      console.log('googleCredential : ', googleCredential);
+      // console.log('googleCredential : ', googleCredential);
 
       // Sign-in the user with the credential
       const res: any = await auth().signInWithCredential(googleCredential);
-      console.log('res : ', res);
+      // console.log('res : ', res);
       if (res) {
         setUserInfo(res?.user);
         setIsPlatForm('Google');
@@ -50,7 +50,8 @@ export const SocialViewModel = () => {
         setIsLoding(false);
       }
     } catch (error) {
-      console.log('로그인 취소');
+      // console.log('로그인 취소');
+      throw Promise.reject(error);
     }
   };
 
@@ -62,13 +63,15 @@ export const SocialViewModel = () => {
         setAccessToken(kakaoAccessToken);
         setIsLogin(true);
         getKakaoProfile();
-        console.log('로그인 성공', JSON.stringify(result));
+        // console.log('로그인 성공', JSON.stringify(result));
       })
       .catch(error => {
         if (error.code === 'E_CANCELLED_OPERATION') {
-          console.log('로그인 취소', error.message);
+          // console.log('로그인 취소', error.message);
+          throw Promise.reject(error);
         } else {
-          console.log(`로그인 실패(code:${error.code})`, error.message);
+          // console.log(`로그인 실패(code:${error.code})`, error.message);
+          throw Promise.reject(error);
         }
       });
   };
@@ -77,14 +80,15 @@ export const SocialViewModel = () => {
   const getKakaoProfile = () => {
     KakaoLogin.getProfile()
       .then(result => {
-        console.log('GetProfile Success', JSON.stringify(result));
+        // console.log('GetProfile Success', JSON.stringify(result));
         const nickname = result.nickname;
         setUserNickname(nickname);
         setIsPlatForm('Kakao');
         setIsLoding(false);
       })
       .catch(error => {
-        console.log(`GetProfile Fail(code:${error.code})`, error.message);
+        // console.log(`GetProfile Fail(code:${error.code})`, error.message);
+        throw Promise.reject(error);
       });
   };
 

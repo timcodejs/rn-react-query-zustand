@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
+import {Platform, StyleSheet} from 'react-native';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
@@ -154,7 +154,11 @@ const DragToCloseAnimation = () => {
 
   const flingGesture = Gesture.Fling()
     .direction(Directions.UP)
-    .hitSlop({right: -11, bottom: 70, width: 100})
+    .hitSlop({
+      right: -11,
+      bottom: Platform.OS === 'ios' ? 70 : 60,
+      width: 100,
+    })
     .onEnd(() => {
       isDirections.value = false;
       arrowY.value = withSpring(0);
@@ -195,7 +199,7 @@ export default DragToCloseAnimation;
 const styles = StyleSheet.create({
   ball: {
     position: 'absolute',
-    bottom: 78,
+    bottom: Platform.OS === 'ios' ? 78 : 72,
     right: -11,
     width: 100,
     height: 100,

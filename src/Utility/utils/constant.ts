@@ -21,6 +21,10 @@ export const menuList = [
     navigates: AllScreenList.WishList,
     text: 'Wish List',
   },
+  {
+    navigates: AllScreenList.DimensionsValue,
+    text: 'Dimensions Value',
+  },
 ];
 
 export const carouselListData = [

@@ -24,7 +24,6 @@ const RightActions = ({
   return (
     <TouchableOpacity
       onPress={() => {
-        console.log(index, 'delete');
         model?.handleDelete(index);
         swipeableRef.current?.close();
       }}

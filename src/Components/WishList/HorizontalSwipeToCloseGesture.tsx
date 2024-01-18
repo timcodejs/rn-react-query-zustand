@@ -1,5 +1,11 @@
 import React from 'react';
-import {View, StyleSheet, FlatList, TouchableOpacity} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  FlatList,
+  TouchableOpacity,
+  Platform,
+} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {GestureDetector} from 'react-native-gesture-handler';
 import Animated, {useSharedValue} from 'react-native-reanimated';
@@ -43,6 +49,7 @@ const HorizontalSwipeToCloseGesture = ({
           {data?.length > 0 ? (
             <FlatList
               data={data}
+              scrollEnabled
               keyExtractor={(item: any) => item.id}
               renderItem={({item}: any) => {
                 const total = item.price * item.choiseCount;
@@ -160,7 +167,7 @@ const styles = StyleSheet.create({
   inner: {
     width: wp(230),
     height: screenHeight,
-    paddingTop: hp(70),
+    paddingTop: Platform.OS === 'ios' ? hp(70) : hp(20),
     paddingHorizontal: hp(10),
     backgroundColor: Color.white,
   },
@@ -191,7 +198,7 @@ const styles = StyleSheet.create({
   },
   footer: {
     position: 'absolute',
-    top: screenHeight - 195,
+    bottom: Platform.OS === 'ios' ? 76 : 73,
     backgroundColor: Color.white,
   },
   addItemBtn: {
