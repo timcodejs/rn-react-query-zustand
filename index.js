@@ -2,58 +2,44 @@
  * @format
  */
 
-import {AppRegistry, Linking, Platform} from 'react-native';
+import {AppRegistry} from 'react-native';
 import messaging from '@react-native-firebase/messaging';
-import PushNotification from 'react-native-push-notification';
-import PushNotificationIOS from '@react-native-community/push-notification-ios';
+import notifee, {EventType} from '@notifee/react-native';
+import {onDisplayNotification} from './src/Utility/utils/Push';
 import App from './App';
 import {name as appName} from './app.json';
 
-// 알림 설정 형성
-PushNotification.configure({
-  // 앱이 켜질 때 fcm 토큰값 리턴
-  onRegister: function (token) {
-    console.log('fcm', token);
-  },
+// 포그라운드 푸시
+messaging().onMessage(async notification => {
+  console.log('Message handled in the forground!', notification);
+  onDisplayNotification({
+    title: notification?.notification.title,
+    body: notification?.notification.body,
+  });
+});
 
-  // 앱으로 푸시 메세지가 올때 동작
-  onNotification: function (notification) {
-    console.log(
-      'NOTIFICATION:',
-      JSON.stringify(notification) + '++' + Platform.OS,
-    );
+// 백그라운드 푸시
+messaging().setBackgroundMessageHandler(async notification => {
+  console.log('Message handled in the background!', notification);
+  onDisplayNotification({
+    title: notification?.notification.title,
+    body: notification?.notification.body,
+  });
+});
 
-    if (notification?.userInteraction) {
-      console.log(notification?.data);
-      if (notification?.data.data === 'BUSINESS_WORK_EVENT_REGISTRATION') {
-        Linking.openURL('mess://eventApplication');
-      }
-    }
-    if (Platform.OS === 'ios') {
-      PushNotification.finish(PushNotificationIOS.FetchResult.NoData);
-    }
-  },
+// 백그라운드 이벤트
+notifee.onBackgroundEvent(async ({type, detail}) => {
+  const {notification, pressAction} = detail;
 
-  // 푸시 메세지를 눌렀을 때 액션
-  onAction: function (notification) {
-    console.log('ACTION:', notification.action);
-    console.log('NOTIFICATION22:', notification);
-  },
+  // Check if the user pressed the "Mark as read" action
+  if (type === EventType.ACTION_PRESS && pressAction.id === 'mark-as-read') {
+    console.log('User pressed Background notification', notification);
+    // Update external API
+    // ...
 
-  // 에러
-  onRegistrationError: function (err) {
-    console.error(err.message, err);
-  },
-
-  permissions: {
-    alert: true,
-    badge: true,
-    sound: true,
-  },
-
-  popInitialNotification: true,
-
-  requestPermissions: true,
+    // Remove the notification
+    await notifee.cancelNotification(notification.id);
+  }
 });
 
 AppRegistry.registerComponent(appName, () => App);

@@ -21,8 +21,8 @@ target 'a_mess_rn' do
   pod 'GoogleUtilities', :modular_headers => true
   pod 'GoogleDataTransport', :modular_headers => true
   pod 'nanopb', :modular_headers => true
-  pod 'RNFlashList', :path => '../node_modules/@shopify/flash-list'
   pod 'rn-fetch-blob', :path => '../node_modules/rn-fetch-blob'
+  pod 'RNFlashList', :path => '../node_modules/@shopify/flash-list'
 
   # Flags change depending on the env values.
   flags = get_default_flags()
