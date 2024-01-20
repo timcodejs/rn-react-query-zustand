@@ -26,6 +26,7 @@ export enum AllScreenList {
   WishList = 'WishList',
   DragToClose = 'DragToClose',
   DimensionsValue = 'DimensionsValue',
+  PushNoti = 'PushNoti',
 }
 
 export enum BottomTabNameList {
@@ -61,6 +62,7 @@ export type SwipeParamList = {
   [AllScreenList.WishList]: {route?: any};
   [AllScreenList.DragToClose]: {route?: any};
   [AllScreenList.DimensionsValue]: {route?: any};
+  [AllScreenList.PushNoti]: {route?: any};
 };
 
 export type SocialParamList = {

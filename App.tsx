@@ -2,24 +2,36 @@ import {useEffect} from 'react';
 import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context';
 import messaging from '@react-native-firebase/messaging';
 import notifee, {EventType} from '@notifee/react-native';
+import {onDisplayNotification} from './src/Utility/utils/Push';
 import Routes from './src/Screens/Routes';
-import Detect from './src/Utility/utils/Detect';
+import {useAuthStore} from './src/Store/stores/authStore';
 
 const App = () => {
-  // Detect();
+  // store
+  const {setFcmToken} = useAuthStore();
+
   useEffect(() => {
+    // 포그라운드 푸시
+    messaging().onMessage(async (notification: any) => {
+      console.log('Message handled in the forground!', notification);
+      onDisplayNotification({
+        title: notification?.notification.title,
+        body: notification?.notification.body,
+        data: notification?.notification.data,
+      });
+    });
     // 포그라운드 이벤트
-    return notifee.onForegroundEvent(({type, detail}) => {
+    notifee.onForegroundEvent(({type, detail}) => {
       switch (type) {
         case EventType.DISMISSED:
           console.log(
-            'User dismissed Foreground notification',
+            'User dismissed Foreground notification - 1',
             detail.notification,
           );
           break;
         case EventType.PRESS:
           console.log(
-            'User pressed Foreground notification',
+            'User pressed Foreground notification - 2',
             detail.notification,
           );
           break;
@@ -39,6 +51,9 @@ const App = () => {
       authStatus === messaging.AuthorizationStatus.PROVISIONAL;
     if (enabled) {
       console.log('Authorization status:', authStatus);
+      const fcmToken = await messaging().getToken();
+      console.log('디바이스 토큰값', fcmToken);
+      setFcmToken(fcmToken);
     }
   };
 

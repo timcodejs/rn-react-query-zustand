@@ -20,7 +20,7 @@ const fetchPushMessage = async (
         sound: 'default',
       },
       priority: 'high',
-      'content-available': 1,
+      content_available: true,
       to: fcmToken,
       notification: {
         title: pushTitle,

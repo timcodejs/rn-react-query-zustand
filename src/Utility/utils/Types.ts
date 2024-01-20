@@ -8,3 +8,19 @@ export interface WishListDataProps {
   quantityLeft: number;
   choiseCount: number;
 }
+
+export interface NotiProps {
+  title: string;
+  body: string;
+  data: any;
+}
+
+export interface ScheduleNotiProps {
+  title: string;
+  body: string;
+  data: any;
+  month: number;
+  day: number;
+  hour: number;
+  minute: number;
+}

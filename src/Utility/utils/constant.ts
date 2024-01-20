@@ -25,6 +25,10 @@ export const menuList = [
     navigates: AllScreenList.DimensionsValue,
     text: 'Dimensions Value',
   },
+  {
+    navigates: AllScreenList.PushNoti,
+    text: 'Push Notification',
+  },
 ];
 
 export const carouselListData = [
