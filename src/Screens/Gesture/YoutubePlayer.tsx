@@ -1,10 +1,9 @@
 import React from 'react';
-import {View, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import Header from '../../Components/Header';
+import HeadingText from '../../Components/HeadingText';
 import {hp, wp} from '../../Utility/utils/UI';
 import {Color} from '../../Utility/utils/Color';
-import {IconArrowIcon} from '../../Utility/utils/SVG';
-import {PretendardBold} from '../../Utility/utils/CustomFont';
 import YoutubePlayerList from '../../Components/Gesture/YoutubePlayerList';
 import {AllScreenList, SwipeStackProps} from '../../Navigation/NavigationProps';
 
@@ -15,24 +14,12 @@ const YoutubePlayer = ({
     <>
       <View style={styles.view}>
         <Header navigation={navigation} bgColor={Color.black} />
-        <View style={styles.head}>
-          <TouchableOpacity
-            onPress={() => navigation.goBack()}
-            style={{marginRight: hp(10)}}>
-            <IconArrowIcon
-              width={wp(20)}
-              height={hp(20)}
-              color={Color.white}
-              style={{transform: [{rotate: '180deg'}]}}
-            />
-          </TouchableOpacity>
-          <PretendardBold
-            size={hp(20)}
-            color={Color.white}
-            style={{marginTop: hp(20), marginBottom: hp(20)}}
-            children="Youtube Player"
-          />
-        </View>
+        <HeadingText
+          navigation={navigation}
+          text="Youtube Player"
+          color={Color.white}
+          style={styles.padding}
+        />
         <YoutubePlayerList />
       </View>
     </>
@@ -46,10 +33,7 @@ const styles = StyleSheet.create({
     height: hp(740),
     backgroundColor: Color.black,
   },
-  head: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingLeft: hp(10),
-    paddingRight: hp(10),
+  padding: {
+    paddingHorizontal: wp(10),
   },
 });
