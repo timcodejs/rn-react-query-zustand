@@ -8,6 +8,7 @@ import WishList from '../Screens/Gesture/WishList';
 import DragToClose from '../Screens/Gesture/DragToClose';
 import DimensionsValue from '../Screens/Gesture/DimensionsValue';
 import PushNoti from '../Screens/Gesture/PushNoti';
+import IntlCommend from '../Screens/Gesture/IntlCommend';
 
 const SwipeNavigation = () => {
   const Stack = createStackNavigator<SwipeParamList>();
@@ -52,6 +53,11 @@ const SwipeNavigation = () => {
       <Stack.Screen
         name={AllScreenList.PushNoti}
         component={PushNoti}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name={AllScreenList.IntlCommend}
+        component={IntlCommend}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

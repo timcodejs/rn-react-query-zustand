@@ -27,6 +27,7 @@ export enum AllScreenList {
   DragToClose = 'DragToClose',
   DimensionsValue = 'DimensionsValue',
   PushNoti = 'PushNoti',
+  IntlCommend = 'IntlCommend',
 }
 
 export enum BottomTabNameList {
@@ -63,6 +64,7 @@ export type SwipeParamList = {
   [AllScreenList.DragToClose]: {route?: any};
   [AllScreenList.DimensionsValue]: {route?: any};
   [AllScreenList.PushNoti]: {route?: any};
+  [AllScreenList.IntlCommend]: {route?: any};
 };
 
 export type SocialParamList = {

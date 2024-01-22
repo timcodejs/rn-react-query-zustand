@@ -29,6 +29,10 @@ export const menuList = [
     navigates: AllScreenList.PushNoti,
     text: 'Push Notification',
   },
+  {
+    navigates: AllScreenList.IntlCommend,
+    text: 'Intl API',
+  },
 ];
 
 export const carouselListData = [
