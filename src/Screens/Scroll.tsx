@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, FlatList} from 'react-native';
+import {View, FlatList, ActivityIndicator} from 'react-native';
 import styled from 'styled-components/native';
 import Header from '../Components/Header';
 import {hp, wp} from '../Utility/utils/UI';
@@ -29,6 +29,7 @@ const Scroll = ({navigation}: ScrollStackProps<AllScreenList.Scroll>) => {
           data={scrollData?.pages}
           contentContainerStyle={{paddingBottom: 70}}
           showsVerticalScrollIndicator={false}
+          removeClippedSubviews={true}
           keyExtractor={(item: any, index: number) => index.toString()}
           renderItem={({item}) => {
             return (
@@ -67,9 +68,15 @@ const Scroll = ({navigation}: ScrollStackProps<AllScreenList.Scroll>) => {
           ListHeaderComponent={
             <PretendardRegular
               children={
-                isFetching && !isFetchingNextPage
-                  ? 'Background Updating...'
-                  : null
+                isFetching && !isFetchingNextPage ? (
+                  <ActivityIndicator
+                    size="large"
+                    style={{
+                      width: wp(330),
+                      alignItems: 'center',
+                    }}
+                  />
+                ) : null
               }
             />
           }

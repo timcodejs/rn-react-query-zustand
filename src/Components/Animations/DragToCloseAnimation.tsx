@@ -20,6 +20,18 @@ import {IconArrowIcon, IconCrossIcon} from '../../Utility/utils/SVG';
 import {Color} from '../../Utility/utils/Color';
 import {PretendardRegular} from '../../Utility/utils/CustomFont';
 
+const colorList = [
+  '#711DB0',
+  '#FFB534',
+  '#88AB8E',
+  '#87C4FF',
+  '#B80000',
+  '#F2AFEF',
+  '#2D3250',
+  '#994D1C',
+  '#FF6C22',
+];
+
 const closeIconCenter = {x: 50 - screenWidth / 2, y: 15};
 
 const DragToCloseAnimation = () => {
@@ -29,11 +41,12 @@ const DragToCloseAnimation = () => {
   const offsetX = useSharedValue(0);
   const offsetY = useSharedValue(0);
   const arrowY = useSharedValue(0);
-  const savedBall = useSharedValue({x: 0, y: 0});
   const scaleBall = useSharedValue(1);
+  const savedBall = useSharedValue({x: 0, y: 0});
   const isBallPressed = useSharedValue(false);
   const isFullScreen = useSharedValue(false);
   const isDirections = useSharedValue(false);
+  const bgColor = useSharedValue(Math.floor(Math.random() * 9));
 
   const ballOpacity = useDerivedValue(() => {
     if (
@@ -120,6 +133,7 @@ const DragToCloseAnimation = () => {
       width: withTiming(w.value),
       height: withTiming(h.value),
       borderRadius: withTiming(rad.value),
+      backgroundColor: colorList[bgColor.value],
       transform: [
         {translateX: offsetX.value},
         {translateY: offsetY.value},
@@ -160,6 +174,7 @@ const DragToCloseAnimation = () => {
       width: 100,
     })
     .onEnd(() => {
+      bgColor.value = Math.floor(Math.random() * 9);
       isDirections.value = false;
       arrowY.value = withSpring(0);
       offsetX.value = withSpring(0);
@@ -205,7 +220,6 @@ const styles = StyleSheet.create({
     height: 100,
     zIndex: 1,
     borderRadius: 50,
-    backgroundColor: 'red',
   },
   close: {
     width: 50,

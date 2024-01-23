@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import {View, StyleSheet} from 'react-native';
 import Header from '../../Components/Header';
 import HeadingText from '../../Components/HeadingText';
@@ -10,35 +10,88 @@ import {PretendardBold} from '../../Utility/utils/CustomFont';
 const IntlCommend = ({
   navigation,
 }: SwipeStackProps<AllScreenList.IntlCommend>) => {
-  const dateIntl = (locales: string, opt: any) =>
-    new Intl.DateTimeFormat(locales, opt);
-  const numIntl = (locales: string, opt: any) =>
-    new Intl.NumberFormat(locales, opt);
+  const dateIntl = useCallback(
+    (locales: string, opt: any) => new Intl.DateTimeFormat(locales, opt),
+    [],
+  );
+  const numIntl = useCallback(
+    (locales: string, opt: any) => new Intl.NumberFormat(locales, opt),
+    [],
+  );
+  const [dateAtTime, setDateAtTime] = useState(
+    dateIntl('ko', {
+      dateStyle: 'full',
+      timeStyle: 'full',
+    }).format(new Date()),
+  );
 
-  const fullDate = dateIntl('ko', {dateStyle: 'full'}).format(new Date());
-  const longDate = dateIntl('ko', {dateStyle: 'long'}).format(new Date());
-  const mediumDate = dateIntl('ko', {dateStyle: 'medium'}).format(new Date());
-  const shortDate = dateIntl('ko', {dateStyle: 'short'}).format(new Date());
-  const fullTime = dateIntl('ko', {timeStyle: 'full'}).format(new Date());
-  const longTime = dateIntl('ko', {timeStyle: 'long'}).format(new Date());
-  const mediumTime = dateIntl('ko', {timeStyle: 'medium'}).format(new Date());
-  const shortTime = dateIntl('ko', {timeStyle: 'short'}).format(new Date());
-  const dateAtTime = dateIntl('ko', {
-    dateStyle: 'full',
-    timeStyle: 'full',
-  }).format(new Date());
-  const percent = numIntl('ko', {style: 'percent'}).format(0.7);
-  const wonCur = numIntl('ko', {style: 'currency', currency: 'KRW'}).format(
-    50000,
+  const fullDate = useMemo(
+    () => dateIntl('ko', {dateStyle: 'full'}).format(new Date()),
+    [],
   );
-  const usdCur = numIntl('en', {style: 'currency', currency: 'USD'}).format(
-    40.56,
+  const longDate = useMemo(
+    () => dateIntl('ko', {dateStyle: 'long'}).format(new Date()),
+    [],
   );
-  const kilo = numIntl('ko', {style: 'unit', unit: 'kilogram'}).format(50);
-  const mPs = numIntl('en', {style: 'unit', unit: 'meter-per-second'}).format(
-    1000,
+  const mediumDate = useMemo(
+    () => dateIntl('ko', {dateStyle: 'medium'}).format(new Date()),
+    [],
   );
-  const rtf = numIntl('ko', {notation: 'compact'}).format(30593195);
+  const shortDate = useMemo(
+    () => dateIntl('ko', {dateStyle: 'short'}).format(new Date()),
+    [],
+  );
+  const fullTime = useMemo(
+    () => dateIntl('ko', {timeStyle: 'full'}).format(new Date()),
+    [],
+  );
+  const longTime = useMemo(
+    () => dateIntl('ko', {timeStyle: 'long'}).format(new Date()),
+    [],
+  );
+  const mediumTime = useMemo(
+    () => dateIntl('ko', {timeStyle: 'medium'}).format(new Date()),
+    [],
+  );
+  const shortTime = useMemo(
+    () => dateIntl('ko', {timeStyle: 'short'}).format(new Date()),
+    [],
+  );
+  const percent = useMemo(
+    () => numIntl('ko', {style: 'percent'}).format(0.7),
+    [],
+  );
+  const wonCur = useMemo(
+    () => numIntl('ko', {style: 'currency', currency: 'KRW'}).format(50000),
+    [],
+  );
+  const usdCur = useMemo(
+    () => numIntl('en', {style: 'currency', currency: 'USD'}).format(40.56),
+    [],
+  );
+  const kilo = useMemo(
+    () => numIntl('ko', {style: 'unit', unit: 'kilogram'}).format(50),
+    [],
+  );
+  const mPs = useMemo(
+    () => numIntl('en', {style: 'unit', unit: 'meter-per-second'}).format(1000),
+    [],
+  );
+  const rtf = useMemo(
+    () => numIntl('ko', {notation: 'compact'}).format(30593195),
+    [],
+  );
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      const times = dateIntl('ko', {
+        dateStyle: 'full',
+        timeStyle: 'full',
+      }).format(new Date());
+      setDateAtTime(times);
+    }, 1000);
+    return () => clearInterval(id);
+  });
 
   return (
     <View style={styles.view}>
@@ -48,6 +101,7 @@ const IntlCommend = ({
         text="Intl API"
         color={Color.black}
       />
+      <PretendardBold style={styles.margin} children={dateAtTime} />
       <PretendardBold style={styles.margin} children={fullDate} />
       <PretendardBold style={styles.margin} children={longDate} />
       <PretendardBold style={styles.margin} children={mediumDate} />
@@ -56,7 +110,6 @@ const IntlCommend = ({
       <PretendardBold style={styles.margin} children={longTime} />
       <PretendardBold style={styles.margin} children={mediumTime} />
       <PretendardBold style={styles.margin} children={shortTime} />
-      <PretendardBold style={styles.margin} children={dateAtTime} />
       <PretendardBold style={styles.margin} children={percent} />
       <PretendardBold style={styles.margin} children={wonCur} />
       <PretendardBold style={styles.margin} children={usdCur} />
