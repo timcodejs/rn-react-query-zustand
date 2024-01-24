@@ -1,39 +1,26 @@
-import React, {useCallback, useState} from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, View, ActivityIndicator} from 'react-native';
 import FastImage from 'react-native-fast-image';
-import {interpolate} from 'react-native-reanimated';
 import Carousel from 'react-native-reanimated-carousel';
 import {hp} from '../../Utility/utils/UI';
 import {screenWidth} from '../../Utility/utils/UI';
 import {PretendardRegular} from '../../Utility/utils/CustomFont';
 import {Color} from '../../Utility/utils/Color';
 
-const AdvancedParallax = ({data}: any) => {
+const NormalParallax = ({data}: any) => {
   const [loading, setLoading] = useState(true);
-  const animationStyle = useCallback((value: number) => {
-    'worklet';
-    const zIndex = interpolate(value, [-1, 0, 1], [10, 20, 30]);
-    const translateX = interpolate(
-      value,
-      [-2, 0, 1],
-      [-screenWidth, 0, screenWidth],
-    );
-
-    return {
-      transform: [{translateX}],
-      zIndex,
-    };
-  }, []);
 
   return (
     <View>
       <PretendardRegular
         size={hp(16)}
         style={{marginVertical: hp(10)}}
-        children="- Advanced-Parallax"
+        children="- Normal-Parallax (Auto Play)"
       />
       <Carousel
         loop={true}
+        autoPlay={true}
+        autoPlayInterval={3000}
         style={styles.carousel}
         width={screenWidth}
         data={data}
@@ -55,14 +42,13 @@ const AdvancedParallax = ({data}: any) => {
             />
           );
         }}
-        customAnimation={animationStyle}
-        scrollAnimationDuration={1200}
+        scrollAnimationDuration={500}
       />
     </View>
   );
 };
 
-export default AdvancedParallax;
+export default NormalParallax;
 
 const styles = StyleSheet.create({
   carousel: {
