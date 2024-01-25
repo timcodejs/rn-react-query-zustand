@@ -28,6 +28,8 @@ export enum AllScreenList {
   DimensionsValue = 'DimensionsValue',
   PushNoti = 'PushNoti',
   IntlCommend = 'IntlCommend',
+  Camera = 'Camera',
+  Setting = 'Setting',
 }
 
 export enum BottomTabNameList {
@@ -65,6 +67,8 @@ export type SwipeParamList = {
   [AllScreenList.DimensionsValue]: {route?: any};
   [AllScreenList.PushNoti]: {route?: any};
   [AllScreenList.IntlCommend]: {route?: any};
+  [AllScreenList.Camera]: {route?: any};
+  [AllScreenList.Setting]: {route?: any};
 };
 
 export type SocialParamList = {

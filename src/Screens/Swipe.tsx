@@ -20,6 +20,7 @@ const Swipe = ({navigation}: SwipeStackProps<AllScreenList.Swipe>) => {
       <FlatList
         data={menuList}
         showsVerticalScrollIndicator={false}
+        contentContainerStyle={{paddingBottom: 100}}
         keyExtractor={(item: any, index: number) => index.toString()}
         renderItem={({item}) => {
           return (

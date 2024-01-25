@@ -11,6 +11,10 @@ export const Color = {
   lightGray: '#ebebeb',
   paleGrey: '#C0C0C0',
   navy: '#191970',
+  purple: '#7F32E4',
+  appleGreen: '#61D361',
+  yellow: '#FF9800',
+  yellow2: '#ffc400',
 };
 
 export const RandomColor = [

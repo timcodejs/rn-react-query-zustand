@@ -1,7 +1,11 @@
 import {useRef} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {RootStackParamList, BottomTabNameList} from './NavigationProps';
+import {
+  RootStackParamList,
+  BottomTabNameList,
+  AllScreenList,
+} from './NavigationProps';
 import {Color} from '../Utility/utils/Color';
 import TodoNavigation from './TodoNavigation';
 import ScrollNavigation from './ScrollNavigation';
@@ -22,7 +26,17 @@ const BottomNavigation = () => {
   const routeNameRef = useRef<any>();
   const navigationRef = useRef<any>();
   const BottomStack = createBottomTabNavigator<RootStackParamList>();
-  const config = {};
+  const config = {
+    screens: {
+      [AllScreenList.Swipe]: {
+        screens: {
+          [AllScreenList.Camera]: {
+            path: 'camera',
+          },
+        },
+      },
+    },
+  };
   const Linking: any = {
     // 디폴트 프로토콜 설정
     prefixes: ['mess://'],

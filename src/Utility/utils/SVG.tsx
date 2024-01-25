@@ -9,6 +9,11 @@ import CrossSvg from '../../Assets/images/cross.svg';
 import CartSvg from '../../Assets/images/cart.svg';
 import MinusSvg from '../../Assets/images/minus.svg';
 import PlusSvg from '../../Assets/images/plus.svg';
+import FlashOnSvg from '../../Assets/images/flash-on.svg';
+import FlashOffSvg from '../../Assets/images/flash-off.svg';
+import HDROnSvg from '../../Assets/images/hdr-on.svg';
+import HDROffSvg from '../../Assets/images/hdr-off.svg';
+import ReuseSvg from '../../Assets/images/reuse.svg';
 
 type IconProps = {
   width: number;
@@ -131,6 +136,61 @@ export const IconPlusIcon = (IconProps: IconProps) => {
 export const IconMinusIcon = (IconProps: IconProps) => {
   return (
     <MinusSvg
+      width={IconProps.width}
+      height={IconProps.height}
+      color={IconProps.color}
+      style={IconProps.style}
+    />
+  );
+};
+
+export const IconFlashOnIcon = (IconProps: IconProps) => {
+  return (
+    <FlashOnSvg
+      width={IconProps.width}
+      height={IconProps.height}
+      color={IconProps.color}
+      style={IconProps.style}
+    />
+  );
+};
+
+export const IconFlashOffIcon = (IconProps: IconProps) => {
+  return (
+    <FlashOffSvg
+      width={IconProps.width}
+      height={IconProps.height}
+      color={IconProps.color}
+      style={IconProps.style}
+    />
+  );
+};
+
+export const IconHDROnIcon = (IconProps: IconProps) => {
+  return (
+    <HDROnSvg
+      width={IconProps.width}
+      height={IconProps.height}
+      color={IconProps.color}
+      style={IconProps.style}
+    />
+  );
+};
+
+export const IconHDROffIcon = (IconProps: IconProps) => {
+  return (
+    <HDROffSvg
+      width={IconProps.width}
+      height={IconProps.height}
+      color={IconProps.color}
+      style={IconProps.style}
+    />
+  );
+};
+
+export const IconReuseIcon = (IconProps: IconProps) => {
+  return (
+    <ReuseSvg
       width={IconProps.width}
       height={IconProps.height}
       color={IconProps.color}

@@ -9,6 +9,8 @@ import DragToClose from '../Screens/Gesture/DragToClose';
 import DimensionsValue from '../Screens/Gesture/DimensionsValue';
 import PushNoti from '../Screens/Gesture/PushNoti';
 import IntlCommend from '../Screens/Gesture/IntlCommend';
+import CameraContainer from '../Screens/Gesture/CameraContainer';
+import Setting from '../Screens/Gesture/Setting';
 
 const SwipeNavigation = () => {
   const Stack = createStackNavigator<SwipeParamList>();
@@ -58,6 +60,16 @@ const SwipeNavigation = () => {
       <Stack.Screen
         name={AllScreenList.IntlCommend}
         component={IntlCommend}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name={AllScreenList.Camera}
+        component={CameraContainer}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name={AllScreenList.Setting}
+        component={Setting}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

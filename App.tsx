@@ -1,4 +1,5 @@
 import {useEffect} from 'react';
+import {Linking} from 'react-native';
 import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context';
 import messaging from '@react-native-firebase/messaging';
 import notifee, {EventType} from '@notifee/react-native';
@@ -9,6 +10,29 @@ import {useAuthStore} from './src/Store/stores/authStore';
 const App = () => {
   // store
   const {setFcmToken} = useAuthStore();
+
+  // deep linking
+  useEffect(() => {
+    // 최초 실행 시에 Universal link 또는 URL scheme요청이 있었을 때 여기서 찾을 수 있음
+    Linking.getInitialURL().then(value => {
+      console.log('getInitialURL', value);
+    });
+
+    const linkingSubscription = Linking.addEventListener('url', e => {
+      // 앱이 실행되어있는 상태에서 요청이 왔을 때 처리하는 이벤트 등록
+      const route = e.url.replace(/.*?:\/\//g, '');
+      console.log('add e.url', e.url);
+      console.log('route', route);
+    });
+
+    return () => {
+      // 이벤트 해제
+      linkingSubscription.remove();
+      // Linking.removeEventListener('url', e => {
+      //   console.log('remove e.url', e.url);
+      // });
+    };
+  }, []);
 
   useEffect(() => {
     // 포그라운드 푸시
@@ -43,7 +67,7 @@ const App = () => {
     requestUserPermission();
   }, []);
 
-  // 알림 허용 얼럿
+  // 알림 권한 확인
   const requestUserPermission = async () => {
     const authStatus = await messaging().requestPermission();
     const enabled =

@@ -33,6 +33,14 @@ export const menuList = [
     navigates: AllScreenList.IntlCommend,
     text: 'Intl API',
   },
+  {
+    navigates: AllScreenList.Camera,
+    text: 'Camera',
+  },
+  {
+    navigates: AllScreenList.Setting,
+    text: 'Setting',
+  },
 ];
 
 export const carouselListData = [
