@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 import {
   Point,
   Camera,
@@ -24,21 +24,16 @@ import Reanimated, {
   withRepeat,
   withTiming,
 } from 'react-native-reanimated';
-import Animated from 'react-native-reanimated';
 import {Gesture, GestureDetector} from 'react-native-gesture-handler';
-import {hp, wp} from '../../Utility/utils/UI';
+
 import {Color} from '../../Utility/utils/Color';
-import {
-  IconFlashOnIcon,
-  IconFlashOffIcon,
-  IconHDROnIcon,
-  IconHDROffIcon,
-  IconReuseIcon,
-} from '../../Utility/utils/SVG';
-import {PretendardBold} from '../../Utility/utils/CustomFont';
-import ToastTopMessage from '../../Components/Animations/ToastTopMessage';
-import {AllScreenList, SwipeStackProps} from '../../Navigation/NavigationProps';
+import CaptureMode from '../../Components/Camera/CaptureMode';
+import ZoomMode from '../../Components/Camera/ZoomMode';
+import PhotoVideoMode from '../../Components/Camera/PhotoVideoMode';
+import DeviceMode from '../../Components/Camera/DeviceMode';
+import CameraButton from '../../Components/Camera/CameraButton';
 import hasPermission from '../../Components/Camera/hasAndroidPermission';
+import {AllScreenList, SwipeStackProps} from '../../Navigation/NavigationProps';
 
 Reanimated.addWhitelistedNativeProps({
   zoom: true,
@@ -63,6 +58,7 @@ const CameraContainer = ({
   const [cameraMode, setCameraMode] = useState('photo');
   const [photoFile, setPhotoFile] = useState<PhotoFile>();
   const [videoFile, setVideoFile] = useState<VideoFile>();
+  const [zoomRatio, setZoomRatio] = useState(1.0);
   const [deviceMode, setDeviceMode] =
     useState<CameraDevice['position']>('back');
   const [photoHDR, setPhotoHDR] =
@@ -282,6 +278,7 @@ const CameraContainer = ({
   }
   return (
     <View style={{flex: 1, backgroundColor: Color.black}}>
+      {/* camera area */}
       <GestureDetector gesture={gestureTap}>
         <ReanimatedCamera
           ref={camera}
@@ -296,174 +293,36 @@ const CameraContainer = ({
           style={StyleSheet.absoluteFill}
           photoHdr={format.supportsPhotoHdr}
           enableZoomGesture={true}
+          zoom={zoomRatio}
           // videoStabilizationMode={supportsVideoStabilization}
         />
       </GestureDetector>
-      <Animated.View style={[styles.focus, focusAnimatedProps]} />
-      <ToastTopMessage
-        text={isTriger.text}
-        triger={isTriger.triger}
-        onClose={setIsTriger}
+      {/* capture mode */}
+      <CaptureMode
+        isTriger={isTriger}
+        setIsTriger={setIsTriger}
+        isFlash={isFlash}
+        setIsFlash={setIsFlash}
+        photoHDR={photoHDR}
+        setPhotoHDR={setPhotoHDR}
+        focusAnimatedProps={focusAnimatedProps}
       />
-      <TouchableOpacity
-        style={[styles.icon, styles.flash]}
-        onPress={() => {
-          setIsFlash(isFlash === 'on' ? 'off' : 'on');
-          setIsTriger({
-            triger: true,
-            text: isFlash === 'on' ? 'Flash OFF' : 'Flash ON',
-          });
-        }}>
-        {isFlash === 'on' ? (
-          <IconFlashOnIcon color={Color.white} width={wp(20)} height={hp(20)} />
-        ) : (
-          <IconFlashOffIcon
-            color={Color.white}
-            width={wp(20)}
-            height={hp(20)}
-          />
-        )}
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={[styles.icon, styles.hdr]}
-        onPress={() => {
-          setPhotoHDR(photoHDR ? false : true);
-          setIsTriger({
-            triger: true,
-            text: photoHDR ? 'HDR OFF' : 'HDR ON',
-          });
-        }}>
-        {photoHDR ? (
-          <IconHDROnIcon color={Color.white} width={wp(30)} height={hp(30)} />
-        ) : (
-          <IconHDROffIcon color={Color.white} width={wp(30)} height={hp(30)} />
-        )}
-      </TouchableOpacity>
-      <View style={styles.mode}>
-        <TouchableOpacity onPress={() => setCameraMode('photo')}>
-          <PretendardBold
-            color={cameraMode === 'photo' ? Color.yellow : Color.white}
-            style={{paddingHorizontal: wp(10)}}
-            children="사진"
-          />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => setCameraMode('video')}>
-          <PretendardBold
-            color={cameraMode === 'video' ? Color.yellow : Color.white}
-            style={{paddingHorizontal: wp(10)}}
-            children="비디오"
-          />
-        </TouchableOpacity>
-      </View>
-      <TouchableOpacity
-        style={[styles.reuse]}
-        onPress={() => {
-          if (deviceMode === 'back') {
-            setDeviceMode('front');
-          } else {
-            setDeviceMode('back');
-          }
-        }}>
-        <IconReuseIcon color={Color.white} width={wp(30)} height={hp(30)} />
-      </TouchableOpacity>
-      {cameraMode === 'photo' ? (
-        <TouchableOpacity style={styles.picture} onPress={takePicturePress}>
-          <View style={styles.circle} />
-        </TouchableOpacity>
-      ) : (
-        <GestureDetector gesture={gestureTapVideo}>
-          <Animated.View style={[styles.video, videoAnimatedProps]}>
-            <TouchableOpacity onPress={takeVideoPress}>
-              <View style={styles.circle2} />
-            </TouchableOpacity>
-          </Animated.View>
-        </GestureDetector>
-      )}
+      {/* zoom mode */}
+      <ZoomMode zoomRatio={zoomRatio} setZoomRatio={setZoomRatio} />
+      {/* photo/video mode */}
+      <PhotoVideoMode cameraMode={cameraMode} setCameraMode={setCameraMode} />
+      {/* device mode */}
+      <DeviceMode deviceMode={deviceMode} setDeviceMode={setDeviceMode} />
+      {/* camera button */}
+      <CameraButton
+        cameraMode={cameraMode}
+        takePicturePress={takePicturePress}
+        takeVideoPress={takeVideoPress}
+        videoAnimatedProps={videoAnimatedProps}
+        gestureTapVideo={gestureTapVideo}
+      />
     </View>
   );
 };
 
 export default CameraContainer;
-
-const styles = StyleSheet.create({
-  mode: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    alignSelf: 'center',
-    flexDirection: 'row',
-    position: 'absolute',
-    bottom: 150,
-  },
-  picture: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    alignSelf: 'center',
-    position: 'absolute',
-    bottom: 50,
-    width: 75,
-    height: 75,
-    borderRadius: 75,
-    backgroundColor: Color.white,
-  },
-  video: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    alignSelf: 'center',
-    position: 'absolute',
-    bottom: 50,
-    width: 75,
-    height: 75,
-    borderRadius: 75,
-    backgroundColor: 'red',
-  },
-  circle: {
-    width: 65,
-    height: 65,
-    borderWidth: 2,
-    borderColor: Color.gray,
-    borderRadius: 65,
-  },
-  circle2: {
-    width: 75,
-    height: 75,
-    borderWidth: 4,
-    borderColor: Color.white,
-    borderRadius: 75,
-  },
-  icon: {
-    alignSelf: 'flex-end',
-    alignItems: 'center',
-    justifyContent: 'center',
-    position: 'absolute',
-    right: 20,
-    width: 40,
-    height: 40,
-    borderWidth: 1,
-    borderColor: Color.white,
-    borderRadius: 65,
-  },
-  flash: {
-    top: 70,
-  },
-  hdr: {
-    top: 120,
-  },
-  reuse: {
-    alignSelf: 'flex-end',
-    alignItems: 'center',
-    justifyContent: 'center',
-    position: 'absolute',
-    bottom: 60,
-    right: 30,
-    width: 50,
-    height: 50,
-    borderRadius: 50,
-    backgroundColor: 'rgba(0,0,0,0.5)',
-  },
-  focus: {
-    position: 'absolute',
-    width: 100,
-    height: 100,
-    opacity: 0,
-  },
-});
