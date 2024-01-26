@@ -1,5 +1,13 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Linking,
+  Button,
+  Platform,
+  ActivityIndicator,
+} from 'react-native';
 import {
   Point,
   Camera,
@@ -11,8 +19,6 @@ import {
   CameraRuntimeError,
   CameraCaptureError,
   TakePhotoOptions,
-  PhotoFile,
-  VideoFile,
   CameraDeviceFormat,
   CameraDevice,
 } from 'react-native-vision-camera';
@@ -21,18 +27,22 @@ import Reanimated, {
   runOnJS,
   useAnimatedStyle,
   useSharedValue,
+  withDelay,
   withRepeat,
   withTiming,
 } from 'react-native-reanimated';
 import {Gesture, GestureDetector} from 'react-native-gesture-handler';
+import {iosReadGalleryPermission} from '@react-native-camera-roll/camera-roll';
 
 import {Color} from '../../Utility/utils/Color';
+import {screenHeight} from '../../Utility/utils/UI';
+import Gallery from '../../Components/Camera/Gallery';
+import Albums from '../../Components/Camera/Albums';
 import CaptureMode from '../../Components/Camera/CaptureMode';
 import ZoomMode from '../../Components/Camera/ZoomMode';
 import PhotoVideoMode from '../../Components/Camera/PhotoVideoMode';
 import DeviceMode from '../../Components/Camera/DeviceMode';
 import CameraButton from '../../Components/Camera/CameraButton';
-import hasPermission from '../../Components/Camera/hasAndroidPermission';
 import {AllScreenList, SwipeStackProps} from '../../Navigation/NavigationProps';
 
 Reanimated.addWhitelistedNativeProps({
@@ -55,9 +65,10 @@ const CameraContainer = ({
   const focusColor = useSharedValue(Color.yellow);
   const focusOpacity = useSharedValue(0);
   const camera = useRef<Camera>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasAlbumPermission, setHasAlbumPermission] = useState(false);
   const [cameraMode, setCameraMode] = useState('photo');
-  const [photoFile, setPhotoFile] = useState<PhotoFile>();
-  const [videoFile, setVideoFile] = useState<VideoFile>();
+  const [albumData, setAlbumData] = useState<any[]>([]);
   const [zoomRatio, setZoomRatio] = useState(1.0);
   const [deviceMode, setDeviceMode] =
     useState<CameraDevice['position']>('back');
@@ -66,7 +77,25 @@ const CameraContainer = ({
   const [isFlash, setIsFlash] = useState<TakePhotoOptions['flash']>('auto');
   const [isTriger, setIsTriger] = useState({triger: false, text: ''});
 
-  const {savePicture} = hasPermission();
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1200);
+  }, []);
+
+  // 바텀 네비 display
+  useEffect(() => {
+    if (isFocused) {
+      navigation.getParent().setOptions({tabBarStyle: {display: 'none'}});
+    } else {
+      navigation.getParent().setOptions({
+        tabBarStyle: {display: 'flex', backgroundColor: Color.black},
+      });
+    }
+  }, [isFocused]);
+
+  // 앨범 권한 & 사진 저장
+  const {getAlbums, savePicture, hasAndroidPermission} = Gallery();
 
   // 카메라 권한
   const {
@@ -80,21 +109,32 @@ const CameraContainer = ({
   } = useMicrophonePermission();
 
   useEffect(() => {
+    getAlbums().then(res => {
+      setAlbumData(res);
+
+      if (Platform.OS === 'ios') {
+        iosReadGalleryPermission('readWrite').then(res => {
+          console.log('permissionIOS', res);
+          if (res === 'granted') {
+            setHasAlbumPermission(true);
+          }
+        });
+      } else if (Platform.OS === 'android') {
+        hasAndroidPermission().then(res => {
+          console.log('permissionAndroid', res);
+        });
+      }
+    });
+
     if (!hasCameraPermission) {
       requestCameraPermission().then(res => {
         console.log('camera permission', res);
-        if (res === false) {
-          // navigation.goBack();
-        }
       });
     }
 
     if (!hasMicrophonePermission) {
       requestMicrophonePermission().then(res => {
         console.log('microphone permission', res);
-        if (res === false) {
-          // navigation.goBack();
-        }
       });
     }
   }, [hasCameraPermission, hasMicrophonePermission]);
@@ -118,13 +158,14 @@ const CameraContainer = ({
 
   // format
   const format: any = useCameraFormat(device, [
-    {photoHdr: photoHDR},
-    {videoStabilizationMode: 'cinematic-extended'},
+    {
+      fps: 60,
+      photoHdr: photoHDR,
+      photoResolution: 'max',
+      videoResolution: 'max',
+      videoStabilizationMode: 'cinematic-extended',
+    },
   ]);
-
-  // 비디오 스테빌라이저
-  const supportsVideoStabilization =
-    format?.videoStabilizationModes?.includes('cinematic-extended');
 
   // 포커스 인
   const focus = useCallback((point: Point) => {
@@ -133,18 +174,11 @@ const CameraContainer = ({
     c.focus(point);
   }, []);
 
-  // 포커스 아웃
-  const timeout = useCallback(() => {
-    const time = setTimeout(() => {
-      focusOpacity.value = 0;
-    }, 1800);
-
-    return () => clearTimeout(time);
-  }, []);
-
   // 포커스 제스쳐
   const gestureTap = Gesture.Tap()
     .onStart(() => {
+      focusX.value = -100;
+      focusY.value = -100;
       focusColor.value = Color.yellow;
     })
     .onEnd(({x, y}) => {
@@ -155,10 +189,10 @@ const CameraContainer = ({
       focusOpacity.value = 1;
       focusColor.value = withRepeat(
         withTiming(Color.yellow2, {duration: 200}),
-        -1,
+        10,
         true,
       );
-      runOnJS(timeout)();
+      focusOpacity.value = withDelay(2000, withTiming(0.5));
     });
 
   // 포커스 제스쳐 애니메이션
@@ -169,6 +203,13 @@ const CameraContainer = ({
       borderWidth: focusBorder.value,
       opacity: focusOpacity.value,
       borderColor: focusColor.value,
+    };
+  });
+  const focusLineAnimatedProps = useAnimatedStyle(() => {
+    return {
+      height: focusBorder.value,
+      opacity: focusOpacity.value,
+      backgroundColor: focusColor.value,
     };
   });
 
@@ -203,17 +244,6 @@ const CameraContainer = ({
     };
   });
 
-  // 바텀 네비 display
-  useEffect(() => {
-    if (isFocused) {
-      navigation.getParent().setOptions({tabBarStyle: {display: 'none'}});
-    } else {
-      navigation.getParent().setOptions({
-        tabBarStyle: {display: 'flex', backgroundColor: Color.black},
-      });
-    }
-  }, [isFocused]);
-
   // error
   const onError = useCallback((error: CameraRuntimeError) => {
     console.error(error);
@@ -229,9 +259,13 @@ const CameraContainer = ({
         enableAutoRedEyeReduction: true, // 적목감소
         enableAutoStabilization: false, // 사진 캡쳐 스테빌라이져
       });
-      console.log('photo', photo);
-      // const result = await fetch(`file://${photo.path}`);
-      // const data = await result.blob();
+
+      // 사진 저장
+      savePicture({tag: photo.path, type: 'photo', album: ''});
+      // 앨범 업데이트
+      getAlbums().then(res => {
+        setAlbumData(res);
+      });
     } catch (e) {
       if (e instanceof CameraCaptureError) {
         switch (e.code) {
@@ -273,8 +307,49 @@ const CameraContainer = ({
     }
   };
 
+  if (isLoading) {
+    return (
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: Color.black,
+          height: screenHeight,
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
+        <ActivityIndicator size="large" />
+      </View>
+    );
+  }
+  if (!hasCameraPermission || !hasAlbumPermission) {
+    return (
+      <View style={{flex: 1, backgroundColor: Color.black}}>
+        <Text
+          style={{
+            color: Color.white,
+            alignSelf: 'center',
+            marginTop: 100,
+            marginBottom: 20,
+          }}>
+          Please allow camera permission
+        </Text>
+        <Button
+          title="설정으로 이동"
+          onPress={() => {
+            Linking.openSettings();
+          }}
+        />
+      </View>
+    );
+  }
   if (device == null) {
-    return <Text>Camera device not found</Text>;
+    return (
+      <View style={{flex: 1, backgroundColor: Color.black}}>
+        <Text style={{color: Color.white, alignSelf: 'center', marginTop: 100}}>
+          Camera device not found
+        </Text>
+      </View>
+    );
   }
   return (
     <View style={{flex: 1, backgroundColor: Color.black}}>
@@ -282,9 +357,9 @@ const CameraContainer = ({
       <GestureDetector gesture={gestureTap}>
         <ReanimatedCamera
           ref={camera}
-          photo={true}
-          video={true}
-          audio={true}
+          photo={hasCameraPermission}
+          video={hasCameraPermission}
+          audio={hasMicrophonePermission}
           device={device}
           format={format}
           onError={onError}
@@ -294,7 +369,6 @@ const CameraContainer = ({
           photoHdr={format.supportsPhotoHdr}
           enableZoomGesture={true}
           zoom={zoomRatio}
-          // videoStabilizationMode={supportsVideoStabilization}
         />
       </GestureDetector>
       {/* capture mode */}
@@ -306,6 +380,7 @@ const CameraContainer = ({
         photoHDR={photoHDR}
         setPhotoHDR={setPhotoHDR}
         focusAnimatedProps={focusAnimatedProps}
+        focusLineAnimatedProps={focusLineAnimatedProps}
       />
       {/* zoom mode */}
       <ZoomMode zoomRatio={zoomRatio} setZoomRatio={setZoomRatio} />
@@ -321,6 +396,8 @@ const CameraContainer = ({
         videoAnimatedProps={videoAnimatedProps}
         gestureTapVideo={gestureTapVideo}
       />
+      {/* Albums */}
+      <Albums albumData={albumData} />
     </View>
   );
 };

@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useRef} from 'react';
 import {Text, Animated, StyleSheet, Easing} from 'react-native';
 
 interface Props {
@@ -17,20 +17,27 @@ const ToastTopMessage = ({text, triger, onClose}: Props) => {
     outputRange: [0, 10],
   });
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      onClose({triger: false, text: ''});
-    }, 2000);
-
-    Animated.timing(fadeAnim, {
-      toValue: triger ? 1 : 0,
-      duration: 200,
-      easing: Easing.linear,
-      useNativeDriver: true,
-    }).start();
-
-    return () => clearTimeout(timer);
-  }, [triger]);
+  if (triger) {
+    Animated.sequence([
+      Animated.timing(fadeAnim, {
+        toValue: 1,
+        duration: 200,
+        easing: Easing.linear,
+        useNativeDriver: true,
+      }),
+      Animated.delay(1500),
+      Animated.timing(fadeAnim, {
+        toValue: 0,
+        duration: 200,
+        easing: Easing.linear,
+        useNativeDriver: true,
+      }),
+    ]).start(({finished}) => {
+      if (finished) {
+        onClose({triger: false, text: ''});
+      }
+    });
+  }
 
   return (
     <>

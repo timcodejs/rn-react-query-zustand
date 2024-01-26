@@ -1,8 +1,8 @@
 import {PermissionsAndroid, Platform} from 'react-native';
 import {CameraRoll} from '@react-native-camera-roll/camera-roll';
 
-const hasPermission = () => {
-  async function hasAndroidPermission() {
+const Gallery = () => {
+  const hasAndroidPermission = async () => {
     const getCheckPermissionPromise = () => {
       if (Platform.Version >= '33') {
         return Promise.all([
@@ -27,6 +27,7 @@ const hasPermission = () => {
     if (hasPermission) {
       return true;
     }
+
     const getRequestPermissionPromise = () => {
       if (Platform.Version >= '33') {
         return PermissionsAndroid.requestMultiple([
@@ -47,17 +48,45 @@ const hasPermission = () => {
     };
 
     return await getRequestPermissionPromise();
-  }
+  };
 
-  async function savePicture({tag, type, album}: any) {
+  const savePicture = async ({tag, type, album}: any) => {
     if (Platform.OS === 'android' && !(await hasAndroidPermission())) {
       return;
     }
 
-    CameraRoll.save(tag, {type, album});
-  }
+    CameraRoll.saveAsset(tag, {type, album});
+  };
 
-  return {savePicture};
+  const getAlbums = async () => {
+    const albums = await CameraRoll.getAlbums({
+      assetType: 'All',
+      albumType: 'All',
+    });
+
+    // for each album, get the first photo
+    const albumDataAll = await Promise.all(
+      albums.map(async album => {
+        const photos = await CameraRoll.getPhotos({
+          first: 1,
+          assetType: 'Photos',
+          groupName: album.title,
+        });
+        if (photos.edges.length > 0) {
+          return {
+            name: album.title,
+            count: album.count,
+            uri: photos.edges[0].node.image.uri,
+            extension: photos.edges[0].node.image.extension,
+          };
+        }
+      }),
+    );
+
+    return albumDataAll;
+  };
+
+  return {getAlbums, savePicture, hasAndroidPermission};
 };
 
-export default hasPermission;
+export default Gallery;

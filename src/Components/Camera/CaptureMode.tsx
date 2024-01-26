@@ -22,6 +22,7 @@ interface Props {
   photoHDR: CameraDeviceFormat['supportsPhotoHdr'];
   setPhotoHDR: (e: CameraDeviceFormat['supportsPhotoHdr']) => void;
   focusAnimatedProps: any;
+  focusLineAnimatedProps: any;
 }
 
 const CaptureMode = ({
@@ -32,11 +33,17 @@ const CaptureMode = ({
   photoHDR,
   setPhotoHDR,
   focusAnimatedProps,
+  focusLineAnimatedProps,
 }: Props) => {
   return (
     <>
       {/* focus area */}
-      <Animated.View style={[styles.focus, focusAnimatedProps]} />
+      <Animated.View style={[styles.focus, focusAnimatedProps]}>
+        <Animated.View style={[styles.line1, focusLineAnimatedProps]} />
+        <Animated.View style={[styles.line2, focusLineAnimatedProps]} />
+        <Animated.View style={[styles.line3, focusLineAnimatedProps]} />
+        <Animated.View style={[styles.line4, focusLineAnimatedProps]} />
+      </Animated.View>
       {/* toast message */}
       <ToastTopMessage
         text={isTriger.text}
@@ -109,5 +116,30 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     opacity: 0,
+  },
+  line1: {
+    position: 'absolute',
+    width: 15,
+    marginTop: 50,
+  },
+  line2: {
+    position: 'absolute',
+    alignSelf: 'flex-end',
+    width: 15,
+    marginTop: 50,
+  },
+  line3: {
+    position: 'absolute',
+    width: 15,
+    marginTop: 5,
+    marginLeft: 40,
+    transform: [{rotate: '90deg'}],
+  },
+  line4: {
+    position: 'absolute',
+    width: 15,
+    marginTop: 89,
+    marginLeft: 40,
+    transform: [{rotate: '90deg'}],
   },
 });
