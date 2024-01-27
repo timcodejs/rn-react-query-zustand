@@ -635,6 +635,8 @@ PODS:
     - RNNotifee/NotifeeCore (= 7.8.2)
   - RNNotifee/NotifeeCore (7.8.2):
     - React-Core
+  - RNPermissions (4.1.0):
+    - React-Core
   - RNReanimated (3.6.1):
     - RCT-Folly (= 2021.07.22.00)
     - React-Core
@@ -748,6 +750,7 @@ DEPENDENCIES:
   - "RNGoogleSignin (from `../node_modules/@react-native-google-signin/google-signin`)"
   - "RNNaverLogin (from `../node_modules/@react-native-seoul/naver-login`)"
   - "RNNotifee (from `../node_modules/@notifee/react-native`)"
+  - RNPermissions (from `../node_modules/react-native-permissions`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNSVG (from `../node_modules/react-native-svg`)
@@ -916,6 +919,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-seoul/naver-login"
   RNNotifee:
     :path: "../node_modules/@notifee/react-native"
+  RNPermissions:
+    :path: "../node_modules/react-native-permissions"
   RNReanimated:
     :path: "../node_modules/react-native-reanimated"
   RNScreens:
@@ -1025,6 +1030,7 @@ SPEC CHECKSUMS:
   RNGoogleSignin: fc408799f1990a12497a32f64280c0fe353ffcc1
   RNNaverLogin: dc2758a157dafaa1ffca63079cad4d4c75208a30
   RNNotifee: 8e2d3df3f0e9ce8f5d1fe4c967431138190b6175
+  RNPermissions: b3e83ffc6c3ce035358b88a3896df9394c5e32f9
   RNReanimated: dc83bf2068bbc91572938337c5b2030641de1415
   RNScreens: 3c5b9f4a9dcde752466854b6109b79c0e205dad3
   RNSVG: ba3e7232f45e34b7b47e74472386cf4e1a676d0a
@@ -1036,6 +1042,6 @@ SPEC CHECKSUMS:
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
   YoutubePlayer-in-WKWebView: 4fca3b4f6f09940077bfbae7bddb771f2b43aacd
 
-PODFILE CHECKSUM: 96df61302c3a7240b055e3d92ecc59c0f5fa992e
+PODFILE CHECKSUM: d6f4cacd500dde3b8e474592b2aa0f300be8b356
 
 COCOAPODS: 1.14.3

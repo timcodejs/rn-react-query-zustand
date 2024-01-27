@@ -6,9 +6,12 @@ import {Color} from '../Utility/utils/Color';
 import {IconArrowIcon} from '../Utility/utils/SVG';
 import {menuList} from '../Utility/utils/constant';
 import {PretendardBold, PretendardRegular} from '../Utility/utils/CustomFont';
+import {CameraPermissionModel} from '../Business/services/CameraPermissionModel';
 import {AllScreenList, SwipeStackProps} from '../Navigation/NavigationProps';
 
 const Swipe = ({navigation}: SwipeStackProps<AllScreenList.Swipe>) => {
+  const {checkPermission} = CameraPermissionModel();
+
   return (
     <View style={styles.view}>
       <Header navigation={navigation} bgColor={Color.white} />
@@ -26,7 +29,17 @@ const Swipe = ({navigation}: SwipeStackProps<AllScreenList.Swipe>) => {
           return (
             <TouchableOpacity
               style={styles.list}
-              onPress={() => navigation.navigate(item.navigates)}>
+              onPress={async () => {
+                if (item.navigates === AllScreenList.Camera) {
+                  const result = await checkPermission();
+
+                  if (result) {
+                    navigation.navigate(item.navigates);
+                  }
+                } else {
+                  navigation.navigate(item.navigates);
+                }
+              }}>
               <PretendardRegular
                 size={hp(18)}
                 style={{marginTop: hp(20), marginBottom: hp(20)}}

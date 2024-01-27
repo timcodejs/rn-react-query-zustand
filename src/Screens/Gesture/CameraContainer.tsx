@@ -1,13 +1,5 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Linking,
-  Button,
-  Platform,
-  ActivityIndicator,
-} from 'react-native';
+import {View, Text, StyleSheet, Button, Linking} from 'react-native';
 import {
   Point,
   Camera,
@@ -32,10 +24,8 @@ import Reanimated, {
   withTiming,
 } from 'react-native-reanimated';
 import {Gesture, GestureDetector} from 'react-native-gesture-handler';
-import {iosReadGalleryPermission} from '@react-native-camera-roll/camera-roll';
 
 import {Color} from '../../Utility/utils/Color';
-import {screenHeight} from '../../Utility/utils/UI';
 import Gallery from '../../Components/Camera/Gallery';
 import Albums from '../../Components/Camera/Albums';
 import CaptureMode from '../../Components/Camera/CaptureMode';
@@ -55,6 +45,9 @@ const CameraContainer = ({
 }: SwipeStackProps<AllScreenList.Camera>) => {
   const isFocused = useIsFocused();
   const isVideoStart = useSharedValue(false);
+  const {getAlbums, savePicture} = Gallery();
+  const {hasPermission: hasCameraPermission} = useCameraPermission();
+  const {hasPermission: hasMicrophonePermission} = useMicrophonePermission();
   const w = useSharedValue(75);
   const h = useSharedValue(75);
   const rad = useSharedValue(75);
@@ -65,8 +58,6 @@ const CameraContainer = ({
   const focusColor = useSharedValue(Color.yellow);
   const focusOpacity = useSharedValue(0);
   const camera = useRef<Camera>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [hasAlbumPermission, setHasAlbumPermission] = useState(false);
   const [cameraMode, setCameraMode] = useState('photo');
   const [albumData, setAlbumData] = useState<any[]>([]);
   const [zoomRatio, setZoomRatio] = useState(1.0);
@@ -76,12 +67,6 @@ const CameraContainer = ({
     useState<CameraDeviceFormat['supportsPhotoHdr']>(false);
   const [isFlash, setIsFlash] = useState<TakePhotoOptions['flash']>('auto');
   const [isTriger, setIsTriger] = useState({triger: false, text: ''});
-
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1200);
-  }, []);
 
   // 바텀 네비 display
   useEffect(() => {
@@ -94,50 +79,12 @@ const CameraContainer = ({
     }
   }, [isFocused]);
 
-  // 앨범 권한 & 사진 저장
-  const {getAlbums, savePicture, hasAndroidPermission} = Gallery();
-
-  // 카메라 권한
-  const {
-    hasPermission: hasCameraPermission,
-    requestPermission: requestCameraPermission,
-  } = useCameraPermission();
-  // 오디오 권한
-  const {
-    hasPermission: hasMicrophonePermission,
-    requestPermission: requestMicrophonePermission,
-  } = useMicrophonePermission();
-
+  // 앨범 데이터 get
   useEffect(() => {
     getAlbums().then(res => {
       setAlbumData(res);
-
-      if (Platform.OS === 'ios') {
-        iosReadGalleryPermission('readWrite').then(res => {
-          console.log('permissionIOS', res);
-          if (res === 'granted') {
-            setHasAlbumPermission(true);
-          }
-        });
-      } else if (Platform.OS === 'android') {
-        hasAndroidPermission().then(res => {
-          console.log('permissionAndroid', res);
-        });
-      }
     });
-
-    if (!hasCameraPermission) {
-      requestCameraPermission().then(res => {
-        console.log('camera permission', res);
-      });
-    }
-
-    if (!hasMicrophonePermission) {
-      requestMicrophonePermission().then(res => {
-        console.log('microphone permission', res);
-      });
-    }
-  }, [hasCameraPermission, hasMicrophonePermission]);
+  }, []);
 
   // device setting
   const device: any = useCameraDevice(deviceMode, {
@@ -307,21 +254,7 @@ const CameraContainer = ({
     }
   };
 
-  if (isLoading) {
-    return (
-      <View
-        style={{
-          flex: 1,
-          backgroundColor: Color.black,
-          height: screenHeight,
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}>
-        <ActivityIndicator size="large" />
-      </View>
-    );
-  }
-  if (!hasCameraPermission || !hasAlbumPermission) {
+  if (!hasCameraPermission) {
     return (
       <View style={{flex: 1, backgroundColor: Color.black}}>
         <Text
