@@ -6,7 +6,7 @@ import {
 import {request, PERMISSIONS} from 'react-native-permissions';
 import Gallery from '../../Components/Camera/Gallery';
 
-export const CameraPermissionModel = () => {
+export const useCamPermissions = () => {
   // 안드로이드 앨범 권한
   const {hasAndroidPermission} = Gallery();
 

@@ -6,11 +6,11 @@ import {Color} from '../Utility/utils/Color';
 import {IconArrowIcon} from '../Utility/utils/SVG';
 import {menuList} from '../Utility/utils/constant';
 import {PretendardBold, PretendardRegular} from '../Utility/utils/CustomFont';
-import {CameraPermissionModel} from '../Business/services/CameraPermissionModel';
+import {useCamPermissions} from '../Business/hooks/useCamPermissions';
 import {AllScreenList, SwipeStackProps} from '../Navigation/NavigationProps';
 
 const Swipe = ({navigation}: SwipeStackProps<AllScreenList.Swipe>) => {
-  const {checkPermission} = CameraPermissionModel();
+  const {checkPermission} = useCamPermissions();
 
   return (
     <View style={styles.view}>

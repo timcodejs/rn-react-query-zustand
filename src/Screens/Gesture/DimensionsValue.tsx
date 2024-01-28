@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import {useIsFocused} from '@react-navigation/native';
 import {useHeaderHeight} from '@react-navigation/elements';
-import {Color} from '../../Utility/utils/Color';
+import {useBottomNaviDisplay} from '../../Business/hooks/useBottomNaviDisplay';
 import {AllScreenList, SwipeStackProps} from '../../Navigation/NavigationProps';
 
 const os = Platform.OS;
@@ -30,15 +30,7 @@ const DimensionsValue = ({
   const heightSum = statusbarH + windowH + navigationH;
   const isIncludeStatusbarHeight = heightSum > screen.height;
 
-  useEffect(() => {
-    if (isFocused) {
-      navigation.getParent().setOptions({tabBarStyle: {display: 'none'}});
-    } else {
-      navigation.getParent().setOptions({
-        tabBarStyle: {display: 'flex', backgroundColor: Color.black},
-      });
-    }
-  }, [isFocused]);
+  useBottomNaviDisplay(navigation, isFocused);
 
   useEffect(() => {
     const subscription = Dimensions.addEventListener(
