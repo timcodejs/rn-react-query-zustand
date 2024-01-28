@@ -39,7 +39,7 @@ const CameraContainer = ({
     useState<CameraDevice['position']>('back');
   const [photoHDR, setPhotoHDR] =
     useState<CameraDeviceFormat['supportsPhotoHdr']>(false);
-  const [isFlash, setIsFlash] = useState<TakePhotoOptions['flash']>('auto');
+  const [isFlash, setIsFlash] = useState<TakePhotoOptions['flash']>('off');
   const [isTriger, setIsTriger] = useState({triger: false, text: ''});
 
   const isFocused = useIsFocused();
@@ -111,18 +111,20 @@ const CameraContainer = ({
       <GestureDetector gesture={gestureTap}>
         <ReanimatedCamera
           ref={camera}
+          device={device}
+          format={format}
+          zoom={zoomRatio}
+          style={StyleSheet.absoluteFill}
           photo={hasCameraPermission}
           video={hasCameraPermission}
           audio={hasMicrophonePermission}
-          device={device}
-          format={format}
           onError={onError}
           isActive={isFocused}
           codeScanner={codeScanner}
-          style={StyleSheet.absoluteFill}
-          photoHdr={format.supportsPhotoHdr}
+          resizeMode="cover"
+          enableFpsGraph={true}
           enableZoomGesture={true}
-          zoom={zoomRatio}
+          enableHighQualityPhotos={true}
         />
       </GestureDetector>
       {/* capture mode */}

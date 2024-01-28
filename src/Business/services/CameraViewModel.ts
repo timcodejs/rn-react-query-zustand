@@ -10,6 +10,7 @@ import {
   useCodeScanner,
 } from 'react-native-vision-camera';
 import Gallery from '../../Components/Camera/Gallery';
+import {screenHeight, screenWidth} from '../../Utility/utils/UI';
 
 interface Props {
   camera: any;
@@ -54,15 +55,19 @@ export const CameraViewModel = ({
     },
   });
 
+  const screenAspectRatio = screenWidth / screenHeight;
+
   // format
   const format: any = useCameraFormat(device, [
-    {
-      fps: 60,
-      photoHdr: photoHDR,
-      photoResolution: 'max',
-      videoResolution: 'max',
-      videoStabilizationMode: 'cinematic-extended',
-    },
+    {fps: 60},
+    {photoHdr: photoHDR},
+    {videoHdr: photoHDR},
+    {photoResolution: 'max'},
+    {videoResolution: 'max'},
+    {photoAspectRatio: screenAspectRatio},
+    {videoAspectRatio: screenAspectRatio},
+    {videoStabilizationMode: 'cinematic-extended'},
+    {pixelFormat: 'native'},
   ]);
 
   // error
@@ -78,7 +83,7 @@ export const CameraViewModel = ({
         flash: isFlash, // 플래시 'on' | 'off' | 'auto'
         enableShutterSound: true, // 셔터음
         enableAutoRedEyeReduction: true, // 적목감소
-        enableAutoStabilization: false, // 사진 캡쳐 스테빌라이져
+        enableAutoStabilization: true, // 사진 캡쳐 스테빌라이져
       });
 
       // 사진 저장
