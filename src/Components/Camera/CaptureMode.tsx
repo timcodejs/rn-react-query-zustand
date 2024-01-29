@@ -7,16 +7,24 @@ import {
   IconHDROnIcon,
 } from '../../Utility/utils/SVG';
 import Animated from 'react-native-reanimated';
-import {CameraDeviceFormat, TakePhotoOptions} from 'react-native-vision-camera';
+import {
+  CameraDeviceFormat,
+  FormatFilter,
+  TakePhotoOptions,
+} from 'react-native-vision-camera';
 import {hp, wp} from '../../Utility/utils/UI';
 import {Color} from '../../Utility/utils/Color';
 import ToastTopMessage from '../../Components/Animations/ToastTopMessage';
+import {PretendardBold} from '@Utility/utils/CustomFont';
 
 type trigerProps = {triger: boolean; text: string};
 
 interface Props {
+  cameraMode: string;
   isTriger: trigerProps;
   setIsTriger: (e: trigerProps) => void;
+  isFPS: FormatFilter['fps'];
+  setIsFPS: (e: FormatFilter['fps']) => void;
   isFlash: TakePhotoOptions['flash'];
   setIsFlash: (e: TakePhotoOptions['flash']) => void;
   photoHDR: CameraDeviceFormat['supportsPhotoHdr'];
@@ -26,8 +34,11 @@ interface Props {
 }
 
 const CaptureMode = ({
+  cameraMode,
   isTriger,
   setIsTriger,
+  isFPS,
+  setIsFPS,
   isFlash,
   setIsFlash,
   photoHDR,
@@ -86,6 +97,26 @@ const CaptureMode = ({
           <IconHDROffIcon color={Color.white} width={wp(30)} height={hp(30)} />
         )}
       </TouchableOpacity>
+      {/* fps 60/30/24 */}
+      {cameraMode === 'video' && (
+        <TouchableOpacity
+          style={[styles.icon, styles.fps]}
+          onPress={() => {
+            if (isFPS === 60) {
+              setIsFPS(24);
+            } else if (isFPS === 24) {
+              setIsFPS(30);
+            } else if (isFPS === 30) {
+              setIsFPS(60);
+            }
+            setIsTriger({
+              triger: true,
+              text: `${isFPS === 60 ? 24 : isFPS === 24 ? 30 : 60}fps`,
+            });
+          }}>
+          <PretendardBold size={13} color={Color.white} children={isFPS} />
+        </TouchableOpacity>
+      )}
     </>
   );
 };
@@ -110,6 +141,9 @@ const styles = StyleSheet.create({
   },
   hdr: {
     top: 120,
+  },
+  fps: {
+    top: 170,
   },
   focus: {
     position: 'absolute',

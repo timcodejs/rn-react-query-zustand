@@ -7,6 +7,7 @@ import {
   TakePhotoOptions,
   CameraDeviceFormat,
   CameraDevice,
+  FormatFilter,
 } from 'react-native-vision-camera';
 import {useIsFocused} from '@react-navigation/native';
 import Reanimated from 'react-native-reanimated';
@@ -40,6 +41,7 @@ const CameraContainer = ({
   const [photoHDR, setPhotoHDR] =
     useState<CameraDeviceFormat['supportsPhotoHdr']>(false);
   const [isFlash, setIsFlash] = useState<TakePhotoOptions['flash']>('off');
+  const [isFPS, setIsFPS] = useState<FormatFilter['fps']>(60); // 60, 30, 24
   const [isTriger, setIsTriger] = useState({triger: false, text: ''});
 
   const isFocused = useIsFocused();
@@ -69,9 +71,11 @@ const CameraContainer = ({
   } = CameraViewModel({
     camera,
     deviceMode,
+    isFPS,
     isFlash,
     photoHDR,
     isVideoStart,
+    isFocused,
     setAlbumData,
   });
 
@@ -129,8 +133,11 @@ const CameraContainer = ({
       </GestureDetector>
       {/* capture mode */}
       <CaptureMode
+        cameraMode={cameraMode}
         isTriger={isTriger}
         setIsTriger={setIsTriger}
+        isFPS={isFPS}
+        setIsFPS={setIsFPS}
         isFlash={isFlash}
         setIsFlash={setIsFlash}
         photoHDR={photoHDR}

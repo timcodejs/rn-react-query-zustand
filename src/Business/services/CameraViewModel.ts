@@ -4,39 +4,56 @@ import {
   CameraDevice,
   CameraDeviceFormat,
   CameraRuntimeError,
+  FormatFilter,
   TakePhotoOptions,
   useCameraDevice,
   useCameraFormat,
   useCodeScanner,
 } from 'react-native-vision-camera';
+import Sound from 'react-native-sound';
 import Gallery from '../../Components/Camera/Gallery';
 import {screenHeight, screenWidth} from '../../Utility/utils/UI';
 
 interface Props {
   camera: any;
   deviceMode: CameraDevice['position'];
+  isFPS: FormatFilter['fps'];
   isFlash: TakePhotoOptions['flash'];
   photoHDR: CameraDeviceFormat['supportsPhotoHdr'];
   isVideoStart: any;
+  isFocused: any;
   setAlbumData: (e: any[]) => void;
 }
+
+Sound.setCategory('Playback');
+const start_recording = new Sound(
+  'Start_Recording_Sound_Effect.mp3',
+  Sound.MAIN_BUNDLE,
+);
+const stop_recording = new Sound(
+  'Stop_Recording_Sound_Effect.mp3',
+  Sound.MAIN_BUNDLE,
+);
 
 export const CameraViewModel = ({
   camera,
   deviceMode,
+  isFPS,
   isFlash,
   photoHDR,
   isVideoStart,
+  isFocused,
   setAlbumData,
 }: Props) => {
   const {getAlbums, savePicture} = Gallery();
+  const screenAspectRatio = screenWidth / screenHeight;
 
   // 앨범 데이터 get
   useEffect(() => {
-    getAlbums().then(res => {
-      setAlbumData(res);
-    });
-  }, []);
+    if (isFocused) {
+      getAlbumsHandler();
+    }
+  }, [isFocused]);
 
   // device setting
   const device: any = useCameraDevice(deviceMode, {
@@ -55,11 +72,9 @@ export const CameraViewModel = ({
     },
   });
 
-  const screenAspectRatio = screenWidth / screenHeight;
-
   // format
   const format: any = useCameraFormat(device, [
-    {fps: 60},
+    {fps: isFPS},
     {photoHdr: photoHDR},
     {videoHdr: photoHDR},
     {photoResolution: 'max'},
@@ -87,11 +102,9 @@ export const CameraViewModel = ({
       });
 
       // 사진 저장
-      savePicture({tag: photo.path, type: 'photo', album: ''});
+      await savePicture({tag: photo.path, type: 'photo', album: ''});
       // 앨범 업데이트
-      getAlbums().then(res => {
-        setAlbumData(res);
-      });
+      getAlbumsHandler();
     } catch (e) {
       if (e instanceof CameraCaptureError) {
         switch (e.code) {
@@ -110,14 +123,20 @@ export const CameraViewModel = ({
   const takeVideoPress = async () => {
     try {
       if (isVideoStart.value) {
+        start_recording.play();
         await camera.current?.startRecording({
+          flash: isFlash,
           videoCodec: 'h265',
           fileType: 'mp4',
-          onRecordingFinished: (video: any) =>
-            console.log('video recode', video),
+          onRecordingFinished: async (video: any) => {
+            console.log('video recode', video);
+            // 비디오 저장
+            await savePicture({tag: video.path, type: 'video', album: ''});
+          },
           onRecordingError: (error: Error) => console.error(error),
         });
       } else {
+        stop_recording.play();
         await camera.current?.stopRecording();
       }
     } catch (e) {
@@ -132,6 +151,12 @@ export const CameraViewModel = ({
         }
       }
     }
+  };
+
+  const getAlbumsHandler = () => {
+    getAlbums().then(res => {
+      setAlbumData(res);
+    });
   };
 
   return {

@@ -40,6 +40,8 @@
 		D0476124903949D0B2FED565 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E38C54EEBA754F39880315F9 /* Foundation.ttf */; };
 		D19AA02E714F4C0E8ED1A732 /* Arita-buri-SemiBold_TTF.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 28F24A9F2B6C4560B63D6253 /* Arita-buri-SemiBold_TTF.ttf */; };
 		EB7F0FD6945F417E90D81AC4 /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AC33D967A21E4B3BB7848854 /* Fontisto.ttf */; };
+		EF2B7F492B6861D100768EB6 /* Start_Recording_Sound_Effect.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EF2B7F472B6861D100768EB6 /* Start_Recording_Sound_Effect.mp3 */; };
+		EF2B7F4A2B6861D100768EB6 /* Stop_Recording_Sound_Effect.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EF2B7F482B6861D100768EB6 /* Stop_Recording_Sound_Effect.mp3 */; };
 		EF5CA73E2B5A0185007D5697 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EF5CA73D2B5A0185007D5697 /* GoogleService-Info.plist */; };
 		F8028CE4C70F4878ADB696E7 /* Pretendard-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9B53B46000404713BDA7281E /* Pretendard-ExtraBold.ttf */; };
 /* End PBXBuildFile section */
@@ -98,6 +100,8 @@
 		DF6983C36E404B5895EB3B84 /* Pretendard-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-Thin.ttf"; path = "../src/Assets/fonts/Pretendard-Thin.ttf"; sourceTree = "<group>"; };
 		E38C54EEBA754F39880315F9 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = ../src/Assets/fonts/Foundation.ttf; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		EF2B7F472B6861D100768EB6 /* Start_Recording_Sound_Effect.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Start_Recording_Sound_Effect.mp3; path = ../../../../Downloads/Start_Recording_Sound_Effect.mp3; sourceTree = "<group>"; };
+		EF2B7F482B6861D100768EB6 /* Stop_Recording_Sound_Effect.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Stop_Recording_Sound_Effect.mp3; path = ../../../../Downloads/Stop_Recording_Sound_Effect.mp3; sourceTree = "<group>"; };
 		EF5CA73D2B5A0185007D5697 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EF5CA73F2B5A037A007D5697 /* a_mess_rn.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = a_mess_rn.entitlements; path = a_mess_rn/a_mess_rn.entitlements; sourceTree = "<group>"; };
 		F3B200312069A7B0A04E8F5A /* libPods-a_mess_rn.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-a_mess_rn.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -175,6 +179,8 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				EF2B7F472B6861D100768EB6 /* Start_Recording_Sound_Effect.mp3 */,
+				EF2B7F482B6861D100768EB6 /* Stop_Recording_Sound_Effect.mp3 */,
 				13B07FAE1A68108700A75B9A /* a_mess_rn */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* a_mess_rnTests */,
@@ -355,7 +361,9 @@
 				807B9DE110924985BB5288A7 /* Ionicons.ttf in Resources */,
 				2777C661083B4B7FB54AC2B9 /* MaterialCommunityIcons.ttf in Resources */,
 				02EB2FCD9DA24FB7BA875E1D /* MaterialIcons.ttf in Resources */,
+				EF2B7F492B6861D100768EB6 /* Start_Recording_Sound_Effect.mp3 in Resources */,
 				EF5CA73E2B5A0185007D5697 /* GoogleService-Info.plist in Resources */,
+				EF2B7F4A2B6861D100768EB6 /* Stop_Recording_Sound_Effect.mp3 in Resources */,
 				5877B7B9774249B991A59980 /* NanumSquareB.ttf in Resources */,
 				71731804505547C893504822 /* Octicons.ttf in Resources */,
 				9B496ADD50074C569432F70C /* Pretendard-Bold.ttf in Resources */,

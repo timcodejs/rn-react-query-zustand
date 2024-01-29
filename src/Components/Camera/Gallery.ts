@@ -55,7 +55,7 @@ const Gallery = () => {
       return;
     }
 
-    CameraRoll.saveAsset(tag, {type, album});
+    await CameraRoll.saveAsset(tag, {type, album});
   };
 
   const getAlbums = async () => {
