@@ -42,7 +42,19 @@
 		EB7F0FD6945F417E90D81AC4 /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AC33D967A21E4B3BB7848854 /* Fontisto.ttf */; };
 		EF2B7F492B6861D100768EB6 /* Start_Recording_Sound_Effect.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EF2B7F472B6861D100768EB6 /* Start_Recording_Sound_Effect.mp3 */; };
 		EF2B7F4A2B6861D100768EB6 /* Stop_Recording_Sound_Effect.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EF2B7F482B6861D100768EB6 /* Stop_Recording_Sound_Effect.mp3 */; };
-		EF5CA73E2B5A0185007D5697 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EF5CA73D2B5A0185007D5697 /* GoogleService-Info.plist */; };
+		EF3AE6392B7783560057E4D9 /* LiveActivityModule.m in Sources */ = {isa = PBXBuildFile; fileRef = EF3AE6382B7783560057E4D9 /* LiveActivityModule.m */; };
+		EFAA6E162B777A1200F18079 /* MessLiveActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAA6E152B777A1200F18079 /* MessLiveActivityAttributes.swift */; };
+		EFAA6E172B777A1200F18079 /* MessLiveActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAA6E152B777A1200F18079 /* MessLiveActivityAttributes.swift */; };
+		EFAA6E192B777BBA00F18079 /* LiveActivityModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAA6E182B777BBA00F18079 /* LiveActivityModule.swift */; };
+		EFB484C02B7772BE00E02130 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFB484BF2B7772BE00E02130 /* WidgetKit.framework */; };
+		EFB484C22B7772BE00E02130 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFB484C12B7772BE00E02130 /* SwiftUI.framework */; };
+		EFB484C52B7772BE00E02130 /* MessLiveActivityBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB484C42B7772BE00E02130 /* MessLiveActivityBundle.swift */; };
+		EFB484C72B7772BE00E02130 /* MessLiveActivityLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB484C62B7772BE00E02130 /* MessLiveActivityLiveActivity.swift */; };
+		EFB484C92B7772BE00E02130 /* MessLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB484C82B7772BE00E02130 /* MessLiveActivity.swift */; };
+		EFB484CB2B7772BE00E02130 /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB484CA2B7772BE00E02130 /* AppIntent.swift */; };
+		EFB484CD2B7772BF00E02130 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EFB484CC2B7772BF00E02130 /* Assets.xcassets */; };
+		EFB484D12B7772BF00E02130 /* MessLiveActivityExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = EFB484BE2B7772BE00E02130 /* MessLiveActivityExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		EFF3A5032B6C8D44007FB521 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EFF3A5022B6C8D44007FB521 /* GoogleService-Info.plist */; };
 		F8028CE4C70F4878ADB696E7 /* Pretendard-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9B53B46000404713BDA7281E /* Pretendard-ExtraBold.ttf */; };
 /* End PBXBuildFile section */
 
@@ -54,7 +66,28 @@
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
 			remoteInfo = a_mess_rn;
 		};
+		EFB484CF2B7772BF00E02130 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EFB484BD2B7772BE00E02130;
+			remoteInfo = MessLiveActivityExtension;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		EFB484D22B7772BF00E02130 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				EFB484D12B7772BF00E02130 /* MessLiveActivityExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		00E356EE1AD99517003FC87E /* a_mess_rnTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = a_mess_rnTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -102,8 +135,22 @@
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		EF2B7F472B6861D100768EB6 /* Start_Recording_Sound_Effect.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Start_Recording_Sound_Effect.mp3; path = ../../../../Downloads/Start_Recording_Sound_Effect.mp3; sourceTree = "<group>"; };
 		EF2B7F482B6861D100768EB6 /* Stop_Recording_Sound_Effect.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Stop_Recording_Sound_Effect.mp3; path = ../../../../Downloads/Stop_Recording_Sound_Effect.mp3; sourceTree = "<group>"; };
-		EF5CA73D2B5A0185007D5697 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		EF3AE6382B7783560057E4D9 /* LiveActivityModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiveActivityModule.m; sourceTree = "<group>"; };
+		EF3AE63A2B7785BF0057E4D9 /* MessLiveActivityExtension-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MessLiveActivityExtension-Bridging-Header.h"; sourceTree = "<group>"; };
 		EF5CA73F2B5A037A007D5697 /* a_mess_rn.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = a_mess_rn.entitlements; path = a_mess_rn/a_mess_rn.entitlements; sourceTree = "<group>"; };
+		EFAA6E112B77799000F18079 /* a_mess_rn-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "a_mess_rn-Bridging-Header.h"; sourceTree = "<group>"; };
+		EFAA6E152B777A1200F18079 /* MessLiveActivityAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessLiveActivityAttributes.swift; sourceTree = "<group>"; };
+		EFAA6E182B777BBA00F18079 /* LiveActivityModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivityModule.swift; sourceTree = "<group>"; };
+		EFB484BE2B7772BE00E02130 /* MessLiveActivityExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MessLiveActivityExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		EFB484BF2B7772BE00E02130 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		EFB484C12B7772BE00E02130 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		EFB484C42B7772BE00E02130 /* MessLiveActivityBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessLiveActivityBundle.swift; sourceTree = "<group>"; };
+		EFB484C62B7772BE00E02130 /* MessLiveActivityLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessLiveActivityLiveActivity.swift; sourceTree = "<group>"; };
+		EFB484C82B7772BE00E02130 /* MessLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessLiveActivity.swift; sourceTree = "<group>"; };
+		EFB484CA2B7772BE00E02130 /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
+		EFB484CC2B7772BF00E02130 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EFB484CE2B7772BF00E02130 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EFF3A5022B6C8D44007FB521 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/mess-app-google-service/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F3B200312069A7B0A04E8F5A /* libPods-a_mess_rn.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-a_mess_rn.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -121,6 +168,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				760CA6B2D13752E1F1DFF38D /* libPods-a_mess_rn.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EFB484BB2B7772BE00E02130 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EFB484C22B7772BE00E02130 /* SwiftUI.framework in Frameworks */,
+				EFB484C02B7772BE00E02130 /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,11 +206,14 @@
 				EF5CA73F2B5A037A007D5697 /* a_mess_rn.entitlements */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
+				EFF3A5022B6C8D44007FB521 /* GoogleService-Info.plist */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
-				EF5CA73D2B5A0185007D5697 /* GoogleService-Info.plist */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				EF3AE6382B7783560057E4D9 /* LiveActivityModule.m */,
+				EFAA6E182B777BBA00F18079 /* LiveActivityModule.swift */,
+				EF3AE63A2B7785BF0057E4D9 /* MessLiveActivityExtension-Bridging-Header.h */,
 			);
 			name = a_mess_rn;
 			sourceTree = "<group>";
@@ -165,6 +224,8 @@
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				F3B200312069A7B0A04E8F5A /* libPods-a_mess_rn.a */,
 				9AC0E1F74223D604BFCC01F3 /* libPods-a_mess_rn-a_mess_rnTests.a */,
+				EFB484BF2B7772BE00E02130 /* WidgetKit.framework */,
+				EFB484C12B7772BE00E02130 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -184,6 +245,7 @@
 				13B07FAE1A68108700A75B9A /* a_mess_rn */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* a_mess_rnTests */,
+				EFB484C32B7772BE00E02130 /* MessLiveActivity */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
@@ -199,6 +261,7 @@
 			children = (
 				13B07F961A680F5B00A75B9A /* a_mess_rn.app */,
 				00E356EE1AD99517003FC87E /* a_mess_rnTests.xctest */,
+				EFB484BE2B7772BE00E02130 /* MessLiveActivityExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -248,6 +311,21 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		EFB484C32B7772BE00E02130 /* MessLiveActivity */ = {
+			isa = PBXGroup;
+			children = (
+				EFB484C42B7772BE00E02130 /* MessLiveActivityBundle.swift */,
+				EFB484C62B7772BE00E02130 /* MessLiveActivityLiveActivity.swift */,
+				EFB484C82B7772BE00E02130 /* MessLiveActivity.swift */,
+				EFB484CA2B7772BE00E02130 /* AppIntent.swift */,
+				EFB484CC2B7772BF00E02130 /* Assets.xcassets */,
+				EFB484CE2B7772BF00E02130 /* Info.plist */,
+				EFAA6E112B77799000F18079 /* a_mess_rn-Bridging-Header.h */,
+				EFAA6E152B777A1200F18079 /* MessLiveActivityAttributes.swift */,
+			);
+			path = MessLiveActivity;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -277,12 +355,13 @@
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "a_mess_rn" */;
 			buildPhases = (
 				EE93B02AA1B6A54387CCECDF /* [CP] Check Pods Manifest.lock */,
+				EFB484D22B7772BF00E02130 /* Embed Foundation Extensions */,
+				A8D7ACFEB7B78E3ECB5FC0BD /* [CP] Embed Pods Frameworks */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				A8D7ACFEB7B78E3ECB5FC0BD /* [CP] Embed Pods Frameworks */,
 				786866952459A6D574C8411D /* [CP] Copy Pods Resources */,
 				9F16172C372746E9F3FDC316 /* [CP-User] [RNFB] Core Configuration */,
 				2E59F0049CA618465DCAD220 /* [CP-User] [RNFB] Crashlytics Configuration */,
@@ -290,11 +369,29 @@
 			buildRules = (
 			);
 			dependencies = (
+				EFB484D02B7772BF00E02130 /* PBXTargetDependency */,
 			);
 			name = a_mess_rn;
 			productName = a_mess_rn;
 			productReference = 13B07F961A680F5B00A75B9A /* a_mess_rn.app */;
 			productType = "com.apple.product-type.application";
+		};
+		EFB484BD2B7772BE00E02130 /* MessLiveActivityExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EFB484D52B7772BF00E02130 /* Build configuration list for PBXNativeTarget "MessLiveActivityExtension" */;
+			buildPhases = (
+				EFB484BA2B7772BE00E02130 /* Sources */,
+				EFB484BB2B7772BE00E02130 /* Frameworks */,
+				EFB484BC2B7772BE00E02130 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MessLiveActivityExtension;
+			productName = MessLiveActivityExtension;
+			productReference = EFB484BE2B7772BE00E02130 /* MessLiveActivityExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -302,6 +399,7 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 1520;
 				LastUpgradeCheck = 1210;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
@@ -309,7 +407,11 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						LastSwiftMigration = 1120;
+						LastSwiftMigration = 1520;
+					};
+					EFB484BD2B7772BE00E02130 = {
+						CreatedOnToolsVersion = 15.2;
+						LastSwiftMigration = 1520;
 					};
 				};
 			};
@@ -328,6 +430,7 @@
 			targets = (
 				13B07F861A680F5B00A75B9A /* a_mess_rn */,
 				00E356ED1AD99517003FC87E /* a_mess_rnTests */,
+				EFB484BD2B7772BE00E02130 /* MessLiveActivityExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -362,7 +465,6 @@
 				2777C661083B4B7FB54AC2B9 /* MaterialCommunityIcons.ttf in Resources */,
 				02EB2FCD9DA24FB7BA875E1D /* MaterialIcons.ttf in Resources */,
 				EF2B7F492B6861D100768EB6 /* Start_Recording_Sound_Effect.mp3 in Resources */,
-				EF5CA73E2B5A0185007D5697 /* GoogleService-Info.plist in Resources */,
 				EF2B7F4A2B6861D100768EB6 /* Stop_Recording_Sound_Effect.mp3 in Resources */,
 				5877B7B9774249B991A59980 /* NanumSquareB.ttf in Resources */,
 				71731804505547C893504822 /* Octicons.ttf in Resources */,
@@ -370,12 +472,21 @@
 				F8028CE4C70F4878ADB696E7 /* Pretendard-ExtraBold.ttf in Resources */,
 				2963CD31B6D74A3AB20B20A2 /* Pretendard-ExtraLight.ttf in Resources */,
 				BD565A5D7E1340DEAF7F4093 /* Pretendard-Light.ttf in Resources */,
+				EFF3A5032B6C8D44007FB521 /* GoogleService-Info.plist in Resources */,
 				24292CBEE69349869DB8135F /* Pretendard-Medium.ttf in Resources */,
 				9420D16134F44A8C8D6D06B4 /* Pretendard-Regular.ttf in Resources */,
 				586AEAE4D84C47ED9FC28711 /* Pretendard-SemiBold.ttf in Resources */,
 				843DD49D280141349BBEA89E /* Pretendard-Thin.ttf in Resources */,
 				8CE3D5C999F74867809CC65E /* SimpleLineIcons.ttf in Resources */,
 				49D3B4F7767A46D6ADFDABA8 /* Zocial.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EFB484BC2B7772BE00E02130 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EFB484CD2B7772BF00E02130 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -572,7 +683,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
+				EF3AE6392B7783560057E4D9 /* LiveActivityModule.m in Sources */,
+				EFAA6E162B777A1200F18079 /* MessLiveActivityAttributes.swift in Sources */,
+				EFAA6E192B777BBA00F18079 /* LiveActivityModule.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EFB484BA2B7772BE00E02130 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EFB484C92B7772BE00E02130 /* MessLiveActivity.swift in Sources */,
+				EFB484CB2B7772BE00E02130 /* AppIntent.swift in Sources */,
+				EFB484C52B7772BE00E02130 /* MessLiveActivityBundle.swift in Sources */,
+				EFB484C72B7772BE00E02130 /* MessLiveActivityLiveActivity.swift in Sources */,
+				EFAA6E172B777A1200F18079 /* MessLiveActivityAttributes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -584,6 +710,11 @@
 			target = 13B07F861A680F5B00A75B9A /* a_mess_rn */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
 		};
+		EFB484D02B7772BF00E02130 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EFB484BD2B7772BE00E02130 /* MessLiveActivityExtension */;
+			targetProxy = EFB484CF2B7772BF00E02130 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
@@ -591,6 +722,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 90313503E0D99386FB0DF720 /* Pods-a_mess_rn-a_mess_rnTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -618,6 +750,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B638393ECC5BBA701F8C1ECA /* Pods-a_mess_rn-a_mess_rnTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = a_mess_rnTests/Info.plist;
@@ -642,6 +775,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 547EA629DA31E4B38BF5BD9A /* Pods-a_mess_rn.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = a_mess_rn/a_mess_rn.entitlements;
@@ -664,6 +798,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mass.project;
 				PRODUCT_NAME = a_mess_rn;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "MessLiveActivity/a_mess_rn-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -674,6 +809,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0F888D4611A9C2BB072599CC /* Pods-a_mess_rn.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = a_mess_rn/a_mess_rn.entitlements;
@@ -695,6 +831,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mass.project;
 				PRODUCT_NAME = a_mess_rn;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "MessLiveActivity/a_mess_rn-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -837,6 +974,97 @@
 			};
 			name = Release;
 		};
+		EFB484D32B7772BF00E02130 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 46SVX2Y835;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MessLiveActivity/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MessLiveActivity;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mass.project.MessLiveActivity;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "MessLiveActivityExtension-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		EFB484D42B7772BF00E02130 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 46SVX2Y835;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MessLiveActivity/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MessLiveActivity;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mass.project.MessLiveActivity;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "MessLiveActivityExtension-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -863,6 +1091,15 @@
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,
 				83CBBA211A601CBA00E9B192 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EFB484D52B7772BF00E02130 /* Build configuration list for PBXNativeTarget "MessLiveActivityExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EFB484D32B7772BF00E02130 /* Debug */,
+				EFB484D42B7772BF00E02130 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

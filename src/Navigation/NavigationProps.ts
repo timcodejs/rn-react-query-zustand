@@ -30,6 +30,7 @@ export enum AllScreenList {
   IntlCommend = 'IntlCommend',
   Camera = 'Camera',
   Setting = 'Setting',
+  DynamicIsland = 'DynamicIsland',
 }
 
 export enum BottomTabNameList {
@@ -69,6 +70,7 @@ export type SwipeParamList = {
   [AllScreenList.IntlCommend]: {route?: any};
   [AllScreenList.Camera]: {route?: any};
   [AllScreenList.Setting]: {route?: any};
+  [AllScreenList.DynamicIsland]: {route?: any};
 };
 
 export type SocialParamList = {
