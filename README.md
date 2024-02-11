@@ -82,3 +82,35 @@ const format = useCameraFormat(device, [
   style={StyleSheet.absoluteFill}
 />
 ```
+
+## iOS Dynamic Island 적용 테스트
+
+1. Setup
+   - Xcode를 사용하여 info.plist 리스트에 "Supports Live Activities" 항목을 추가하고 "YES" 로 설정.
+2. widget extension 생성
+   - Xcode > File > New > Target... > Search "Widget Extension" > Name is "OOOLiveActivity"
+3. Native Swift Module 생성
+   - Project folder Right click > New File > Select Swift > Name is "LiveActivityModule"
+4. Native Objective-C Module 생성
+   - Project folder Right click > New File > Select Objective-C File > Name is "LiveActivityModule"
+5. RN에서 Native Module 사용하기
+   ```
+   import {NativeModules} from 'react-native'; // import NativeModules
+   const {LiveActivity} = NativeModules; // get LiveActivity
+   // start Dynamic Island Function
+   const onStartActivity = () => {
+   if (LiveActivity && typeof LiveActivity.startActivity === 'function') {
+   LiveActivity.startActivity();
+   } else {
+   console.log('LiveActivity not found');
+   }
+   };
+   // end Dynamic Island Function
+   const onEndActivity = () => {
+   if (LiveActivity && typeof LiveActivity.endActivity === 'function') {
+   LiveActivity.endActivity();
+   } else {
+   console.log('LiveActivity not found');
+   }
+   };
+   ```
