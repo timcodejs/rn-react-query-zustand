@@ -13,6 +13,8 @@ import {TodoViewModel} from '../Business/services/TodoViewModel';
 import {AllScreenList, TodoStackProps} from '../Navigation/NavigationProps';
 import {useGetDataQuery} from '../Store/queries/todoQuery';
 
+import SharedDefaults from '../Business/services/SharedDefaults';
+
 const Todo = ({navigation}: TodoStackProps<AllScreenList.Todo>) => {
   const isFocused = useIsFocused();
   const flatListRef = useRef<FlatList | null>(null);
@@ -28,6 +30,10 @@ const Todo = ({navigation}: TodoStackProps<AllScreenList.Todo>) => {
       rowRef.current = null;
     }
   }, [isFocused]);
+
+  useEffect(() => {
+    SharedDefaults.set(datas?.data);
+  }, [datas]);
 
   return (
     <TodoView>

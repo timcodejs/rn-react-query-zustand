@@ -16,8 +16,9 @@ struct MessLiveActivityLiveActivity: Widget {
             VStack {
                 Text("Hello \(context.state.emoji)")
             }
-            .activityBackgroundTint(Color.cyan)
-            .activitySystemActionForegroundColor(Color.black)
+            .padding()
+            .activityBackgroundTint(Color.black.opacity(0.25))
+            .activitySystemActionForegroundColor(Color.white)
 
         } dynamicIsland: { context in
             DynamicIsland {
