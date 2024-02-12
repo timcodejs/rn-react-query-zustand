@@ -114,3 +114,79 @@ const format = useCameraFormat(device, [
    }
    };
    ```
+
+## iOS Widget 적용 테스트
+
+1. AppGroup 추가
+   - Xcode > TARGETS > Project > Signing & Capabilities > + Capability > App Groups 추가
+   - group. name 적기 (ex. group.com.project.widget)
+   - Xcode > TARGETS > LiveActivityExtension > Signing & Capabilities > + Capability > App Groups 추가
+   - group. name 적기 (ex. group.com.project.widget)
+2. LiveActivityModule.h 생성
+   - Project folder Right click > New File > Select Header File > Name is "LiveActivityModule"
+   ```
+   #import <React/RCTBridgeModule.h>
+   @interface SharedDefaults : NSObject<RCTBridgeModule>
+   @end
+   ```
+3. LiveActivityModule.m 파일에 코드 추가
+   ```
+   #import "LiveActivityModule.h"
+   @implementation SharedDefaults
+   -(dispatch_queue_t)methodQueue {
+      return dispatch_get_main_queue();
+   }
+   RCT_EXPORT_MODULE(SharedDefaults);
+   RCT_EXPORT_METHOD(set: (NSString *)data
+                     resolver:(RCTPromiseResolveBlock)resolve
+                     rejceter:(RCTPromiseRejectBlock)reject)
+   {
+      @try{
+         NSUserDefaults *shared = [[NSUserDefaults alloc]initWithSuiteName:@"App Group명"];
+         [shared setObject:data forKey:@"data"]; // data를 저장할 key 값
+         [shared synchronize];
+         resolve(@"true");
+      }@catch(NSException *exception){
+         reject(@"get_error",exception.reason, nil);
+      }
+   }
+   @end
+   ```
+4. LiveActivity.swift timeline 코드 추가
+   ```
+   let userDefaults = UserDefaults(suiteName: "App Group명")
+   let jsonText = userDefaults?.string(forKey: "data")
+   var todos : [TodoModel] = []
+   do {
+      if jsonText != nil {
+      let jsonData = Data(jsonText?.utf8 ?? "".utf8)
+      let valueData = try JSONDecoder().decode([TodoModel].self, from: jsonData)
+      todos = valueData
+      }
+   } catch {
+      print(error)
+   }
+   ```
+5. React Native에서 UserDefaults Write하기
+   ```
+   import {NativeModules} from 'react-native';
+   const NativeSharedDefaults = NativeModules.SharedDefaults;
+   class SharedDefaults {
+   public async set(obj: Record<string, any>) {
+      try {
+         const res: boolean = await NativeSharedDefaults.set(JSON.stringify(obj));
+         return res;
+      } catch (e) {
+         console.warn('[SHARED DEFAULTS]', e);
+         return false;
+      }
+   }
+   }
+   export default new SharedDefaults();
+   ```
+6. useEffect를 통해 todos 상태가 변할 때마다 SharedDefaults.set(data)를 호출
+   ```
+   useEffect(() => {
+      SharedDefaults.set(data);
+   }, [data]);
+   ```

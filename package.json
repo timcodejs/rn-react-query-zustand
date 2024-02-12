@@ -7,7 +7,6 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "json": "json-server --watch db.json --port 4000",
-    "run:json": "json-server --host 192.168.0.16 --watch db.json --port 4000",
     "dev": "npm-run-all --parallel start run:json",
     "lint": "eslint .",
     "test": "jest"
