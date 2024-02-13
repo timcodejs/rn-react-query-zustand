@@ -74,10 +74,11 @@ struct MessLiveActivityEntryView : View {
       switch widgetFamily {
         case .systemSmall:
           HStack(alignment: .top, spacing: nil, content: {
-            VStack(alignment: .leading, spacing: 4, content: {
+            VStack(alignment: .leading, spacing: 5, content: {
               ForEach(Array(zip(entry.todos.indices, entry.todos)), id: \.0) { index, item in
                 if index < 5 {
                   Text("\(item.id). \(item.title)")
+                    .font(Font.system(size: 14))
                     .frame(maxWidth: .infinity, alignment: .leading)
                   Divider()
 //                    .font(Font.system(size: 14))
@@ -95,10 +96,11 @@ struct MessLiveActivityEntryView : View {
               Text("⭐️ 할 일 목록 ⭐️").bold().padding(.bottom, 5)
               Text(entry.configuration.favoriteEmoji).font(Font.system(size: 70)).padding(.top, 5)
             })
-            VStack(alignment: .leading, spacing: 4, content: {
+            VStack(alignment: .leading, spacing: 5, content: {
               ForEach(Array(zip(entry.todos.indices, entry.todos)), id: \.0) { index, item in
                 if index < 5 {
                   Text("\(item.id). \(item.title)")
+                    .font(Font.system(size: 14))
                     .frame(maxWidth: .infinity, alignment: .leading)
                   Divider()
                 }
@@ -111,10 +113,11 @@ struct MessLiveActivityEntryView : View {
               Text("⭐️ 할 일 목록 ⭐️").bold().padding(.bottom, 5)
               Text(entry.configuration.favoriteEmoji).font(Font.system(size: 70)).padding(.top, 5)
             })
-            VStack(alignment: .leading, spacing: 8, content: {
+            VStack(alignment: .leading, spacing: 10, content: {
               ForEach(Array(zip(entry.todos.indices, entry.todos)), id: \.0) { index, item in
                 if index < 9 {
                   Text("\(item.id). \(item.title)")
+                    .font(Font.system(size: 14))
                     .frame(maxWidth: .infinity, alignment: .leading)
                   Divider()
                 }
