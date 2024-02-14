@@ -16,7 +16,7 @@ struct MessLiveActivityLiveActivity: Widget {
             VStack {
                 HStack {
                   Image(systemName: "heart.fill").tint(.red)
-                  Text("진행률")
+                  Text("진행률 \(context.state.value)")
                 }
                 ProgressView("", value: Double(context.state.value) / context.attributes.totalNum)
             }
@@ -33,7 +33,7 @@ struct MessLiveActivityLiveActivity: Widget {
                     Text("Start")
                 }
                 DynamicIslandExpandedRegion(.trailing) {
-                    Text("End")
+                    Text("End ")
                 }
                 DynamicIslandExpandedRegion(.bottom) {
                   HStack {
@@ -45,11 +45,11 @@ struct MessLiveActivityLiveActivity: Widget {
                   ProgressView("", value: Double(context.state.value) / context.attributes.totalNum)
                 }
             } compactLeading: {
-                Text("0")
+                Text("T")
             } compactTrailing: {
-                Text("100")
+                Text("\(context.state.value)")
             } minimal: {
-                Text("A앱")
+                Text("\(context.state.value)")
             }
             .widgetURL(URL(string: "http://www.apple.com"))
             .keylineTint(Color.red)
@@ -64,18 +64,13 @@ extension MessLiveActivityAttributes {
 }
 
 extension MessLiveActivityAttributes.ContentState {
-    fileprivate static var smiley: MessLiveActivityAttributes.ContentState {
+    fileprivate static var timer: MessLiveActivityAttributes.ContentState {
       MessLiveActivityAttributes.ContentState(value: 0)
-     }
-     
-     fileprivate static var starEyes: MessLiveActivityAttributes.ContentState {
-         MessLiveActivityAttributes.ContentState(value: 0)
      }
 }
 
 #Preview("Notification", as: .content, using: MessLiveActivityAttributes.preview) {
    MessLiveActivityLiveActivity()
 } contentStates: {
-    MessLiveActivityAttributes.ContentState.smiley
-    MessLiveActivityAttributes.ContentState.starEyes
+    MessLiveActivityAttributes.ContentState.timer
 }

@@ -7,7 +7,6 @@ import ActivityKit
 final class LiveActivityModule: NSObject {
   @Published var num: Int = 0
   private var cancellable: Set<AnyCancellable> = Set()
-  private var content: ActivityContent<MessLiveActivityAttributes.ContentState>?
   private var activity: Activity<MessLiveActivityAttributes>?
 
   @objc(startActivity)
@@ -29,10 +28,9 @@ final class LiveActivityModule: NSObject {
   @objc(endActivity)
   func endActivity() {
     Task {
-//      for activity in Activity<MessLiveActivityAttributes>.activities {
       await activity?.end(using: nil, dismissalPolicy: .default)
       cancellable.removeAll()
-//      }
+      num = 0
     }
   }
   
@@ -48,7 +46,7 @@ final class LiveActivityModule: NSObject {
             body: "현재숫자: \(num)",
             sound: .default
           )
-          await activity?.update(using: newState, alertConfiguration: alertConfiguration)
+          await activity?.update(using: newState)
           if num == 100 {
             await activity?.end(using: nil, dismissalPolicy: .default)
             cancellable.removeAll()
