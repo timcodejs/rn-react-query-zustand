@@ -14,32 +14,42 @@ struct MessLiveActivityLiveActivity: Widget {
         ActivityConfiguration(for: MessLiveActivityAttributes.self) { context in
             // Lock screen/banner UI goes here
             VStack {
-                Text("Hello \(context.state.emoji)")
+                HStack {
+                  Image(systemName: "heart.fill").tint(.red)
+                  Text("진행률")
+                }
+                ProgressView("", value: Double(context.state.value) / context.attributes.totalNum)
             }
-            .padding()
-            .activityBackgroundTint(Color.black.opacity(0.25))
+            .padding(30)
+            .activityBackgroundTint(Color.black)
             .activitySystemActionForegroundColor(Color.white)
+            .foregroundColor(.white)
 
         } dynamicIsland: { context in
             DynamicIsland {
                 // Expanded UI goes here.  Compose the expanded UI through
                 // various regions, like leading/trailing/center/bottom
                 DynamicIslandExpandedRegion(.leading) {
-                    Text("Leading")
+                    Text("Start")
                 }
                 DynamicIslandExpandedRegion(.trailing) {
-                    Text("Trailing")
+                    Text("End")
                 }
                 DynamicIslandExpandedRegion(.bottom) {
-                    Text("Bottom \(context.state.emoji)")
-                    // more content
+                  HStack {
+                    Image(systemName: "heart.fill").tint(.red)
+                    Text("진행률 \(context.state.value)")
+                  }
+                }
+                DynamicIslandExpandedRegion(.bottom) {
+                  ProgressView("", value: Double(context.state.value) / context.attributes.totalNum)
                 }
             } compactLeading: {
-                Text("L")
+                Text("0")
             } compactTrailing: {
-                Text("T \(context.state.emoji)")
+                Text("100")
             } minimal: {
-                Text(context.state.emoji)
+                Text("A앱")
             }
             .widgetURL(URL(string: "http://www.apple.com"))
             .keylineTint(Color.red)
@@ -55,11 +65,11 @@ extension MessLiveActivityAttributes {
 
 extension MessLiveActivityAttributes.ContentState {
     fileprivate static var smiley: MessLiveActivityAttributes.ContentState {
-        MessLiveActivityAttributes.ContentState(emoji: "😀")
+      MessLiveActivityAttributes.ContentState(value: 0)
      }
      
      fileprivate static var starEyes: MessLiveActivityAttributes.ContentState {
-         MessLiveActivityAttributes.ContentState(emoji: "🤩")
+         MessLiveActivityAttributes.ContentState(value: 0)
      }
 }
 

@@ -1,21 +1,26 @@
 import SwiftUI
+import Combine
 import ActivityKit
 
 @available(iOS 16.2, *)
 @objc(LiveActivity)
-class LiveActivityModule: NSObject {
-  
+final class LiveActivityModule: NSObject {
+  @Published var num: Int = 0
+  private var cancellable: Set<AnyCancellable> = Set()
   private var content: ActivityContent<MessLiveActivityAttributes.ContentState>?
+  private var activity: Activity<MessLiveActivityAttributes>?
 
   @objc(startActivity)
   func startActivity() {
+    // 앱이 live activity사용 가능한지여부
+    guard ActivityAuthorizationInfo().areActivitiesEnabled else { return }
+    let liveActAttributes = MessLiveActivityAttributes(name: "test")
+    // stateful한 값
+    let liveActContentState = MessLiveActivityAttributes.ContentState(value: 0)
+    
     do {
-      let liveActAttributes = MessLiveActivityAttributes(name: "test")
-      let liveActContentState = MessLiveActivityAttributes.ContentState(emoji: "")
-      content = ActivityContent(state: liveActContentState, staleDate: nil, relevanceScore: 1.0)
-      if let content{
-        try Activity.request(attributes: liveActAttributes , content: content, pushType: nil)
-      }
+      self.activity = try Activity.request(attributes: liveActAttributes, contentState: liveActContentState)
+      timer()
     } catch {
       print("Error")
     }
@@ -24,9 +29,33 @@ class LiveActivityModule: NSObject {
   @objc(endActivity)
   func endActivity() {
     Task {
-      for activity in Activity<MessLiveActivityAttributes>.activities {
-        await activity.end(content, dismissalPolicy: .default)
-      }
+//      for activity in Activity<MessLiveActivityAttributes>.activities {
+      await activity?.end(using: nil, dismissalPolicy: .default)
+      cancellable.removeAll()
+//      }
     }
+  }
+  
+  func timer() {
+    Timer.publish(every: 1, on: .main, in: .default)
+      .autoconnect()
+      .sink { [self] _ in
+        num += 1
+        Task {
+          let newState = MessLiveActivityAttributes.ContentState(value: num)
+          let alertConfiguration = AlertConfiguration(
+            title: "timer update",
+            body: "현재숫자: \(num)",
+            sound: .default
+          )
+          await activity?.update(using: newState, alertConfiguration: alertConfiguration)
+          if num == 100 {
+            await activity?.end(using: nil, dismissalPolicy: .default)
+            cancellable.removeAll()
+            num = 0
+          }
+        }
+      }
+      .store(in: &cancellable)
   }
 }
