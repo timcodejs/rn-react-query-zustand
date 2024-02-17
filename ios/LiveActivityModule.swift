@@ -20,6 +20,7 @@ final class LiveActivityModule: NSObject {
     do {
       self.activity = try Activity.request(attributes: liveActAttributes, contentState: liveActContentState)
       timer()
+      getData()
     } catch {
       print("Error")
     }
@@ -55,5 +56,31 @@ final class LiveActivityModule: NSObject {
         }
       }
       .store(in: &cancellable)
+  }
+  
+  func getData() {
+    let session = URLSession.shared
+    let url = URL(string: "https://api.github.com/search/repositories?q=topic:reactjs&per_page=15&page=1")
+    var request = URLRequest(url: url!)
+    request.httpMethod = "GET"
+    let task = session.dataTask(with: request) { (data, response, error) in
+        if let error = error {
+            print("Error: \(error.localizedDescription)")
+            return
+        }
+
+        guard let data = data else {
+            print("No data received")
+            return
+        }
+
+        do {
+            let json = try JSONSerialization.jsonObject(with: data, options: [])
+            print(json)
+        } catch let error {
+            print("Error: \(error.localizedDescription)")
+        }
+    }
+    task.resume()
   }
 }
