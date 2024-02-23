@@ -1,8 +1,10 @@
-import {useState} from 'react';
+import {useRef, useState} from 'react';
+import {TextInput} from 'react-native';
 import {useSearchStore} from '../../Store/stores/searchStore';
 import {useGetSearchQuery} from '../../Store/queries/searchQuery';
 
 export const SearchViewModel = () => {
+  const searchInputRef = useRef<TextInput>(null);
   const [keyword, setKeyword] = useState<string>('');
 
   // store
@@ -28,12 +30,16 @@ export const SearchViewModel = () => {
   const handleSubmit = () => {
     setIsEnter(false);
     setResult(data?.data?.items);
+    if (searchInputRef.current) {
+      searchInputRef?.current.blur();
+    }
   };
 
   return {
     data,
     status,
     keyword,
+    searchInputRef,
     handleChange,
     handleChoise,
     handleReset,

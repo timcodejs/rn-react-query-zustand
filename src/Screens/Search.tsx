@@ -30,6 +30,7 @@ const Search = ({navigation}: SearchStackProps<AllScreenList.Search>) => {
         children="책 검색"
       />
       <CommonInput
+        ref={model?.searchInputRef}
         text="검색"
         placeholderText="네이버 책 검색"
         values={model?.keyword}

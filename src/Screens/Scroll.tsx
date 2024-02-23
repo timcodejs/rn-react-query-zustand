@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import {View, FlatList, ActivityIndicator} from 'react-native';
+import {useScrollToTop} from '@react-navigation/native';
 import styled from 'styled-components/native';
 import Header from '../Components/Header';
 import {hp, wp} from '../Utility/utils/UI';
@@ -13,6 +14,9 @@ import {PretendardRegular, PretendardBold} from '../Utility/utils/CustomFont';
 import {AllScreenList, ScrollStackProps} from '../Navigation/NavigationProps';
 
 const Scroll = ({navigation}: ScrollStackProps<AllScreenList.Scroll>) => {
+  const listRef = useRef(null);
+  useScrollToTop(listRef);
+
   const {scrollData, fetchNextPage, isFetching, isFetchingNextPage} =
     useScrollInfiniteQuery();
 
@@ -26,6 +30,7 @@ const Scroll = ({navigation}: ScrollStackProps<AllScreenList.Scroll>) => {
       />
       <View style={{flex: 1}}>
         <FlatList
+          ref={listRef}
           data={scrollData?.pages}
           contentContainerStyle={{paddingBottom: 70}}
           showsVerticalScrollIndicator={false}

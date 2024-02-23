@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import {StyleSheet, TouchableOpacity, View, FlatList} from 'react-native';
+import {useScrollToTop} from '@react-navigation/native';
 import Header from '../Components/Header';
 import {hp, wp} from '../Utility/utils/UI';
 import {Color} from '../Utility/utils/Color';
@@ -10,6 +11,9 @@ import {useCamPermissions} from '../Business/hooks/useCamPermissions';
 import {AllScreenList, SwipeStackProps} from '../Navigation/NavigationProps';
 
 const Swipe = ({navigation}: SwipeStackProps<AllScreenList.Swipe>) => {
+  const listRef = useRef(null);
+  useScrollToTop(listRef);
+
   const {checkPermission} = useCamPermissions();
 
   return (
@@ -21,6 +25,7 @@ const Swipe = ({navigation}: SwipeStackProps<AllScreenList.Swipe>) => {
         children="스와이프 (feat.RNGH, reanimated)"
       />
       <FlatList
+        ref={listRef}
         data={menuList}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{paddingBottom: 100}}

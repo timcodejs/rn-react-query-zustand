@@ -1,12 +1,17 @@
 import React, {useEffect, useRef} from 'react';
-import {FlatList, View} from 'react-native';
-import styled from 'styled-components/native';
-import {useIsFocused} from '@react-navigation/native';
+import {
+  FlatList,
+  Platform,
+  StyleSheet,
+  KeyboardAvoidingView,
+  View,
+} from 'react-native';
+import {useIsFocused, useScrollToTop} from '@react-navigation/native';
 import {Swipeable} from 'react-native-gesture-handler';
 import Header from '../Components/Header';
 import CommonInput from '../Components/CommonInput';
 import SwipeableItem from '../Components/TodoSwipe/SwipeableItem';
-import {hp} from '../Utility/utils/UI';
+import {hp, wp} from '../Utility/utils/UI';
 import {Color} from '../Utility/utils/Color';
 import {PretendardBold} from '../Utility/utils/CustomFont';
 import {TodoViewModel} from '../Business/services/TodoViewModel';
@@ -19,6 +24,8 @@ const Todo = ({navigation}: TodoStackProps<AllScreenList.Todo>) => {
   const isFocused = useIsFocused();
   const flatListRef = useRef<FlatList | null>(null);
   const rowRef = useRef<Swipeable | null>(null);
+
+  useScrollToTop(flatListRef);
 
   // query
   const {datas, refetch} = useGetDataQuery();
@@ -36,7 +43,7 @@ const Todo = ({navigation}: TodoStackProps<AllScreenList.Todo>) => {
   }, [datas]);
 
   return (
-    <TodoView>
+    <View style={styles.view}>
       <Header navigation={navigation} bgColor={Color.white} />
       <PretendardBold
         size={hp(20)}
@@ -65,7 +72,9 @@ const Todo = ({navigation}: TodoStackProps<AllScreenList.Todo>) => {
           }}
         />
       )}
-      <View style={{flex: 1}}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+        style={styles.avoid}>
         <FlatList
           ref={flatListRef}
           data={datas?.data}
@@ -85,24 +94,27 @@ const Todo = ({navigation}: TodoStackProps<AllScreenList.Todo>) => {
               }}
             />
           )}
-          ItemSeparatorComponent={() => <Line />}
-          ListFooterComponent={() => <Line />}
+          ItemSeparatorComponent={() => <View style={styles.line} />}
+          ListFooterComponent={() => <View style={styles.line} />}
         />
-      </View>
-    </TodoView>
+      </KeyboardAvoidingView>
+    </View>
   );
 };
 
 export default Todo;
 
-const TodoView = styled.View`
-  height: ${hp(740)}px;
-  padding-left: ${hp(10)}px;
-  padding-right: ${hp(10)}px;
-  background-color: ${Color.white};
-`;
-
-const Line = styled.View`
-  height: 1px;
-  background-color: ${Color.gray};
-`;
+const styles = StyleSheet.create({
+  view: {
+    height: hp(740),
+    paddingHorizontal: wp(10),
+    backgroundColor: Color.white,
+  },
+  avoid: {
+    flex: 1,
+  },
+  line: {
+    height: 1,
+    backgroundColor: Color.gray,
+  },
+});
