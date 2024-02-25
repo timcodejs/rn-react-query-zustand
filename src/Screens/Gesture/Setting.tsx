@@ -17,12 +17,12 @@ const Setting = ({navigation}: SwipeStackProps<AllScreenList.Setting>) => {
       <Header navigation={navigation} bgColor={Color.white} />
       <HeadingText navigation={navigation} text="Setting" color={Color.black} />
       <View style={styles.align}>
-        <PretendardBold children="Camera" />
+        <PretendardBold children="Setting" />
         <CommonSwitch
           isOnOff={isOnOff}
           setIsOnOff={setIsOnOff}
           aniValue={aniValue}
-          before={'camera'}
+          before={'setting'}
         />
       </View>
     </View>
