@@ -44,7 +44,7 @@
           <data
           android:host="oauth"
           android:scheme="kakaocb09913c9cf7d2f60894e7c90bc75479" />
-          <data android:scheme="mass" />
+          <data android:scheme="mess" />
         </intent-filter>  
       </activity>
       <!-- local notification code -->

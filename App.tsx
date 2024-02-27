@@ -54,6 +54,19 @@ const App = () => {
           );
           break;
         case EventType.PRESS:
+          if (detail.notification?.data?.body === 'YOUTUBE') {
+            Linking.openURL('mess://youtube');
+          } else if (detail.notification?.data?.body === 'CAMERA') {
+            Linking.openURL('mess://camera');
+          } else if (detail.notification?.data?.body === 'TODO') {
+            Linking.openURL('mess://todo');
+          } else if (detail.notification?.data?.body === 'SCROLL') {
+            Linking.openURL('mess://scroll');
+          } else if (detail.notification?.data?.body === 'SEARCH') {
+            Linking.openURL('mess://search');
+          } else if (detail.notification?.data?.body === 'LOGIN') {
+            Linking.openURL('mess://login');
+          }
           console.log(
             'User pressed Foreground notification - 2',
             detail.notification,

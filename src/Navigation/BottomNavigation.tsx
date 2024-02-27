@@ -1,6 +1,7 @@
 import {useRef} from 'react';
-import {NavigationContainer} from '@react-navigation/native';
+import {LinkingOptions, NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import analytics from '@react-native-firebase/analytics';
 import {
   RootStackParamList,
   BottomTabNameList,
@@ -28,16 +29,31 @@ const BottomNavigation = () => {
   const BottomStack = createBottomTabNavigator<RootStackParamList>();
   const config = {
     screens: {
-      [AllScreenList.Swipe]: {
+      [BottomTabNameList.main]: {
+        path: 'todo',
+      },
+      [BottomTabNameList.first]: {
+        path: 'scroll',
+      },
+      [BottomTabNameList.second]: {
+        path: 'search',
+      },
+      [BottomTabNameList.third]: {
         screens: {
+          [AllScreenList.YoutubePlayer]: {
+            path: 'youtube',
+          },
           [AllScreenList.Camera]: {
             path: 'camera',
           },
         },
       },
+      [BottomTabNameList.forth]: {
+        path: 'login',
+      },
     },
   };
-  const Linking: any = {
+  const linking: LinkingOptions<RootStackParamList> = {
     // 디폴트 프로토콜 설정
     prefixes: ['mess://'],
     // 스택 네비게이션 디렉토리 정보 설정
@@ -46,7 +62,7 @@ const BottomNavigation = () => {
 
   return (
     <NavigationContainer
-      linking={Linking}
+      linking={linking}
       ref={navigationRef}
       onReady={() => {
         routeNameRef.current = navigationRef?.current.getCurrentRoute().name;
@@ -57,6 +73,10 @@ const BottomNavigation = () => {
 
         if (previousRouteName !== currentRouteName) {
           // analytics().setCurrentScreen(currentRouteName); // -> 애널리틱스 연결
+          await analytics().logScreenView({
+            screen_name: currentRouteName,
+            screen_class: currentRouteName,
+          });
         }
         routeNameRef.current = currentRouteName;
       }}>

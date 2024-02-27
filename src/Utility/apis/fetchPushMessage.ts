@@ -5,6 +5,7 @@ const fetchPushMessage = async (
   fcmToken: string,
   pushTitle: string,
   pushBody: string,
+  pushData?: string,
 ) => {
   return await request(
     'post',
@@ -15,7 +16,7 @@ const fetchPushMessage = async (
     },
     {
       data: {
-        body: 'This is awesome notification by Mobikul',
+        body: pushData ? pushData : 'This is awesome notification by Mobikul',
         title: 'Mobikul',
         sound: 'default',
       },

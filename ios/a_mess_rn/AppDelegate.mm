@@ -42,7 +42,7 @@
       return [RNKakaoLogins handleOpenUrl: url];
   }
 
-  return NO;
+  return [RCTLinkingManager application:app openURL:url options:options];
 }
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge

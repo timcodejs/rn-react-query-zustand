@@ -1,6 +1,12 @@
 import moment from 'moment';
-import React from 'react';
-import {View, StyleSheet, TouchableOpacity, ScrollView} from 'react-native';
+import React, {useState} from 'react';
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+  Alert,
+} from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import Header from '../../Components/Header';
 import HeadingText from '../../Components/HeadingText';
@@ -12,9 +18,12 @@ import {PretendardBold} from '../../Utility/utils/CustomFont';
 import {fetchPushMessage} from '../../Utility/apis/fetchPushMessage';
 import {PushViewModel} from '../../Business/services/PushViewModel';
 import {AllScreenList, SwipeStackProps} from '../../Navigation/NavigationProps';
+import CommonSelect from '../../Components/CommonSelect';
+import {LINKING_OPTIONS} from '../../Utility/utils/constant';
 
 const PushNoti = ({navigation}: SwipeStackProps<AllScreenList.PushNoti>) => {
   const model = PushViewModel();
+  const [gubun, setGubun] = useState<any>();
 
   return (
     <View style={styles.view}>
@@ -36,16 +45,28 @@ const PushNoti = ({navigation}: SwipeStackProps<AllScreenList.PushNoti>) => {
           }
         />
         <View style={styles.line} />
+        <CommonSelect
+          optionData={LINKING_OPTIONS}
+          placeholderText="구분"
+          values={gubun}
+          setValues={setGubun}
+          disabled={true}
+        />
         <CommonButton
-          text="background push noti"
+          text="deeplink push noti"
           pressHandler={() => {
-            setTimeout(() => {
-              fetchPushMessage(
-                model?.fcmToken,
-                '테스트 타이틀',
-                'Background 테스트 메세지',
-              );
-            }, 5000);
+            if (gubun?.value === undefined) {
+              Alert.alert('딥링크 구분을 선택해 주세요.');
+            } else {
+              setTimeout(() => {
+                fetchPushMessage(
+                  model?.fcmToken,
+                  'deeplink 테스트 타이틀',
+                  'Deeplink 테스트 메세지',
+                  gubun?.value,
+                );
+              }, 5000);
+            }
           }}
         />
         <View style={styles.line} />

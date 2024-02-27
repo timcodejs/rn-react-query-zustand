@@ -24,9 +24,7 @@ const EventPopup = ({setIsPopup}: Props) => {
         overshootClamping: true,
       });
     }, 300);
-    return () => {
-      clearTimeout(time);
-    };
+    return () => clearTimeout(time);
   }, []);
 
   const aninatedStyle = useAnimatedStyle(() => {
@@ -35,20 +33,23 @@ const EventPopup = ({setIsPopup}: Props) => {
     };
   });
 
+  const handleClose = () => {
+    yPosition.value = withSpring(screenHeight, {
+      damping: 5,
+      overshootClamping: true,
+    });
+    const time = setTimeout(() => {
+      setIsPopup(false);
+    }, 100);
+
+    return () => clearTimeout(time);
+  };
+
   return (
     <View style={styles.wrap}>
-      <TouchableOpacity
-        style={styles.void}
-        onPress={() => {
-          setIsPopup(false);
-        }}
-      />
+      <TouchableOpacity style={styles.void} onPress={handleClose} />
       <Animated.View style={[styles.view, aninatedStyle]}>
-        <TouchableOpacity
-          style={styles.btn}
-          onPress={() => {
-            setIsPopup(false);
-          }}>
+        <TouchableOpacity style={styles.btn} onPress={handleClose}>
           <IconCrossIcon
             color={Color.black}
             width={30}

@@ -112,3 +112,12 @@ export const wishListData = [
     choiseCount: 0,
   },
 ];
+
+export const LINKING_OPTIONS = [
+  {value: 'YOUTUBE', label: 'YOUTUBE'},
+  {value: 'CAMERA', label: 'CAMERA'},
+  {value: 'TODO', label: 'TODO'},
+  {value: 'SCROLL', label: 'SCROLL'},
+  {value: 'SEARCH', label: 'SEARCH'},
+  {value: 'LOGIN', label: 'LOGIN'},
+];

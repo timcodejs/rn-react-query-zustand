@@ -14,6 +14,9 @@ import FlashOffSvg from '../../Assets/images/flash-off.svg';
 import HDROnSvg from '../../Assets/images/hdr-on.svg';
 import HDROffSvg from '../../Assets/images/hdr-off.svg';
 import ReuseSvg from '../../Assets/images/reuse.svg';
+import IconSelect from '../../Assets/images/select_arrow.svg';
+import IconRadioOn from '../../Assets/images/radio_btn_on_ic.svg';
+import IconRadioOff from '../../Assets/images/radio_btn_off_ic.svg';
 
 type IconProps = {
   width: number;
@@ -191,6 +194,39 @@ export const IconHDROffIcon = (IconProps: IconProps) => {
 export const IconReuseIcon = (IconProps: IconProps) => {
   return (
     <ReuseSvg
+      width={IconProps.width}
+      height={IconProps.height}
+      color={IconProps.color}
+      style={IconProps.style}
+    />
+  );
+};
+
+export const IconSelectIcon = (IconProps: IconProps) => {
+  return (
+    <IconSelect
+      width={IconProps.width}
+      height={IconProps.height}
+      color={IconProps.color}
+      style={IconProps.style}
+    />
+  );
+};
+
+export const IconRadioOnIcon = (IconProps: IconProps) => {
+  return (
+    <IconRadioOn
+      width={IconProps.width}
+      height={IconProps.height}
+      color={IconProps.color}
+      style={IconProps.style}
+    />
+  );
+};
+
+export const IconRadioOffIcon = (IconProps: IconProps) => {
+  return (
+    <IconRadioOff
       width={IconProps.width}
       height={IconProps.height}
       color={IconProps.color}
