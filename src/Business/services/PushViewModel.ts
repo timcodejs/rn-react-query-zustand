@@ -28,7 +28,7 @@ export const PushViewModel = () => {
     const now = moment(new Date(Date.now())).format('MM.DD HH:mm');
     const select = moment(selectedDate).format('MM.DD HH:mm');
 
-    if (now > select) {
+    if (now >= select) {
       setVisibleDate(false);
       setDate(new Date());
       Alert.alert('지난 날짜 및 시간은 선택할 수 없습니다.');
@@ -43,7 +43,7 @@ export const PushViewModel = () => {
     const now = moment(new Date(Date.now())).format('MM.DD HH:mm');
     const select = moment(isDate).format('MM.DD HH:mm');
 
-    if (now > select) {
+    if (now >= select) {
       setVisibleDate(false);
       setDate(new Date());
       Alert.alert('지난 날짜 및 시간엔 스케쥴을 등록할 수 없습니다.');
@@ -72,6 +72,7 @@ export const PushViewModel = () => {
     fcmToken,
     visibleDate,
     scheduleData,
+    setDate,
     setIsUpdate,
     onConfirmDate,
     setVisibleDate,

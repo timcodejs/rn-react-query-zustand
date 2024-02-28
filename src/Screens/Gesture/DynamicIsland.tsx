@@ -1,8 +1,10 @@
 import React from 'react';
 import {NativeModules, StyleSheet, Button, View} from 'react-native';
 import Header from '../../Components/Header';
+import {hp, wp} from '../../Utility/utils/UI';
+import {Color} from '../../Utility/utils/Color';
+import HeadingText from '../../Components/HeadingText';
 import {AllScreenList, SwipeStackProps} from '../../Navigation/NavigationProps';
-import {Color} from '@Utility/utils/Color';
 
 const {LiveActivity} = NativeModules;
 
@@ -26,10 +28,18 @@ const DynamicIsland = ({
   };
 
   return (
-    <View style={styles.container}>
+    <View style={styles.view}>
       <Header navigation={navigation} bgColor={Color.white} />
-      <Button title="Start Activity" onPress={onStartActivity} />
-      <Button title="Stop Activity" onPress={onEndActivity} />
+      <HeadingText
+        navigation={navigation}
+        text="Dynamic Island"
+        color={Color.black}
+      />
+      <View style={styles.container}>
+        <Header navigation={navigation} bgColor={Color.white} />
+        <Button title="Start Activity" onPress={onStartActivity} />
+        <Button title="Stop Activity" onPress={onEndActivity} />
+      </View>
     </View>
   );
 };
@@ -37,9 +47,15 @@ const DynamicIsland = ({
 export default DynamicIsland;
 
 const styles = StyleSheet.create({
+  view: {
+    height: hp(740),
+    paddingHorizontal: wp(10),
+    backgroundColor: Color.white,
+  },
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    marginBottom: 200,
   },
 });

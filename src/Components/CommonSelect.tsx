@@ -43,7 +43,7 @@ const CommonSelect = ({
         <IconSelectIcon
           width={wp(28)}
           height={hp(28)}
-          style={{marginRight: hp(10)}}
+          style={{marginRight: hp(5)}}
         />
       </InputView>
       <Modal animationType="fade" transparent={true} visible={isOpen}>
@@ -99,11 +99,12 @@ const InputView = styled.TouchableOpacity`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  border-radius: ${hp(5)}px;
   border: 1px solid ${Color.lightGray};
   color: ${Color.black};
   font-size: ${hp(14)}px;
   margin-bottom: ${hp(8)}px;
-  padding-left: ${wp(20)}px;
+  padding-left: ${wp(10)}px;
 `;
 
 const Container = styled.TouchableOpacity`

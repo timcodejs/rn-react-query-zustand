@@ -1,29 +1,39 @@
 import moment from 'moment';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
-  StyleSheet,
-  TouchableOpacity,
-  ScrollView,
   Alert,
+  ScrollView,
+  StyleSheet,
+  RefreshControl,
+  TouchableOpacity,
 } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import Header from '../../Components/Header';
 import HeadingText from '../../Components/HeadingText';
 import CommonButton from '../../Components/CommonButton';
+import CommonSelect from '../../Components/CommonSelect';
 import ScheduleList from '../../Components/PushNotification/ScheduleList';
 import {hp, wp} from '../../Utility/utils/UI';
 import {Color} from '../../Utility/utils/Color';
+import {LINKING_OPTIONS} from '../../Utility/utils/constant';
 import {PretendardBold} from '../../Utility/utils/CustomFont';
 import {fetchPushMessage} from '../../Utility/apis/fetchPushMessage';
+import useRefresh from '../../Business/hooks/useRefresh';
 import {PushViewModel} from '../../Business/services/PushViewModel';
 import {AllScreenList, SwipeStackProps} from '../../Navigation/NavigationProps';
-import CommonSelect from '../../Components/CommonSelect';
-import {LINKING_OPTIONS} from '../../Utility/utils/constant';
 
 const PushNoti = ({navigation}: SwipeStackProps<AllScreenList.PushNoti>) => {
-  const model = PushViewModel();
   const [gubun, setGubun] = useState<any>();
+  const [refreshing, onRefresh] = useRefresh();
+  const model = PushViewModel();
+
+  useEffect(() => {
+    if (refreshing) {
+      setGubun(undefined);
+      model?.setDate(new Date());
+    }
+  }, [refreshing]);
 
   return (
     <View style={styles.view}>
@@ -33,7 +43,10 @@ const PushNoti = ({navigation}: SwipeStackProps<AllScreenList.PushNoti>) => {
         text="Push Notification"
         color={Color.black}
       />
-      <ScrollView>
+      <ScrollView
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }>
         <CommonButton
           text="forground push noti"
           pressHandler={() =>

@@ -17,7 +17,7 @@ const Setting = ({navigation}: SwipeStackProps<AllScreenList.Setting>) => {
       <Header navigation={navigation} bgColor={Color.white} />
       <HeadingText navigation={navigation} text="Setting" color={Color.black} />
       <View style={styles.align}>
-        <PretendardBold children="Setting" />
+        <PretendardBold children="Setting Switch" />
         <CommonSwitch
           isOnOff={isOnOff}
           setIsOnOff={setIsOnOff}
