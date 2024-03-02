@@ -22,6 +22,7 @@ export const pickImg = (
     response => {
       if (response.didCancel) {
         console.log('User cancelled image picker');
+        setImgError('Error');
       } else if (response.errorCode) {
         console.log('ImagePicker Error: ', response.errorCode);
       } else if (response.errorMessage) {

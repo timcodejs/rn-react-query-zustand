@@ -12,6 +12,8 @@ import IntlCommend from '../Screens/Gesture/IntlCommend';
 import CameraContainer from '../Screens/Gesture/CameraContainer';
 import Setting from '../Screens/Gesture/Setting';
 import DynamicIsland from '../Screens/Gesture/DynamicIsland';
+import RemoveBackGround from '../Screens/Gesture/RemoveBackGround';
+import SelectImage from '../Screens/Gesture/SelectImage';
 
 const SwipeNavigation = () => {
   const Stack = createStackNavigator<SwipeParamList>();
@@ -76,6 +78,16 @@ const SwipeNavigation = () => {
       <Stack.Screen
         name={AllScreenList.DynamicIsland}
         component={DynamicIsland}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name={AllScreenList.RemoveBackGround}
+        component={RemoveBackGround}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name={AllScreenList.SelectImage}
+        component={SelectImage}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

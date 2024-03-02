@@ -31,6 +31,8 @@ export enum AllScreenList {
   Camera = 'Camera',
   Setting = 'Setting',
   DynamicIsland = 'DynamicIsland',
+  RemoveBackGround = 'RemoveBackGround',
+  SelectImage = 'SelectImage',
 }
 
 export enum BottomTabNameList {
@@ -71,6 +73,8 @@ export type SwipeParamList = {
   [AllScreenList.Camera]: {route?: any};
   [AllScreenList.Setting]: {route?: any};
   [AllScreenList.DynamicIsland]: {route?: any};
+  [AllScreenList.RemoveBackGround]: {route?: any};
+  [AllScreenList.SelectImage]: {route?: any};
 };
 
 export type SocialParamList = {

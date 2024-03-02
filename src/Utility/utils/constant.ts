@@ -45,6 +45,10 @@ export const menuList = [
     navigates: AllScreenList.DynamicIsland,
     text: 'Dynamic Island',
   },
+  {
+    navigates: AllScreenList.RemoveBackGround,
+    text: 'Remove BackGround',
+  },
 ];
 
 export const carouselListData = [
