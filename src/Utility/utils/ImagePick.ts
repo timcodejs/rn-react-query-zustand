@@ -29,12 +29,15 @@ export const pickImg = (
         console.log('errorMessage ', response.errorMessage);
       } else {
         const res = response.assets || [];
+
         const body = {
           name: res[0].fileName,
           type: res[0].type,
           uri: res[0].uri,
         };
-        setImg(body);
+        const formData = new FormData();
+        formData.append('file', body);
+        setImg(formData);
       }
     },
   );
