@@ -10,6 +10,7 @@ import {AllScreenList, SwipeStackProps} from '../../Navigation/NavigationProps';
 
 const Setting = ({navigation}: SwipeStackProps<AllScreenList.Setting>) => {
   const [isOnOff, setIsOnOff] = useState(false);
+  const [isOnOff2, setIsOnOff2] = useState(true);
   const [aniValue] = useState(new Animated.Value(0));
 
   return (
@@ -23,6 +24,15 @@ const Setting = ({navigation}: SwipeStackProps<AllScreenList.Setting>) => {
           setIsOnOff={setIsOnOff}
           aniValue={aniValue}
           before={'setting'}
+        />
+      </View>
+      <View style={styles.align}>
+        <PretendardBold children="Setting Switch2" />
+        <CommonSwitch
+          isOnOff={isOnOff2}
+          setIsOnOff={setIsOnOff2}
+          aniValue={aniValue}
+          before={'setting2'}
         />
       </View>
     </View>
